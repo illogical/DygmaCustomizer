@@ -3,6 +3,7 @@
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from customize_trans_key import command_entry, numbers
@@ -37,7 +38,25 @@ def l1_positions(source):
     return result
 
 
+def physical_position(source, position_id):
+    match = re.fullmatch(r'defy:(left|right):r([1-9][0-9]*):c([1-9][0-9]*)', position_id)
+    if not match:
+        raise ValueError(f'Invalid Defy position ID: {position_id}')
+    side, row, column = match.group(1), int(match.group(2)), int(match.group(3))
+    device = source.get('device') or source.get('neuron', {}).get('device', {})
+    try:
+        return device['keyboard'][side][row - 1][column - 1]
+    except (KeyError, IndexError, TypeError) as error:
+        raise ValueError(f'Position ID absent from source geometry: {position_id}') from error
+
+
 def expand_shortcut(shortcut, profile):
+    if isinstance(shortcut, list):
+        if not shortcut:
+            raise ValueError('Shortcut sequence is empty')
+        return [expand_shortcut(step, profile) for step in shortcut]
+    if not isinstance(shortcut, str):
+        raise ValueError('Shortcut must be a chord or sequence of chords')
     parts = shortcut.split('+')
     if any(not part for part in parts):
         raise ValueError(f'Invalid shortcut: {shortcut}')
@@ -67,19 +86,33 @@ def resolve(template, os_name, profile=None, source=None):
         raise ValueError('An environment-specific template requires a matching profile')
 
     positions = l1_positions(source) if source else None
-    seen_ids, seen_labels = set(), set()
-    rows, skipped = [], []
+    index_labels = {index: label for label, indices in (positions or {}).items() for index in indices}
+    seen_ids, seen_locations = set(), set()
+    rows, skipped, warnings = [], [], []
     overrides = profile.get('shortcut_overrides', {})
     available_apps = set(profile.get('available_apps', []))
     for binding in template['bindings']:
         action_id = binding['id']
         label = binding['position_l1']
-        if action_id in seen_ids or label in seen_labels:
+        position_id = binding.get('position_id')
+        location = position_id or label
+        if action_id in seen_ids or location in seen_locations:
             raise ValueError(f'Duplicate action or L1 position: {action_id} / {label}')
         seen_ids.add(action_id)
-        seen_labels.add(label)
-        if positions is not None and len(positions.get(label, [])) != 1:
-            raise ValueError(f'L1 label {label} is missing or ambiguous in source')
+        seen_locations.add(location)
+        index = None
+        if positions is not None:
+            if position_id:
+                index = physical_position(source, position_id)
+                if not 0 <= index < 80:
+                    raise ValueError(f'Position ID outside Defy keymap: {position_id}')
+                current_label = index_labels.get(index, f'keycode:{numbers(command_entry(source, "keymap.custom"), "keymap.custom")[index]}')
+                if current_label != label:
+                    warnings.append(f'{action_id}: L1 label changed from {label} to {current_label} at {position_id}')
+            else:
+                if len(positions.get(label, [])) != 1:
+                    raise ValueError(f'L1 label {label} is missing or ambiguous in source')
+                index = positions[label][0]
         required_app = binding.get('requires_app')
         if profile and required_app and required_app not in available_apps:
             skipped.append((action_id, f'{required_app} absent from profile.available_apps'))
@@ -88,19 +121,21 @@ def resolve(template, os_name, profile=None, source=None):
         if not shortcut:
             skipped.append((action_id, f'no {os_name} shortcut'))
             continue
-        if not isinstance(shortcut, str):
-            raise ValueError(f'Invalid shortcut for {action_id}')
         row = {'id': action_id, 'name': binding['name'], 'l1_label': label,
                'color_category': binding['color_category'],
                'shortcut': expand_shortcut(shortcut, profile)}
-        if positions is not None:
-            row['position_index'] = positions[label][0]
+        if position_id:
+            row['position_id'] = position_id
+        if index is not None:
+            row['position_index'] = index
+            row['current_l1_label'] = index_labels.get(index, f'keycode:{numbers(command_entry(source, "keymap.custom"), "keymap.custom")[index]}')
         if required_app and not profile:
             row['app_status'] = 'installation unverified'
         rows.append(row)
     return {'template': template['id'], 'name': template['name'], 'os': os_name,
             'profile': profile.get('id'), 'activation': template.get('activation'),
-            'source': template.get('source'), 'bindings': rows, 'skipped': skipped}
+            'source': template.get('source'), 'bindings': rows, 'skipped': skipped,
+            'warnings': warnings}
 
 
 def markdown(result):
@@ -110,9 +145,14 @@ def markdown(result):
     lines = [f'# {title}', '', 'Proposed layer; no Bazecor JSON or keyboard changed.', '']
     activation = result['activation'] or {}
     lines += [f'Activation: {activation.get("mode", "unspecified")}; L1 trigger: {activation.get("trigger_l1") or "to choose"}.', '']
-    lines += ['| L1 key | Index | Action | Shortcut | Color category |', '| --- | ---: | --- | --- | --- |']
+    lines += ['| L1 hint | Position ID | Index | Action | Shortcut / sequence | Color category |', '| --- | --- | ---: | --- | --- | --- |']
     for row in result['bindings']:
-        lines.append(f'| {row["l1_label"]} | {row.get("position_index", "—")} | {row["name"]} | {row["shortcut"]} | {row["color_category"]} |')
+        shortcut = row['shortcut']
+        display = ' → '.join(shortcut) if isinstance(shortcut, list) else shortcut
+        lines.append(f'| {row["l1_label"]} | {row.get("position_id", "—")} | {row.get("position_index", "—")} | {row["name"]} | {display} | {row["color_category"]} |')
+    if result['warnings']:
+        lines += ['', 'Position notes:']
+        lines += [f'- {warning}' for warning in result['warnings']]
     if result['skipped']:
         lines += ['', 'Skipped:']
         lines += [f'- {action}: {reason}' for action, reason in result['skipped']]

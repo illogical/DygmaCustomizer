@@ -2,16 +2,107 @@
   "schema_version": 1,
   "id": "vscode",
   "name": "VS Code essentials",
-  "platforms": ["macos", "windows", "linux"],
+  "platforms": [
+    "macos",
+    "windows",
+    "linux"
+  ],
   "source": "https://code.visualstudio.com/docs/reference/default-keybindings",
-  "activation": {"mode": "one-shot", "trigger_l1": null},
+  "activation": {
+    "mode": "one-shot",
+    "trigger_l1": null
+  },
   "bindings": [
-    {"id": "search_files", "name": "Search files (Quick Open)", "position_l1": "F", "color_category": "search", "requires_app": "vscode", "shortcuts": {"macos": "Cmd+P", "windows": "Ctrl+P", "linux": "Ctrl+P"}},
-    {"id": "search_settings", "name": "Open settings", "position_l1": "S", "color_category": "search", "requires_app": "vscode", "shortcuts": {"macos": "Cmd+Comma", "windows": "Ctrl+Comma", "linux": "Ctrl+Comma"}},
-    {"id": "go_back", "name": "Go back", "position_l1": "J", "color_category": "navigation", "requires_app": "vscode", "shortcuts": {"macos": "Ctrl+Minus", "windows": "Alt+Left", "linux": "Ctrl+Alt+Minus"}},
-    {"id": "go_forward", "name": "Go forward", "position_l1": "K", "color_category": "navigation", "requires_app": "vscode", "shortcuts": {"macos": "Ctrl+Shift+Minus", "windows": "Alt+Right", "linux": "Ctrl+Shift+Minus"}},
-    {"id": "go_references", "name": "Go to references", "position_l1": "R", "color_category": "search", "requires_app": "vscode", "shortcuts": {"macos": "Shift+F12", "windows": "Shift+F12", "linux": "Shift+F12"}},
-    {"id": "build", "name": "Run build task", "position_l1": "B", "color_category": "run", "requires_app": "vscode", "shortcuts": {"macos": "Shift+Cmd+B", "windows": "Ctrl+Shift+B", "linux": "Ctrl+Shift+B"}},
-    {"id": "debug", "name": "Start debugging", "position_l1": "D", "color_category": "run", "requires_app": "vscode", "shortcuts": {"macos": "F5", "windows": "F5", "linux": "F5"}}
+    {
+      "id": "search_files",
+      "name": "Search files (Quick Open)",
+      "position_l1": "F",
+      "color_category": "search",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "Cmd+P",
+        "windows": "Ctrl+P",
+        "linux": "Ctrl+P"
+      },
+      "position_id": "defy:left:r3:c5"
+    },
+    {
+      "id": "search_settings",
+      "name": "Open settings",
+      "position_l1": "S",
+      "color_category": "search",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "Cmd+Comma",
+        "windows": "Ctrl+Comma",
+        "linux": "Ctrl+Comma"
+      },
+      "position_id": "defy:left:r3:c3"
+    },
+    {
+      "id": "go_back",
+      "name": "Go back",
+      "position_l1": "J",
+      "color_category": "navigation",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "Ctrl+Minus",
+        "windows": "Alt+Left",
+        "linux": "Ctrl+Alt+Minus"
+      },
+      "position_id": "defy:right:r3:c3"
+    },
+    {
+      "id": "go_forward",
+      "name": "Go forward",
+      "position_l1": "K",
+      "color_category": "navigation",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "Ctrl+Shift+Minus",
+        "windows": "Alt+Right",
+        "linux": "Ctrl+Shift+Minus"
+      },
+      "position_id": "defy:right:r3:c4"
+    },
+    {
+      "id": "go_references",
+      "name": "Go to references",
+      "position_l1": "R",
+      "color_category": "search",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "Shift+F12",
+        "windows": "Shift+F12",
+        "linux": "Shift+F12"
+      },
+      "position_id": "defy:left:r2:c5"
+    },
+    {
+      "id": "build",
+      "name": "Run build task",
+      "position_l1": "B",
+      "color_category": "run",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "Shift+Cmd+B",
+        "windows": "Ctrl+Shift+B",
+        "linux": "Ctrl+Shift+B"
+      },
+      "position_id": "defy:left:r4:c6"
+    },
+    {
+      "id": "debug",
+      "name": "Start debugging",
+      "position_l1": "D",
+      "color_category": "run",
+      "requires_app": "vscode",
+      "shortcuts": {
+        "macos": "F5",
+        "windows": "F5",
+        "linux": "F5"
+      },
+      "position_id": "defy:left:r3:c4"
+    }
   ]
 }

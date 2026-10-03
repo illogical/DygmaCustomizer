@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "id": "blender-view",
+  "name": "Blender viewport (default keymap)",
+  "platforms": [
+    "macos",
+    "windows",
+    "linux"
+  ],
+  "source": "https://docs.blender.org/manual/en/latest/editors/3dview/navigate/ (Blender default keymap; 3D viewport context)",
+  "activation": {
+    "mode": "layer-shift",
+    "trigger_l1": null
+  },
+  "bindings": [
+    {
+      "id": "front",
+      "name": "Front view",
+      "position_l1": "U",
+      "position_id": "defy:right:r2:c3",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad1",
+        "windows": "Numpad1",
+        "linux": "Numpad1"
+      }
+    },
+    {
+      "id": "right",
+      "name": "Right view",
+      "position_l1": "I",
+      "position_id": "defy:right:r2:c4",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad3",
+        "windows": "Numpad3",
+        "linux": "Numpad3"
+      }
+    },
+    {
+      "id": "top",
+      "name": "Top view",
+      "position_l1": "O",
+      "position_id": "defy:right:r2:c5",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad7",
+        "windows": "Numpad7",
+        "linux": "Numpad7"
+      }
+    },
+    {
+      "id": "orbit_left",
+      "name": "Orbit left",
+      "position_l1": "H",
+      "position_id": "defy:right:r3:c2",
+      "color_category": "navigation",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad4",
+        "windows": "Numpad4",
+        "linux": "Numpad4"
+      }
+    },
+    {
+      "id": "orbit_down",
+      "name": "Orbit down",
+      "position_l1": "J",
+      "position_id": "defy:right:r3:c3",
+      "color_category": "navigation",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad2",
+        "windows": "Numpad2",
+        "linux": "Numpad2"
+      }
+    },
+    {
+      "id": "orbit_up",
+      "name": "Orbit up",
+      "position_l1": "K",
+      "position_id": "defy:right:r3:c4",
+      "color_category": "navigation",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad8",
+        "windows": "Numpad8",
+        "linux": "Numpad8"
+      }
+    },
+    {
+      "id": "orbit_right",
+      "name": "Orbit right",
+      "position_l1": "L",
+      "position_id": "defy:right:r3:c5",
+      "color_category": "navigation",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad6",
+        "windows": "Numpad6",
+        "linux": "Numpad6"
+      }
+    },
+    {
+      "id": "frame_selected",
+      "name": "Frame selected",
+      "position_l1": "F",
+      "position_id": "defy:left:r3:c5",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "NumpadPeriod",
+        "windows": "NumpadPeriod",
+        "linux": "NumpadPeriod"
+      }
+    },
+    {
+      "id": "frame_all",
+      "name": "Frame all",
+      "position_l1": "A",
+      "position_id": "defy:left:r3:c2",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Home",
+        "windows": "Home",
+        "linux": "Home"
+      }
+    },
+    {
+      "id": "perspective",
+      "name": "Toggle perspective / orthographic",
+      "position_l1": "P",
+      "position_id": "defy:right:r2:c6",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad5",
+        "windows": "Numpad5",
+        "linux": "Numpad5"
+      }
+    },
+    {
+      "id": "camera",
+      "name": "Camera view",
+      "position_l1": "C",
+      "position_id": "defy:left:r4:c4",
+      "color_category": "view",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Numpad0",
+        "windows": "Numpad0",
+        "linux": "Numpad0"
+      }
+    }
+  ]
+}

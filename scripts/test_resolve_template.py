@@ -44,14 +44,31 @@ class ResolveTemplateTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'requires Omarchy'):
             resolve(template, 'linux', load('profiles/windows.example.json') | {'os': 'linux'})
 
-    def test_ambiguous_l1_reference_is_rejected(self):
+    def test_physical_id_survives_l1_reassignment(self):
         template = load('templates/vscode.json')
         source = load('examples/VirtualDefy.json')
         keys = source['virtual']['keymap.custom']['data'].split()
-        keys[0] = str(4 + ord('F') - ord('A'))
+        keys[36] = str(4 + ord('Q') - ord('A'))
         source['virtual']['keymap.custom']['data'] = ' '.join(keys)
-        with self.assertRaisesRegex(ValueError, 'ambiguous'):
-            resolve(template, 'macos', source=source)
+        result = resolve(template, 'macos', source=source)
+        file_search = next(row for row in result['bindings'] if row['id'] == 'search_files')
+        self.assertEqual(file_search['position_index'], 36)
+        self.assertEqual(file_search['current_l1_label'], 'Q')
+        self.assertTrue(any('search_files' in warning for warning in result['warnings']))
+
+    def test_herdr_and_tmux_have_distinct_prefix_sequences(self):
+        source = load('examples/VirtualDefy.json')
+        herdr = resolve(load('templates/herdr.json'), 'macos', source=source)
+        tmux = resolve(load('templates/tmux.json'), 'linux', source=source)
+        self.assertEqual(next(row['shortcut'] for row in herdr['bindings'] if row['id'] == 'split_right'), ['Ctrl+B', 'V'])
+        self.assertEqual(next(row['shortcut'] for row in tmux['bindings'] if row['id'] == 'split_right'), ['Ctrl+B', 'Shift+5'])
+        self.assertEqual(next(row['position_index'] for row in herdr['bindings'] if row['id'] == 'focus_left'), 42)
+
+    def test_blender_view_uses_numpad_codes(self):
+        result = resolve(load('templates/blender-view.json'), 'windows',
+                         source=load('examples/VirtualDefy.json'))
+        self.assertEqual(next(row['shortcut'] for row in result['bindings'] if row['id'] == 'front'), 'Numpad1')
+        self.assertFalse(result['warnings'])
 
 
 if __name__ == '__main__':

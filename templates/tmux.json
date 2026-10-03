@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "id": "tmux",
+  "name": "tmux panes and windows",
+  "platforms": [
+    "macos",
+    "linux"
+  ],
+  "source": "https://github.com/tmux/tmux/wiki/Getting-Started (default prefix Ctrl+B; check tmux list-keys -Tprefix -N and local configuration)",
+  "activation": {
+    "mode": "layer-shift",
+    "trigger_l1": null
+  },
+  "bindings": [
+    {
+      "id": "focus_left",
+      "name": "Focus pane left",
+      "position_l1": "H",
+      "position_id": "defy:right:r3:c2",
+      "color_category": "navigation",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Left"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Left"
+        ]
+      }
+    },
+    {
+      "id": "focus_down",
+      "name": "Focus pane down",
+      "position_l1": "J",
+      "position_id": "defy:right:r3:c3",
+      "color_category": "navigation",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Down"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Down"
+        ]
+      }
+    },
+    {
+      "id": "focus_up",
+      "name": "Focus pane up",
+      "position_l1": "K",
+      "position_id": "defy:right:r3:c4",
+      "color_category": "navigation",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Up"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Up"
+        ]
+      }
+    },
+    {
+      "id": "focus_right",
+      "name": "Focus pane right",
+      "position_l1": "L",
+      "position_id": "defy:right:r3:c5",
+      "color_category": "navigation",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Right"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Right"
+        ]
+      }
+    },
+    {
+      "id": "split_right",
+      "name": "Split pane side by side",
+      "position_l1": "V",
+      "position_id": "defy:left:r4:c5",
+      "color_category": "create",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Shift+5"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Shift+5"
+        ]
+      }
+    },
+    {
+      "id": "split_down",
+      "name": "Split pane top and bottom",
+      "position_l1": "D",
+      "position_id": "defy:left:r3:c4",
+      "color_category": "create",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Shift+Quote"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Shift+Quote"
+        ]
+      }
+    },
+    {
+      "id": "new_window",
+      "name": "New window",
+      "position_l1": "C",
+      "position_id": "defy:left:r4:c4",
+      "color_category": "create",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "C"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "C"
+        ]
+      }
+    },
+    {
+      "id": "next_window",
+      "name": "Next window",
+      "position_l1": "N",
+      "position_id": "defy:right:r4:c2",
+      "color_category": "navigation",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "N"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "N"
+        ]
+      }
+    },
+    {
+      "id": "previous_window",
+      "name": "Previous window",
+      "position_l1": "P",
+      "position_id": "defy:right:r2:c6",
+      "color_category": "navigation",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "P"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "P"
+        ]
+      }
+    },
+    {
+      "id": "sessions",
+      "name": "Choose session",
+      "position_l1": "W",
+      "position_id": "defy:left:r2:c3",
+      "color_category": "workspace",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "S"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "S"
+        ]
+      }
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom pane",
+      "position_l1": "Z",
+      "position_id": "defy:left:r4:c2",
+      "color_category": "view",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "Z"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "Z"
+        ]
+      }
+    },
+    {
+      "id": "kill_pane",
+      "name": "Kill pane",
+      "position_l1": "X",
+      "position_id": "defy:left:r4:c3",
+      "color_category": "destructive",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "X"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "X"
+        ]
+      }
+    },
+    {
+      "id": "detach",
+      "name": "Detach client",
+      "position_l1": "Q",
+      "position_id": "defy:left:r2:c2",
+      "color_category": "session",
+      "requires_app": "tmux",
+      "shortcuts": {
+        "macos": [
+          "Ctrl+B",
+          "D"
+        ],
+        "linux": [
+          "Ctrl+B",
+          "D"
+        ]
+      }
+    }
+  ]
+}

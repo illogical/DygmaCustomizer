@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "id": "blender-modeling",
+  "name": "Blender modeling (default keymap)",
+  "platforms": [
+    "macos",
+    "windows",
+    "linux"
+  ],
+  "source": "https://docs.blender.org/manual/en/latest/interface/keymap/index.html (Blender default keymap; 3D viewport and Edit Mode context)",
+  "activation": {
+    "mode": "layer-shift",
+    "trigger_l1": null
+  },
+  "bindings": [
+    {
+      "id": "move",
+      "name": "Move selection",
+      "position_l1": "G",
+      "position_id": "defy:left:r3:c6",
+      "color_category": "transform",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "G",
+        "windows": "G",
+        "linux": "G"
+      }
+    },
+    {
+      "id": "rotate",
+      "name": "Rotate selection",
+      "position_l1": "R",
+      "position_id": "defy:left:r2:c5",
+      "color_category": "transform",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "R",
+        "windows": "R",
+        "linux": "R"
+      }
+    },
+    {
+      "id": "scale",
+      "name": "Scale selection",
+      "position_l1": "S",
+      "position_id": "defy:left:r3:c3",
+      "color_category": "transform",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "S",
+        "windows": "S",
+        "linux": "S"
+      }
+    },
+    {
+      "id": "extrude",
+      "name": "Extrude selection",
+      "position_l1": "E",
+      "position_id": "defy:left:r2:c4",
+      "color_category": "mesh",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "E",
+        "windows": "E",
+        "linux": "E"
+      }
+    },
+    {
+      "id": "inset",
+      "name": "Inset faces",
+      "position_l1": "I",
+      "position_id": "defy:right:r2:c4",
+      "color_category": "mesh",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "I",
+        "windows": "I",
+        "linux": "I"
+      }
+    },
+    {
+      "id": "bevel",
+      "name": "Bevel edges",
+      "position_l1": "B",
+      "position_id": "defy:left:r4:c6",
+      "color_category": "mesh",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Ctrl+B",
+        "windows": "Ctrl+B",
+        "linux": "Ctrl+B"
+      }
+    },
+    {
+      "id": "loop_cut",
+      "name": "Loop cut",
+      "position_l1": "L",
+      "position_id": "defy:right:r3:c5",
+      "color_category": "mesh",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Ctrl+R",
+        "windows": "Ctrl+R",
+        "linux": "Ctrl+R"
+      }
+    },
+    {
+      "id": "duplicate",
+      "name": "Duplicate selection",
+      "position_l1": "D",
+      "position_id": "defy:left:r3:c4",
+      "color_category": "create",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Shift+D",
+        "windows": "Shift+D",
+        "linux": "Shift+D"
+      }
+    },
+    {
+      "id": "knife",
+      "name": "Knife",
+      "position_l1": "K",
+      "position_id": "defy:right:r3:c4",
+      "color_category": "mesh",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "K",
+        "windows": "K",
+        "linux": "K"
+      }
+    },
+    {
+      "id": "toggle_edit",
+      "name": "Toggle Edit Mode",
+      "position_l1": "T",
+      "position_id": "defy:left:r2:c6",
+      "color_category": "mode",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Tab",
+        "windows": "Tab",
+        "linux": "Tab"
+      }
+    },
+    {
+      "id": "add_menu",
+      "name": "Add menu",
+      "position_l1": "A",
+      "position_id": "defy:left:r3:c2",
+      "color_category": "create",
+      "requires_app": "blender",
+      "shortcuts": {
+        "macos": "Shift+A",
+        "windows": "Shift+A",
+        "linux": "Shift+A"
+      }
+    }
+  ]
+}
