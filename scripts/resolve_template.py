@@ -70,7 +70,7 @@ def expand_shortcut(shortcut, profile):
     return '+'.join(parts)
 
 
-def resolve(template, os_name, profile=None, source=None):
+def resolve(template, os_name, profile=None, source=None, include_without_shortcut=False):
     profile = profile or {}
     if template.get('schema_version') != 1 or not template.get('id') or not isinstance(template.get('bindings'), list):
         raise ValueError('Expected template schema version 1 with id and bindings')
@@ -118,12 +118,12 @@ def resolve(template, os_name, profile=None, source=None):
             skipped.append((action_id, f'{required_app} absent from profile.available_apps'))
             continue
         shortcut = overrides.get(f'{template["id"]}.{action_id}', binding.get('shortcuts', {}).get(os_name))
-        if not shortcut:
+        if not shortcut and not include_without_shortcut:
             skipped.append((action_id, f'no {os_name} shortcut'))
             continue
         row = {'id': action_id, 'name': binding['name'], 'l1_label': label,
                'color_category': binding['color_category'],
-               'shortcut': expand_shortcut(shortcut, profile)}
+               'shortcut': expand_shortcut(shortcut, profile) if shortcut else None}
         if position_id:
             row['position_id'] = position_id
         if index is not None:
@@ -134,7 +134,8 @@ def resolve(template, os_name, profile=None, source=None):
         rows.append(row)
     return {'template': template['id'], 'name': template['name'], 'os': os_name,
             'profile': profile.get('id'), 'activation': template.get('activation'),
-            'source': template.get('source'), 'bindings': rows, 'skipped': skipped,
+            'source': template.get('source'), 'color_slots': template.get('color_slots', {}),
+            'bindings': rows, 'skipped': skipped,
             'warnings': warnings}
 
 
@@ -150,6 +151,9 @@ def markdown(result):
         shortcut = row['shortcut']
         display = ' → '.join(shortcut) if isinstance(shortcut, list) else shortcut
         lines.append(f'| {row["l1_label"]} | {row.get("position_id", "—")} | {row.get("position_index", "—")} | {row["name"]} | {display} | {row["color_category"]} |')
+    if result['color_slots']:
+        lines += ['', 'Color purposes:']
+        lines += [f'- Slot {slot}: {purpose}' for slot, purpose in result['color_slots'].items()]
     if result['warnings']:
         lines += ['', 'Position notes:']
         lines += [f'- {warning}' for warning in result['warnings']]

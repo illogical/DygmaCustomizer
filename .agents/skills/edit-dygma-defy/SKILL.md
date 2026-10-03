@@ -13,6 +13,8 @@ For reusable named layers, read `templates/README.md`, the selected template, an
 
 Templates now use `position_id` (Defy side, one-based row and column) as physical identity, with `position_l1` as a readable hint. Derive the current numeric key index from the selected source's `device.keyboard`; warn when the current L1 assignment differs from the hint. For a binding without an ID, require an unambiguous L1 label. A shortcut array denotes ordered keypresses with release between steps, not one simultaneous Combo Key; confirm a Bazecor macro encoding before applying Herdr or tmux sequences.
 
+Templates may contain only a few keys. `scripts/apply_template.py preview` reports collisions, skips, unsupported encodings, and requested LED/slot changes without writing a file. By default, `apply` writes both assignments and mapped colors to a distinct output; `--keys-only` or `--colors-only` selects one aspect. It refuses skipped actions unless `--allow-skipped`, occupied assignments unless `--override`, and all unsupported requested changes. The current encoder accepts plain keys and the locally verified Cmd+S code only. For color application, map palette slot IDs to semantic purposes in the template; the script checks slot existence in the source palette and only maps LEDs with verified geometry. Plan a recognizable layer identity color, and reuse purpose colors across layers selectively when the action groups have a shared meaning. Expand the encoder only after obtaining minimal examples from the current Bazecor UI.
+
 ## Interpret the request
 
 - Layer names in requests are displayed numbers: L1 is stored layer index 0, L4 is index 3.

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "macos-navigation",
+  "name": "macOS navigation keys",
+  "platforms": ["macos"],
+  "source": "https://support.apple.com/en-us/102650; user-specific desktop and screenshot shortcuts require host verification",
+  "activation": {"mode": "unspecified", "trigger_l1": null},
+  "bindings": [
+    {"id": "desktop_left", "name": "Previous desktop", "position_l1": "H", "position_id": "defy:right:r3:c2", "color_category": "workspace", "shortcuts": {"macos": "Ctrl+Left"}},
+    {"id": "desktop_right", "name": "Next desktop", "position_l1": "L", "position_id": "defy:right:r3:c5", "color_category": "workspace", "shortcuts": {"macos": "Ctrl+Right"}},
+    {"id": "previous_app", "name": "Previous app in switcher", "position_l1": "J", "position_id": "defy:right:r3:c3", "color_category": "navigation", "shortcuts": {"macos": "Shift+Cmd+Tab"}},
+    {"id": "next_app", "name": "Next app in switcher", "position_l1": "K", "position_id": "defy:right:r3:c4", "color_category": "navigation", "shortcuts": {"macos": "Cmd+Tab"}},
+    {"id": "previous_window", "name": "Previous window in current app", "position_l1": "U", "position_id": "defy:right:r2:c3", "color_category": "navigation", "shortcuts": {"macos": "Shift+Cmd+Grave"}},
+    {"id": "next_window", "name": "Next window in current app", "position_l1": "I", "position_id": "defy:right:r2:c4", "color_category": "navigation", "shortcuts": {"macos": "Cmd+Grave"}},
+    {"id": "open_finder", "name": "Open Finder", "position_l1": "F", "position_id": "defy:left:r3:c5", "color_category": "launch", "requires_app": "finder", "shortcuts": {}},
+    {"id": "screenshot", "name": "Screenshot action", "position_l1": "S", "position_id": "defy:left:r3:c3", "color_category": "capture", "shortcuts": {"macos": "Shift+Cmd+4"}}
+  ]
+}

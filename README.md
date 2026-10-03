@@ -35,9 +35,20 @@ python3 scripts/resolve_template.py templates/app-launcher.json --profile profil
 python3 scripts/resolve_template.py templates/omarchy.json --profile profiles/omarchy.example.json --source-json examples/VirtualDefy.json
 ```
 
-The resolver previews **one layer** as a Markdown cheat sheet, or a structured manifest with `--format json`. The template's `position_id` gives a physical Defy half/row/column; the L1 label remains an easy conversational hint. With `--source-json`, the resolver derives the current key index and warns if the L1 label has changed. It reports actions whose apps or shortcuts are absent from the profile. It does not assign a layer number, create a Bazecor configuration, or check that a host shortcut actually works; those follow after choosing an activation key and confirming the host behavior. The first VS Code proposal places file search on L1 `F`, settings on `S`, references on `R`, back/forward on adjacent `J`/`K`, and build/debug on `B`/`D`.
+The resolver previews **one template** as a Markdown cheat sheet, or a structured manifest with `--format json`. A template can be a handful of keys merged into an existing layer. Its `position_id` gives a physical Defy half/row/column; the L1 label remains an easy conversational hint. With `--source-json`, the resolver derives the current key index and warns if the L1 label has changed. It reports actions whose apps or shortcuts are absent from the profile. It does not assign a layer number, create a Bazecor configuration, or check that a host shortcut actually works. The first VS Code proposal places file search on L1 `F`, settings on `S`, references on `R`, back/forward on adjacent `J`/`K`, and build/debug on `B`/`D`.
 
 Additional samples: [`templates/herdr.json`](templates/herdr.json) and [`templates/tmux.json`](templates/tmux.json) share physical positions for pane navigation and creation while emitting each app's own **prefix sequence**; [`templates/blender-modeling.json`](templates/blender-modeling.json) and [`templates/blender-view.json`](templates/blender-view.json) separate modeling from Numpad-based viewport control. Their layouts and colors are proposals. Herdr/tmux sequences need verified macro handling in Bazecor, and Blender depends on the selected keymap and viewport context. See `templates/README.md` for the rationale and source links.
+
+[`templates/macos-navigation.json`](templates/macos-navigation.json) proposes a small macOS navigation group for desktops, apps, windows, Finder, and screenshots. The local Mac profile overrides desktop and screenshot actions with the user's reported shortcuts; Finder needs a chosen global launcher shortcut. Apple's documented defaults are linked in `templates/README.md`.
+
+To inspect and then apply a partial template to a displayed layer number:
+
+```sh
+python3 scripts/apply_template.py preview examples/VirtualDefy.json templates/macos-navigation.json --target 4 --profile profiles/macbook-pro-m5.local.json
+python3 scripts/apply_template.py apply INPUT.json TEMPLATE.json --target 4 --profile PROFILE.json
+```
+
+Preview and apply include key assignments and mapped colors by default. Use `--keys-only` to preserve LED colors or `--colors-only` to preserve key assignments. `--override` replaces occupied key assignments; it does not affect color-only changes. `--allow-skipped` omits actions without usable host shortcuts. Color application uses the template's slot-to-purpose mapping and checks slot existence; RGB(W) values are not required. The macOS and VS Code modifier combinations cannot yet be applied because their Bazecor keycodes need current UI examples. Plain keys and the already verified Cmd+S encoding are supported. No command changes a connected keyboard.
 
 ## Bazecor capabilities relevant to this project
 
