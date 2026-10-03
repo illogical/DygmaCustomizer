@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "app-launcher",
+  "name": "App launcher",
+  "platforms": ["macos", "windows", "linux"],
+  "activation": {"mode": "one-shot", "trigger_l1": null},
+  "bindings": [
+    {"id": "activity_monitor", "name": "Launch Activity Monitor", "position_l1": "A", "color_category": "app", "requires_app": "activity-monitor"},
+    {"id": "antigravity", "name": "Launch Antigravity", "position_l1": "G", "color_category": "app", "requires_app": "antigravity"},
+    {"id": "bloom", "name": "Launch Bloom", "position_l1": "B", "color_category": "app", "requires_app": "bloom"},
+    {"id": "chatgpt", "name": "Launch ChatGPT", "position_l1": "1", "color_category": "app", "requires_app": "chatgpt"},
+    {"id": "discord", "name": "Launch Discord", "position_l1": "D", "color_category": "app", "requires_app": "discord"},
+    {"id": "evernote", "name": "Launch Evernote", "position_l1": "E", "color_category": "app", "requires_app": "evernote"},
+    {"id": "firefox", "name": "Launch Firefox", "position_l1": "F", "color_category": "app", "requires_app": "firefox"},
+    {"id": "notion", "name": "Launch Notion", "position_l1": "N", "color_category": "app", "requires_app": "notion"},
+    {"id": "sublime_text", "name": "Launch Sublime Text", "position_l1": "S", "color_category": "app", "requires_app": "sublime-text"},
+    {"id": "terminal", "name": "Launch Terminal", "position_l1": "T", "color_category": "app", "requires_app": "terminal"},
+    {"id": "vscode", "name": "Launch Visual Studio Code", "position_l1": "C", "color_category": "app", "requires_app": "vscode"},
+    {"id": "vivaldi", "name": "Launch Vivaldi", "position_l1": "V", "color_category": "app", "requires_app": "vivaldi"},
+    {"id": "zen", "name": "Launch Zen", "position_l1": "Z", "color_category": "app", "requires_app": "zen"}
+  ]
+}

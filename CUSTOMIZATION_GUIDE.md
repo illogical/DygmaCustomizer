@@ -35,6 +35,8 @@ One Shot Layer setup includes making the trigger's position Transparent on the t
 
 Record an action by its name, then list its actual Mac, Windows, and Linux shortcuts in `PERSONALIZATION.md`. A keyboard emits keys and mouse actions; Raycast, VS Code, and other host apps decide what those inputs do. App launching normally requires a host launcher or OS binding. Do not assume a Mac shortcut has the same effect elsewhere.
 
+For repeatable designs, put named actions, suggested L1 positions, and semantic color categories in `templates/`. Put a particular computer's OS, installed apps, Hyper definition, and shortcut overrides in a profile. Resolve one template with `scripts/resolve_template.py` to preview a cheat sheet and identify unavailable actions. The template is an intent layer above Bazecor's numeric keycodes; see `templates/README.md` for the small schema and examples. Keep a shortcut's actual OS-specific chord explicit, because defaults such as VS Code Back differ across Mac, Windows, and Linux.
+
 For each planned action, record: app/context, action name, target layer and L1 reference position, trigger gesture, OS shortcut or macro events, semantic color category, and verification status. `PERSONALIZATION.example.md` provides a table. A color slot is a shared RGB(W) value; the category is a user convention, so audit current use before reassigning a slot across layers.
 
 ## Build and verify

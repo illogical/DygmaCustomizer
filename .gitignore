@@ -1,0 +1,3 @@
+# User-specific machines and preferences; keep reusable examples tracked.
+PERSONALIZATION.md
+profiles/*.local.json

@@ -9,6 +9,8 @@ Work in the DygmaCustomizer project. Start with the JSON file the user names; if
 
 Read `CUSTOMIZATION_GUIDE.md` for choosing a Bazecor feature from natural language. Use virtual files now and a separately verified Bazecor backup/apply workflow when a physical Defy is connected.
 
+For reusable named layers, read `templates/README.md`, the selected template, and a machine profile. `scripts/resolve_template.py` previews one template for macOS, Windows, or Linux; its output is an intent/cheat-sheet manifest, not Bazecor JSON. Resolve L1 labels against the chosen source and check application availability and host shortcuts before encoding.
+
 ## Interpret the request
 
 - Layer names in requests are displayed numbers: L1 is stored layer index 0, L4 is index 3.

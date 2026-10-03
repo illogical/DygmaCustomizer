@@ -8,6 +8,7 @@ Copy to `PERSONALIZATION.md` and fill in the parts you want an agent to use. Kee
 - Keyboard layout/language:
 - Bazecor and Defy firmware versions (if known):
 - Which virtual JSON is the current starting point:
+- Machine profile path (`profiles/*.local.json`), OS, and installed apps:
 
 ## Layer plan
 
@@ -31,6 +32,8 @@ Record the RGB(W) values and slot number after checking `python3 scripts/defy.py
 For macros, write the event sequence with presses, releases, text, clicks, and delays in order. Record whether holding/repeating the trigger should repeat it. For Superkeys, record each requested gesture separately and leave others unused. Mark whether the action is only proposed, checked in Bazecor, or tested on a physical keyboard. See `CUSTOMIZATION_GUIDE.md`.
 
 For launchers, record whether Raycast (or another launcher) owns the shortcut, the actual shortcut, and whether the target app must be installed. Avoid assuming a keyboard macro can directly launch an app on every OS.
+
+Reusable action names and suggested L1 positions live in `templates/`. This file explains personal priorities; a machine profile supplies OS, installed apps, and shortcut overrides. Run `scripts/resolve_template.py` to preview one template and make a cheat sheet before editing Bazecor.
 
 ## Open decisions
 

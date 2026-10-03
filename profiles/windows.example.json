@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "id": "windows-example",
+  "os": "windows",
+  "available_apps": ["vscode"],
+  "shortcut_overrides": {}
+}

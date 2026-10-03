@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "omarchy",
+  "name": "Omarchy essentials",
+  "platforms": ["linux"],
+  "environment": "Omarchy",
+  "source": "https://github.com/omacom/omarchy/blob/quattro/manual/07-hotkeys.md (checked 2026-10-03; compare with installed version and Super+K)",
+  "activation": {"mode": "one-shot", "trigger_l1": null},
+  "bindings": [
+    {"id": "menu", "name": "Omarchy menu", "position_l1": "M", "color_category": "system", "shortcuts": {"linux": "Super+Space"}},
+    {"id": "apps_menu", "name": "Apps menu", "position_l1": "A", "color_category": "app", "shortcuts": {"linux": "Super+Alt+Space"}},
+    {"id": "terminal", "name": "Terminal", "position_l1": "T", "color_category": "app", "requires_app": "terminal", "shortcuts": {"linux": "Super+Return"}},
+    {"id": "tmux_terminal", "name": "Tmux terminal", "position_l1": "X", "color_category": "app", "requires_app": "tmux", "shortcuts": {"linux": "Super+Alt+Return"}},
+    {"id": "herdr", "name": "Herdr", "position_l1": "H", "color_category": "app", "requires_app": "herdr", "shortcuts": {"linux": "Super+Ctrl+Return"}},
+    {"id": "browser", "name": "Browser", "position_l1": "B", "color_category": "app", "requires_app": "browser", "shortcuts": {"linux": "Super+Shift+Return"}},
+    {"id": "files", "name": "File manager", "position_l1": "F", "color_category": "app", "requires_app": "file-manager", "shortcuts": {"linux": "Super+Shift+F"}},
+    {"id": "close_window", "name": "Close window", "position_l1": "W", "color_category": "window", "shortcuts": {"linux": "Super+W"}},
+    {"id": "fullscreen", "name": "Full screen", "position_l1": "G", "color_category": "window", "shortcuts": {"linux": "Super+F"}},
+    {"id": "lock", "name": "Lock computer", "position_l1": "L", "color_category": "system", "shortcuts": {"linux": "Super+Ctrl+L"}},
+    {"id": "clipboard", "name": "Clipboard manager", "position_l1": "V", "color_category": "system", "shortcuts": {"linux": "Super+Ctrl+V"}},
+    {"id": "workspace_1", "name": "Workspace 1", "position_l1": "1", "color_category": "navigation", "shortcuts": {"linux": "Super+1"}},
+    {"id": "workspace_2", "name": "Workspace 2", "position_l1": "2", "color_category": "navigation", "shortcuts": {"linux": "Super+2"}},
+    {"id": "workspace_3", "name": "Workspace 3", "position_l1": "3", "color_category": "navigation", "shortcuts": {"linux": "Super+3"}},
+    {"id": "workspace_4", "name": "Workspace 4", "position_l1": "4", "color_category": "navigation", "shortcuts": {"linux": "Super+4"}}
+  ]
+}

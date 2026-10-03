@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "omarchy-example",
+  "os": "linux",
+  "environment": "Omarchy",
+  "version": "check installed version against the template source",
+  "available_apps": ["vscode", "terminal", "tmux", "browser", "file-manager"],
+  "shortcut_overrides": {}
+}

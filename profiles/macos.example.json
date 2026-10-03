@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "macos-example",
+  "os": "macos",
+  "environment": "Raycast",
+  "available_apps": ["vscode"],
+  "hyper_modifiers": ["Ctrl", "Alt", "Cmd", "Shift"],
+  "shortcut_overrides": {
+    "app-launcher.vscode": "Hyper+C"
+  }
+}

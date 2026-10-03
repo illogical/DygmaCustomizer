@@ -24,6 +24,19 @@ python3 scripts/defy.py set-palette INPUT.json OUTPUT.json --slot 14 --channels 
 
 The examples show syntax; choose actual paths, positions, and colors after inspecting the source. `copy-keys` copies assignments and optionally matching LED slots. A whole-layer copy copies all 80 key positions and that layer's full LED map; move then clears the source keys to transparent and source LEDs to the requested slot. Existing destination assignments require `--replace`. Changing a used palette slot also requires `--replace` because every LED referring to that slot will change. This command does not rewrite layer-switch keys, macros, default-layer settings, or names; review those when moving a layer. For per-key color edits, the verified key-to-LED map covers the left half and right top row. Use `--led` only after checking another right-side LED in Bazecor.
 
+## Named layer templates and machine profiles
+
+[`templates/README.md`](templates/README.md) defines a small template format. A template holds stable action names, proposed L1 positions, semantic color categories, and default shortcuts by OS. A profile records one computer's OS, installed apps, and shortcut overrides. This keeps VS Code's action names and positions portable while allowing Mac, Windows, and Linux to send the shortcuts each host expects. Machine-specific profiles use `*.local.json` and are ignored by Git; tracked `*.example.json` files show how to create one. `PERSONALIZATION.md` records this user's priorities and the Raycast screenshot transcription separately from reusable templates.
+
+```sh
+python3 scripts/resolve_template.py templates/vscode.json --os macos --source-json examples/VirtualDefy.json
+python3 scripts/resolve_template.py templates/vscode.json --os windows --source-json examples/VirtualDefy.json
+python3 scripts/resolve_template.py templates/app-launcher.json --profile profiles/macbook-pro-m5.local.json --source-json examples/VirtualDefy.json
+python3 scripts/resolve_template.py templates/omarchy.json --profile profiles/omarchy.example.json --source-json examples/VirtualDefy.json
+```
+
+The resolver previews **one layer** as a Markdown cheat sheet, or a structured manifest with `--format json`. It verifies that each proposed L1 label is unique in the chosen source when `--source-json` is supplied. It reports actions whose apps or shortcuts are absent from the profile. It does not assign a layer number, create a Bazecor configuration, or check that a host shortcut actually works; those follow after choosing an activation key and confirming the host behavior. The first VS Code proposal places file search on L1 `F`, settings on `S`, references on `R`, back/forward on adjacent `J`/`K`, and build/debug on `B`/`D`.
+
 ## Bazecor capabilities relevant to this project
 
 Bazecor supports per-layer layouts, per-key lighting, macros, Superkeys, Combo Keys, mouse/media keys, and layer controls. Some functions depend on firmware and device model, so confirm exact encoding in Bazecor before writing raw keycodes. A virtual keyboard can be configured without a connected Defy. Names for layers, macros, and Superkeys may live in Bazecor/backups instead of the keyboard or virtual file; document semantic names in personalization as well.
