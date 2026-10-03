@@ -1,0 +1,11 @@
+# Project instructions
+
+- This project builds reusable Dygma keyboard customizations, starting with the Defy. Use virtual Bazecor JSON while no physical keyboard is connected; later confirm compatibility and apply changes through Bazecor to a connected keyboard. A virtual file alone does not change the keyboard.
+- Use L1 as the default vocabulary for physical key positions: “the `1` key on L4” means the position occupied by `1` on L1, with L4 as the destination. If an L1 label occurs more than once or is unclear, resolve the position with the user before editing.
+- Keep each input JSON intact. Write a distinct output file, then verify the intended key and color changes and the absence of unrelated changes. Do not overwrite a virtual file that Bazecor may currently be using unless explicitly requested.
+- For Defy layout or lighting changes, follow [the project skill](.agents/skills/edit-dygma-defy/SKILL.md). Use [the customization guide](CUSTOMIZATION_GUIDE.md) to translate natural language into shortcuts, macros, Superkeys, layer behavior, and a verification plan. The JSON snapshots are in `examples/`.
+- Run `python3 -m unittest discover -s scripts -p 'test_*.py' -v` after changing a project script. Update `README.md` when the supported workflow or loading instructions change.
+- Read `PERSONALIZATION.md` when it exists for this user's goals; use `PERSONALIZATION.example.md` as a template for another user. Treat desired layers, colors, and shortcuts there as proposals until verified in a source JSON and Bazecor.
+- Use Dygma's names: Layer Shift (active while held), Layer Lock (toggle), and One Shot Layer (next keystroke; hold/double-tap behavior depends on the assigned key). Say which behavior is requested before encoding it. Keep a way back to the base layer.
+- Prefer `scripts/defy.py` for supported copies and palette/LED edits. Inspect slot usage first and record semantic color categories in the personalization file; palette slot IDs alone do not convey purpose.
+- Before editing a macro, Superkey, layer trigger, or another unsupported serialized command, build a minimal example in the current Bazecor UI and compare its saved JSON against a preserved source. Track references and timing settings. Do not infer an encoding solely from a generic or older API example.
