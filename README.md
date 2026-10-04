@@ -4,13 +4,21 @@ Tools and guidance for customizing Dygma keyboards through Bazecor, starting wit
 
 ## Purpose and scope
 
-This repository is a reusable starting point for Defy customization on macOS, Windows, or Linux. The current file workflow uses virtual Defy JSON. When a keyboard is connected, a backup and Bazecor compatibility check will precede applying changes to it. `AGENTS.md` and the project skill hold the general workflow. [CUSTOMIZATION_GUIDE.md](CUSTOMIZATION_GUIDE.md) translates natural-language requests into Bazecor features and verification steps. `PERSONALIZATION.example.md` is a template for anyone's platform, layers, shortcuts, and color meanings; `PERSONALIZATION.md` records this user's Mac-first intentions. Actual app shortcuts remain platform-specific and should be confirmed before encoding them.
+This repository is a reusable starting point for Defy customization on macOS, Windows, or Linux. The current file workflow uses virtual Defy JSON. When a keyboard is connected, a backup and Bazecor compatibility check will precede applying changes to it. `AGENTS.md` and the [project skill](.agents/skills/edit-dygma-defy/SKILL.md) guide agent work; [CUSTOMIZATION_GUIDE.md](CUSTOMIZATION_GUIDE.md) translates requests into Bazecor features. Reusable actions belong in `templates/`, machine settings in `profiles/`, and layer assignments in a PC initialization manifest. `PERSONALIZATION.md`, when present, is optional private notes rather than a required parallel specification. Confirm actual host shortcuts before encoding them.
 
-Dygma calls the temporary held behavior **Layer Shift**, the toggle behavior **Layer Lock**, and the next-keypress behavior **One Shot Layer**. Dygma describes a One Shot Layer key as shifting on hold and moving to the layer on double tap as well. A future Raycast launcher layer can evaluate One Shot Layer, while VS Code shortcuts can start with Combo Keys for key-plus-modifier actions and macros for sequences. The app layers listed in `PERSONALIZATION.md` are intentions, not current assignments.
+Dygma calls the temporary held behavior **Layer Shift**, the toggle behavior **Layer Lock**, and the next-keypress behavior **One Shot Layer**. Dygma describes a One Shot Layer key as shifting on hold and moving to the layer on double tap as well. Templates and manifests describe proposed behavior; a preview or virtual file alone does not change a connected keyboard.
+
+## Start with templates
+
+1. Choose a preserved Defy virtual JSON as the source. The files in `examples/` demonstrate the format; use a fresh export for a particular computer. Give the agent the source path, computer/OS, desired layer actions, and any physical positions in L1 terms. For example: “Using `examples/VirtualDefy.json` and `profiles/windows.example.json`, preview `templates/gaming-fps.json` on a fresh layer; keep Esc as Esc and leave activation undecided.”
+2. Select or add a named template in `templates/`. Each action has a stable physical `position_id` plus an L1 label hint. Put reusable OS shortcuts and semantic color categories there. Copy a tracked `profiles/*.example.json` to a private `*.local.json` for installed apps and host-specific shortcut overrides. Check those shortcuts on the computer.
+3. Use `scripts/resolve_template.py` for a one-template cheat sheet, then `scripts/apply_template.py preview` for one layer. For a whole PC, copy a `profiles/*-init.example.json` manifest to a private `*.init.local.json`, set its `profile`, displayed layer numbers, navigation roles, and template entries, then use `scripts/apply_template_set.py preview`. Preview is read-only and reports collisions, skipped actions, unverified encodings, and color mapping issues.
+4. Choose layer access and a return path before applying. Put Layer Shift, Layer Lock, or One Shot Layer triggers on the base layer as intended; a locked layer needs a route back to L1, while a held Layer Shift returns on release. A One Shot destination generally keeps the trigger position Transparent. The current `layer-navigation.json`, `rare-layer-access.json`, and `layer-return.json` show how to compose these actions with app layers. Keep Esc available where the app or game uses it. Verify the trigger and return encodings in the current Bazecor UI before writing them.
+5. When every requested action is supported and the preview is ready, apply to a **distinct output JSON**, compare the changed keys and LEDs, and inspect it in Bazecor through Keyboard Manager → **Use existing virtual keyboard**. Bazecor Save writes the selected virtual file. To change a connected Defy later, export its current backup first, check model/firmware compatibility, then apply and test through Bazecor; loading a virtual JSON alone does not update hardware.
 
 ## Reusable JSON command
 
-`scripts/defy.py` reads a Defy **virtual** JSON and writes a distinct output for edits. Displayed layer numbers start at 1; physical positions use underlying indices 0–79, normally identified by the L1 label. Run `inspect` first to see all 16 palette RGB(W) values and their per-layer usage counts. The counts show use, not semantic meaning; record agreed color categories in your personalization file.
+`scripts/defy.py` reads a Defy **virtual** JSON and writes a distinct output for edits. Displayed layer numbers start at 1; physical positions use underlying indices 0–79, normally identified by the L1 label. Run `inspect` first to see all 16 palette RGB(W) values and their per-layer usage counts. The counts show use, not semantic meaning; record purpose categories in templates and map them to palette slots in each PC manifest.
 
 ```sh
 python3 scripts/defy.py inspect examples/VirtualDefy.json
@@ -26,7 +34,7 @@ The examples show syntax; choose actual paths, positions, and colors after inspe
 
 ## Named layer templates and machine profiles
 
-[`templates/README.md`](templates/README.md) defines a small template format. A template holds stable action names, proposed L1 positions, semantic color categories, and default shortcuts by OS. A profile records one computer's OS, installed apps, and shortcut overrides. This keeps VS Code's action names and positions portable while allowing Mac, Windows, and Linux to send the shortcuts each host expects. Machine-specific profiles use `*.local.json` and are ignored by Git; tracked `*.example.json` files show how to create one. `PERSONALIZATION.md` records this user's priorities and the Raycast screenshot transcription separately from reusable templates.
+[`templates/README.md`](templates/README.md) defines the template format. A template holds stable action names, proposed L1 positions, semantic color categories, and default shortcuts by OS. A profile records one computer's OS, installed apps, and shortcut overrides. A PC manifest lists the template/layer pairs, logical navigation targets, and optional palette-slot meanings. This keeps VS Code's action names and positions portable while allowing Mac, Windows, and Linux to send the shortcuts each host expects. Machine-specific `*.local.json` profiles and manifests are ignored by Git; tracked `*.example.json` files show their structure. Optional `PERSONALIZATION.md` notes can record unresolved personal preferences without duplicating the templates.
 
 ```sh
 python3 scripts/resolve_template.py templates/vscode.json --os macos --source-json examples/VirtualDefy.json
@@ -41,6 +49,8 @@ Additional samples: [`templates/herdr.json`](templates/herdr.json) and [`templat
 
 [`templates/macos-navigation.json`](templates/macos-navigation.json) proposes a small macOS navigation group for desktops, apps, windows, Finder, and screenshots. The local Mac profile overrides desktop and screenshot actions with the user's reported shortcuts; Finder needs a chosen global launcher shortcut. Apple's documented defaults are linked in `templates/README.md`.
 
+[`templates/gaming-fps.json`](templates/gaming-fps.json) and [`templates/gaming-rpg.json`](templates/gaming-rpg.json) propose separate Windows gaming layers with left-hand WASD, number slots, modifiers, and Space, plus occasional right-hand arrow and Enter controls. RPG moves inventory and map outputs to the L1 `T` and `G` positions. Their amber/violet identity colors are proposals only; palette slots, activation, and return behavior are undecided. Resolve with `profiles/windows.example.json` and the chosen source before previewing. Several special-key outputs need Bazecor fixtures before the applier can write the full templates; see `templates/README.md`.
+
 To inspect and then apply a partial template to a displayed layer number:
 
 ```sh
@@ -53,26 +63,26 @@ Preview and apply include key assignments and mapped colors by default. Use `--k
 For a fresh Defy virtual JSON on this Mac, preview the initialization manifest. It includes navigation on L1, device controls on the primary layer, and return controls where a layer can remain locked:
 
 ```sh
-python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles/macbook-pro-m5.init.local.json --keys-only --override
-python3 scripts/apply_template_set.py apply INPUT.json profiles/macbook-pro-m5.init.local.json --keys-only --override --output OUTPUT.json
+python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles/macos-init.example.json --keys-only --override
+python3 scripts/apply_template_set.py apply INPUT.json PC-MANIFEST.json --keys-only --override --output OUTPUT.json
 ```
 
-The Mac manifest maps `primary` to L4 app launcher, `secondary` to L5 VS Code, `tertiary` to L6 macOS navigation, `rare` to L7 Herdr, and `base` to L1. The Omarchy example maps its own L4–L6 layers to those roles. Multiple manifest entries can target one layer and compose in order. `--only-layer N` selects all templates for that layer. The current initialization previews remain blocked until Bazecor-verified layer-trigger, Superkey, battery, and Bluetooth encodings are available; no partial output is written.
+The Mac example manifest maps `primary` to L4 app launcher, `secondary` to L5 VS Code, `tertiary` to L6 macOS navigation, `rare` to L7 Herdr, and `base` to L1. The Omarchy example maps its own L4–L6 layers to those roles. Multiple manifest entries can target one layer and compose in order. `--only-layer N` selects all templates for that layer. Replace `PC-MANIFEST.json` with the chosen manifest path; run `apply` only after its preview has no blockers. The current example initialization previews remain blocked until Bazecor-verified layer-trigger, Superkey, battery, and Bluetooth encodings are available; no partial output is written.
 
 To revise just L5 in an existing configuration, update L5's template in the manifest, then run:
 
 ```sh
-python3 scripts/apply_template_set.py preview CURRENT.json profiles/macbook-pro-m5.init.local.json --only-layer 5 --replace-layer --baseline examples/VirtualDefy.json
-python3 scripts/apply_template_set.py apply CURRENT.json profiles/macbook-pro-m5.init.local.json --only-layer 5 --replace-layer --baseline examples/VirtualDefy.json --output UPDATED.json
+python3 scripts/apply_template_set.py preview CURRENT.json PC-MANIFEST.json --only-layer 5 --replace-layer --baseline CLEAN.json
+python3 scripts/apply_template_set.py apply CURRENT.json PC-MANIFEST.json --only-layer 5 --replace-layer --baseline CLEAN.json --output UPDATED.json
 ```
 
 Other layers are preserved. Navigation and return templates describe the selected One Shot Layer, Layer Shift, and Layer Lock behavior. The applier blocks those actions until their Bazecor encodings are verified. No command changes a connected keyboard.
 
 ## Bazecor capabilities relevant to this project
 
-Bazecor supports per-layer layouts, per-key lighting, macros, Superkeys, Combo Keys, mouse/media keys, and layer controls. Some functions depend on firmware and device model, so confirm exact encoding in Bazecor before writing raw keycodes. A virtual keyboard can be configured without a connected Defy. Names for layers, macros, and Superkeys may live in Bazecor/backups instead of the keyboard or virtual file; document semantic names in personalization as well.
+Bazecor supports per-layer layouts, per-key lighting, macros, Superkeys, Combo Keys, mouse/media keys, and layer controls. Some functions depend on firmware and device model, so confirm exact encoding in Bazecor before writing raw keycodes. A virtual keyboard can be configured without a connected Defy. Names for layers, macros, and Superkeys may live in Bazecor/backups instead of the keyboard or virtual file; keep meaningful names in templates and preserve a named backup.
 
-For future macro, layer-trigger, device-command, and Superkey work, first capture the desired action and trigger in the personalization file. A shortcut is appropriate for one key with modifiers; a macro is for ordered events or delays; a Superkey assigns distinct actions to tap, hold, tap and hold, double tap, or double tap and hold. Dygma limits which actions fit each gesture. Compare a small current Bazecor example with a preserved source before adding an encoder. Bazecor can export a single layer or a full backup; a full backup includes macros and Superkeys, while names are stored in Bazecor/backups rather than on the keyboard.
+For future macro, layer-trigger, device-command, and Superkey work, first capture the desired action and trigger in a template and its target in the PC manifest. A shortcut is appropriate for one key with modifiers; a macro is for ordered events or delays; a Superkey assigns distinct actions to tap, hold, tap and hold, double tap, or double tap and hold. Dygma limits which actions fit each gesture. Compare a small current Bazecor example with a preserved source before adding an encoder. Bazecor can export a single layer or a full backup; a full backup includes macros and Superkeys, while names are stored in Bazecor/backups rather than on the keyboard.
 
 The included virtual snapshot has 10 layers, 80 keymap positions per layer, 178 LED entries per layer, and 16 RGBW palette slots. Those are properties of this snapshot, not a promise that every Defy or Bazecor export has the same sizes. The command derives the layer, LED, and palette counts from each input and rejects unexpected structure. Lighting has a global palette and a per-layer map of slot references. If one palette slot changes, its color changes everywhere that slot is used. Bazecor can also store macros and Superkeys, but their serialized formats need separate validation before this project edits them directly.
 
@@ -80,7 +90,7 @@ Primary references: [Dygma Defy configuration](https://dygma.com/pages/defy-conf
 
 ## Working with an agent
 
-Start a Codex project or chat rooted in this directory so it discovers `AGENTS.md` and the project-scoped `edit-dygma-defy` skill. Ask for changes in terms of the L1 key at a physical position, for example: “On L4, put the L1 `1` through `0` keys and their colors at the same positions.” Name the JSON file to start from when more than one candidate exists. The agent should create a new output JSON, verify its precise changes, and tell you which file to load in Bazecor. If an L1 label is ambiguous, provide another location cue or confirm the intended key in the UI.
+Start a Codex project or chat rooted in this directory so it discovers `AGENTS.md` and the project-scoped `edit-dygma-defy` skill. Ask the agent to select or create a template, name the source JSON and machine profile, preview the target layer or PC manifest, and report any unsupported encoding before applying. For example: “On L4, put the L1 `1` through `0` keys and their colors at the same positions; preview against `examples/VirtualDefy.json` first.” State how the layer is entered and exited. The agent should create a new output JSON only when ready, verify its precise changes, and tell you which file to load in Bazecor. If an L1 label is ambiguous, provide another location cue or confirm the intended key in the UI.
 
 `AGENTS.md` holds short rules that apply to all work in this project. `.agents/skills/edit-dygma-defy/SKILL.md` holds the focused Bazecor editing workflow. `scripts/defy.py` handles supported key, layer, and color operations; the older scripts remain checked examples. Configuration snapshots live in `examples/`. Add or adapt scripts when a repeated transformation warrants it.
 
