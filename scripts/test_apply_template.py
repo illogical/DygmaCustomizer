@@ -45,13 +45,11 @@ class ApplyTemplateTest(unittest.TestCase):
         template = read_json(ROOT / 'templates/macos-navigation.json')
         report = plan(self.source, template, self.profile, 4)
         self.assertTrue(any(row.get('unsupported') for row in report['rows']))
-        self.assertTrue(any(action == 'open_finder' for action, _ in report['skipped']))
-        with self.assertRaisesRegex(ValueError, 'Skipped actions'):
-            apply(self.source, report)
+        self.assertFalse(report['skipped'])
         with self.assertRaisesRegex(ValueError, 'Unsupported actions'):
-            apply(self.source, report, allow_skipped=True)
+            apply(self.source, report)
 
-    def test_unverified_layer_and_device_actions_are_reported_and_refused(self):
+    def test_unverified_layer_action_is_refused_while_existing_device_code_resolves(self):
         template = {
             'schema_version': 1, 'id': 'actions', 'name': 'Bazecor actions',
             'platforms': ['macos'], 'bindings': [{
@@ -70,10 +68,35 @@ class ApplyTemplateTest(unittest.TestCase):
         profile = self.profile | {'layer_targets': {'primary': 4}}
         report = plan(self.source, template, profile, 1,
                       with_keys=True, with_colors=False)
-        self.assertTrue(all('current Bazecor-verified encoding fixture' in row['unsupported']
-                            for row in report['rows']))
+        self.assertIn('current Bazecor-verified encoding fixture', report['rows'][0]['unsupported'])
+        self.assertEqual(report['rows'][1]['after_keycode'], 230)
         with self.assertRaisesRegex(ValueError, 'Unsupported actions'):
             apply(self.source, report)
+
+    def test_device_controls_copy_verified_l1_codes_even_after_l1_is_cleared(self):
+        template = read_json(ROOT / 'templates/device-controls.json')
+        source = copy.deepcopy(self.source)
+        doc = copy.deepcopy(source)
+        keys = model(doc)[1]['keymap.custom']
+        keys[78] = keys[79] = 65535
+        doc['virtual']['keymap.custom']['data'] = ' '.join(map(str, keys))
+        report = plan(doc, template, self.profile, 4, with_colors=False, source=source)
+        self.assertEqual([row['after_keycode'] for row in report['rows']], [230, 53852])
+        apply(doc, report)
+        self.assertEqual(model(doc)[1]['keymap.custom'][3 * 80 + 78:3 * 80 + 80],
+                         [230, 53852])
+        self.assertEqual(doc['virtual']['colormap.map'], source['virtual']['colormap.map'])
+
+    def test_device_copy_rejects_a_changed_source_code(self):
+        template = read_json(ROOT / 'templates/device-controls.json')
+        source = copy.deepcopy(self.source)
+        keys = model(source)[1]['keymap.custom']
+        keys[78] = 65535
+        source['virtual']['keymap.custom']['data'] = ' '.join(map(str, keys))
+        report = plan(self.source, template, self.profile, 4, with_colors=False,
+                      source=source)
+        self.assertIn('matching verified L1 assignment', report['rows'][0]['unsupported'])
+        self.assertEqual(report['rows'][1]['after_keycode'], 53852)
 
     def test_transparent_thumb_action_uses_known_transparent_keycode(self):
         template = {

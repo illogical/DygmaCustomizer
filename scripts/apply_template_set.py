@@ -57,7 +57,7 @@ def compose(source, baseline, manifest, profile, load_template, only_layer=None,
                 reset_layer(output, baseline, number, with_keys, with_colors)
                 reset_layers.add(number)
             report = plan(output, template, profile, number, with_keys, with_colors,
-                          fill_empty=(policy == 'fill-empty'))
+                          fill_empty=(policy == 'fill-empty'), source=source)
         except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
             blockers.append(f'L{number} {entry["template"]}: {error}')
             continue

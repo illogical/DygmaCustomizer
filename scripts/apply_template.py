@@ -20,6 +20,10 @@ PLAIN['0'] = 39
 PLAIN.update({'Tab': 43, 'Space': 44, 'Minus': 45, 'Grave': 53,
               'Left': 80, 'Right': 79, 'Up': 82, 'Down': 81})
 ENCODED = {'Cmd+S': 4118}
+# Existing L1 assignments in examples/VirtualDefy.json. Copy only when the
+# selected source still has these exact codes at these physical positions.
+VERIFIED_DEVICE_SOURCE = {'battery-level': (78, 230),
+                          'bluetooth-pairing': (79, 53852)}
 
 
 def encode(chord):
@@ -65,13 +69,15 @@ def reset_layer(doc, baseline, target, with_keys=True, with_colors=True):
         entries['colormap.map']['data'] = ' '.join(map(str, arrays['colormap.map']))
 
 
-def plan(doc, template, profile, target, with_keys=True, with_colors=True, fill_empty=False):
+def plan(doc, template, profile, target, with_keys=True, with_colors=True,
+         fill_empty=False, source=None):
     entries, arrays, count, leds, width, _ = model(doc)
     target_index = layer(target, count)
     result = resolve(template, profile['os'], profile, doc,
                      include_without_shortcut=with_colors and not with_keys)
     keys, colors, palette = (arrays[name] for name in entries)
     mapping = led_map(doc) if with_colors else {}
+    source = source or doc
     rows = []
     used_indices = set()
     for binding in result['bindings']:
@@ -98,6 +104,18 @@ def plan(doc, template, profile, target, with_keys=True, with_colors=True, fill_
                 action_type = binding['bazecor_action']['type']
                 if action_type == 'transparent':
                     row['after_keycode'] = TRANSPARENT
+                elif action_type == 'device-command':
+                    command = binding['bazecor_action']['command']
+                    verified = VERIFIED_DEVICE_SOURCE.get(command)
+                    source_keys = model(source)[1]['keymap.custom']
+                    if (verified is None or index != verified[0]
+                            or source['device']['keyboard'] != doc['device']['keyboard']
+                            or source_keys[index] != verified[1]):
+                        row['unsupported'] = (
+                            f'{command} needs a matching verified L1 assignment in the source'
+                        )
+                    else:
+                        row['after_keycode'] = verified[1]
                 else:
                     row['unsupported'] = (
                         f'{action_type} action needs a current Bazecor-verified encoding fixture'
@@ -211,7 +229,8 @@ def main():
         doc = copy.deepcopy(original)
         if args.replace_layer:
             reset_layer(doc, read_json(args.baseline), args.target, with_keys, with_colors)
-        report = plan(doc, template, profile, args.target, with_keys, with_colors, args.fill_empty)
+        report = plan(doc, template, profile, args.target, with_keys, with_colors,
+                      args.fill_empty, source=original)
         print_report(report)
         if args.action == 'preview':
             return

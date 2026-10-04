@@ -47,7 +47,7 @@ The resolver previews **one template** as a Markdown cheat sheet, or a structure
 
 Additional samples: [`templates/herdr.json`](templates/herdr.json) and [`templates/tmux.json`](templates/tmux.json) share physical positions for pane navigation and creation while emitting each app's own **prefix sequence**; [`templates/blender-modeling.json`](templates/blender-modeling.json) and [`templates/blender-view.json`](templates/blender-view.json) separate modeling from Numpad-based viewport control. Their layouts and colors are proposals. Herdr/tmux sequences need verified macro handling in Bazecor, and Blender depends on the selected keymap and viewport context. See `templates/README.md` for the rationale and source links.
 
-[`templates/macos-navigation.json`](templates/macos-navigation.json) proposes a small macOS navigation group for desktops, apps, windows, Finder, and screenshots. The local Mac profile overrides desktop and screenshot actions with the user's reported shortcuts; Finder needs a chosen global launcher shortcut. Apple's documented defaults are linked in `templates/README.md`.
+[`templates/macos-navigation.json`](templates/macos-navigation.json) proposes a small macOS navigation group for desktops, apps, windows, and screenshots. The local Mac profile overrides desktop and screenshot actions with the user's reported shortcuts. Apple's documented defaults are linked in `templates/README.md`.
 
 [`templates/gaming-fps.json`](templates/gaming-fps.json) and [`templates/gaming-rpg.json`](templates/gaming-rpg.json) propose separate Windows gaming layers with left-hand WASD, number slots, modifiers, and Space, plus occasional right-hand arrow and Enter controls. RPG moves inventory and map outputs to the L1 `T` and `G` positions. Their amber/violet identity colors are proposals only; palette slots, activation, and return behavior are undecided. Resolve with `profiles/windows.example.json` and the chosen source before previewing. Several special-key outputs need Bazecor fixtures before the applier can write the full templates; see `templates/README.md`.
 
@@ -60,6 +60,8 @@ python3 scripts/apply_template.py apply INPUT.json TEMPLATE.json --target 4 --pr
 
 Preview and apply include key assignments and mapped colors by default. Use `--keys-only` to preserve LED colors or `--colors-only` to preserve key assignments. Occupied keys stop an apply by default. `--fill-empty` skips an occupied key and its color; `--override` replaces assignments only at template positions; `--replace-layer --baseline CLEAN.json` clears the target layer's selected aspects before applying: keys become transparent (`65535`), and lighting returns to the clean baseline. `--allow-skipped` on the single-template command omits actions without usable host shortcuts. Color application checks slot existence; RGB(W) values are not required.
 
+For the MacBook Pro M5, `profiles/macbook-pro-m5-init.local.json` is the initialization manifest and references `profiles/macbook-pro-m5.local.json` as its machine profile. Run `python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles/macbook-pro-m5-init.local.json` to see the current blockers. The [Bazecor fixture guide](BAZECOR_FIXTURES.md) lists the minimal UI examples needed to verify the remaining encodings and right-side LEDs. The manifest reuses existing palette slots for semantic colors and leaves the global RGBW palette unchanged.
+
 For a fresh Defy virtual JSON on this Mac, preview the initialization manifest. It includes navigation on L1, device controls on the primary layer, and return controls where a layer can remain locked:
 
 ```sh
@@ -67,7 +69,7 @@ python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles
 python3 scripts/apply_template_set.py apply INPUT.json PC-MANIFEST.json --keys-only --override --output OUTPUT.json
 ```
 
-The Mac example manifest maps `primary` to L4 app launcher, `secondary` to L5 VS Code, `tertiary` to L6 macOS navigation, `rare` to L7 Herdr, and `base` to L1. The Omarchy example maps its own L4–L6 layers to those roles. Multiple manifest entries can target one layer and compose in order. `--only-layer N` selects all templates for that layer. Replace `PC-MANIFEST.json` with the chosen manifest path; run `apply` only after its preview has no blockers. The current example initialization previews remain blocked until Bazecor-verified layer-trigger, Superkey, battery, and Bluetooth encodings are available; no partial output is written.
+The Mac example manifest maps `primary` to L4 app launcher, `secondary` to L5 VS Code, `tertiary` to L6 macOS navigation, `rare` to L7 Herdr, and `base` to L1. The Omarchy example maps its own L4–L6 layers to those roles. Multiple manifest entries can target one layer and compose in order. `--only-layer N` selects all templates for that layer. Replace `PC-MANIFEST.json` with the chosen manifest path; run `apply` only after its preview has no blockers. The applier can copy the Battery Level and Bluetooth Pairing assignments already present on L1 of the selected `VirtualDefy.json` when their codes and physical positions match. Layer triggers, Superkeys, shortcuts, macros, and right-side lighting still block the complete Mac output.
 
 To revise just L5 in an existing configuration, update L5's template in the manifest, then run:
 

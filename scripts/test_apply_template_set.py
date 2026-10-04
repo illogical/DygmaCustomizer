@@ -23,6 +23,22 @@ class ApplyTemplateSetTest(unittest.TestCase):
                                        'position_id': 'defy:left:r3:c3', 'color_category': 'app',
                                        'shortcuts': {'macos': 'Cmd+S'}}]}
 
+    def test_mac_manifest_resolves_profile_and_reports_only_verified_blockers(self):
+        manifest = read_json(ROOT / 'profiles/macbook-pro-m5-init.local.json')
+        profile = read_json(ROOT / manifest['profile'])
+        before = copy.deepcopy(self.source)
+        output, reports, blockers = compose(
+            self.source, self.source, manifest, profile,
+            lambda path: read_json(ROOT / path))
+        self.assertIsNone(output)
+        self.assertEqual(self.source, before)
+        self.assertEqual({report['target_layer'] for report in reports}, {1, 4, 5, 6, 7})
+        self.assertFalse(any(report['skipped'] for report in reports))
+        self.assertTrue(any('Bazecor-verified' in issue for issue in blockers))
+        self.assertTrue(any('verified LED mapping' in issue for issue in blockers))
+        self.assertFalse(any('color category' in issue for issue in blockers))
+        self.assertFalse(any('open_finder' in issue for issue in blockers))
+
     def test_compose_two_layers_preserves_unselected_layers_and_commands(self):
         manifest = {'schema_version': 1, 'id': 'test', 'layers': [
             {'layer': 4, 'template': 'a.json', 'color_slots': {'5': 'app'}},
