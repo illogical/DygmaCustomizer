@@ -81,6 +81,30 @@ class ApplyTemplateTest(unittest.TestCase):
         self.assertEqual(model(self.source)[1]['keymap.custom'], model(before)[1]['keymap.custom'])
         self.assertNotEqual(model(self.source)[1]['colormap.map'], model(before)[1]['colormap.map'])
 
+    def test_fill_empty_skips_occupied_key_and_color(self):
+        self.template['color_slots'] = {'5': 'navigation'}
+        before = copy.deepcopy(self.source)
+        report = plan(self.source, self.template, self.profile, 1, fill_empty=True)
+        self.assertTrue(report['rows'][0]['skipped_occupied'])
+        apply(self.source, report)
+        self.assertEqual(self.source, before)
+
+    def test_replace_layer_clears_unlisted_keys_and_restores_baseline_lighting(self):
+        from apply_template import reset_layer
+        baseline = copy.deepcopy(self.source)
+        arrays = model(self.source)[1]
+        arrays['keymap.custom'][3*80+10] = 4
+        arrays['colormap.map'][3*178+10] = 5
+        for name in ('keymap.custom', 'colormap.map'):
+            self.source['virtual'][name]['data'] = ' '.join(map(str, arrays[name]))
+        reset_layer(self.source, baseline, 4, True, True)
+        report = plan(self.source, self.template, self.profile, 4, with_colors=False)
+        apply(self.source, report)
+        after = model(self.source)[1]
+        self.assertEqual(after['keymap.custom'][3*80+10], 65535)
+        self.assertEqual(after['colormap.map'][3*178+10], 15)
+        self.assertEqual(after['keymap.custom'][3*80+34], 4118)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "macos-init-example",
+  "profile": "profiles/macos.example.json",
+  "layers": [
+    {"layer": 4, "template": "templates/app-launcher.json"},
+    {"layer": 5, "template": "templates/vscode.json"},
+    {"layer": 6, "template": "templates/macos-navigation.json"},
+    {"layer": 7, "template": "templates/herdr.json"}
+  ]
+}

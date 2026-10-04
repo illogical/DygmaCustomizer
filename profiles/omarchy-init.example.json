@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "omarchy-init-example",
+  "profile": "profiles/omarchy.example.json",
+  "layers": [
+    {"layer": 4, "template": "templates/omarchy.json"},
+    {"layer": 5, "template": "templates/herdr.json"},
+    {"layer": 6, "template": "templates/tmux.json"}
+  ]
+}

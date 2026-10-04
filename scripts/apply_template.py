@@ -48,7 +48,24 @@ def color_slot(template, category, palette, width):
     return slot
 
 
-def plan(doc, template, profile, target, with_keys=True, with_colors=True):
+def reset_layer(doc, baseline, target, with_keys=True, with_colors=True):
+    entries, arrays, count, leds, width, slots = model(doc)
+    _, base_arrays, base_count, base_leds, base_width, _ = model(baseline)
+    if (count, leds, width) != (base_count, base_leds, base_width) or doc['device']['keyboard'] != baseline['device']['keyboard']:
+        raise ValueError('Baseline Defy geometry does not match input')
+    target_index = layer(target, count)
+    if with_keys:
+        arrays['keymap.custom'][target_index*KEYS:(target_index+1)*KEYS] = [TRANSPARENT]*KEYS
+        entries['keymap.custom']['data'] = ' '.join(map(str, arrays['keymap.custom']))
+    if with_colors:
+        base_colors = base_arrays['colormap.map'][target_index*leds:(target_index+1)*leds]
+        if any(slot >= slots for slot in base_colors):
+            raise ValueError('Baseline lighting uses a slot missing from input palette')
+        arrays['colormap.map'][target_index*leds:(target_index+1)*leds] = base_colors
+        entries['colormap.map']['data'] = ' '.join(map(str, arrays['colormap.map']))
+
+
+def plan(doc, template, profile, target, with_keys=True, with_colors=True, fill_empty=False):
     entries, arrays, count, leds, width, _ = model(doc)
     target_index = layer(target, count)
     result = resolve(template, profile['os'], profile, doc,
@@ -68,6 +85,12 @@ def plan(doc, template, profile, target, with_keys=True, with_colors=True):
         row = {'id': binding['id'], 'name': binding['name'],
                'position_id': binding.get('position_id'), 'position_index': index,
                'l1_label': binding['l1_label'], 'color_category': binding['color_category']}
+        if fill_empty and with_keys and keys[offset] != TRANSPARENT:
+            row['before_keycode'] = keys[offset]
+            row['skipped_occupied'] = True
+            row['collision'] = False
+            rows.append(row)
+            continue
         if with_keys:
             row['shortcut'] = binding['shortcut']
             row['before_keycode'] = keys[offset]
@@ -100,7 +123,7 @@ def apply(doc, report, override=False, allow_skipped=False):
         raise ValueError('No template actions are available to apply')
     if report['skipped'] and not allow_skipped:
         raise ValueError('Skipped actions: ' + ', '.join(action for action, _ in report['skipped']) + '; use --allow-skipped')
-    blocked = [row for row in report['rows'] if row.get('unsupported')]
+    blocked = [row for row in report['rows'] if row.get('unsupported') and not row.get('skipped_occupied')]
     if blocked:
         raise ValueError('Unsupported actions: ' + ', '.join(row['id'] for row in blocked))
     collisions = [row for row in report['rows'] if row['collision']]
@@ -109,6 +132,8 @@ def apply(doc, report, override=False, allow_skipped=False):
     entries, arrays, _, leds, _, _ = model(doc)
     target = report['target_layer'] - 1
     for row in report['rows']:
+        if row.get('skipped_occupied'):
+            continue
         if report['with_keys']:
             arrays['keymap.custom'][target*KEYS+row['position_index']] = row['after_keycode']
         if report['with_colors']:
@@ -123,11 +148,16 @@ def apply(doc, report, override=False, allow_skipped=False):
 
 
 def print_report(report):
-    print(f"{report['template']} → L{report['target_layer']}: {len(report['rows'])} proposed keys")
+    print(f"{report['template']} → L{report['target_layer']}: {len(report['rows'])} proposed actions")
     for row in report['rows']:
-        status = ('UNSUPPORTED: ' + row['unsupported']) if row.get('unsupported') else ('COLLISION' if row['collision'] else 'ready')
+        if row.get('skipped_occupied'):
+            status = 'SKIPPED occupied'
+        elif row.get('unsupported'):
+            status = 'UNSUPPORTED: ' + row['unsupported']
+        else:
+            status = 'COLLISION' if row['collision'] else 'ready'
         key_change = (f"{row['before_keycode']} → {row.get('after_keycode', '?')}"
-                      if 'before_keycode' in row else 'keys unchanged')
+                      if 'before_keycode' in row and not row.get('skipped_occupied') else 'keys unchanged')
         print(f"  {row['id']} at {row['position_id'] or row['l1_label']} (index {row['position_index']}): "
               f"{key_change}  {status}")
         if 'after_color_slot' in row:
@@ -150,9 +180,13 @@ def main():
         feature_group = cmd.add_mutually_exclusive_group()
         feature_group.add_argument('--keys-only', action='store_true', help='Apply key assignments and preserve LED colors')
         feature_group.add_argument('--colors-only', action='store_true', help='Apply LED colors and preserve key assignments')
+        policy_group = cmd.add_mutually_exclusive_group()
+        policy_group.add_argument('--fill-empty', action='store_true', help='Skip occupied keys and their colors')
+        policy_group.add_argument('--override', action='store_true', help='Replace occupied assignments at template positions')
+        policy_group.add_argument('--replace-layer', action='store_true', help='Clear target layer before applying')
+        cmd.add_argument('--baseline', type=Path, help='Clean virtual export required with --replace-layer')
         if name == 'apply':
             cmd.add_argument('--output', type=Path, help='Default: INPUT-LN-TEMPLATE.json')
-            cmd.add_argument('--override', action='store_true', help='Replace occupied key assignments')
             cmd.add_argument('--allow-skipped', action='store_true', help='Apply remaining actions when profile omits others')
     args = parser.parse_args()
     try:
@@ -161,14 +195,20 @@ def main():
         profile = read_json(args.profile)
         with_keys = not args.colors_only
         with_colors = not args.keys_only
-        report = plan(original, template, profile, args.target, with_keys, with_colors)
+        if args.fill_empty and not with_keys:
+            raise ValueError('--fill-empty requires key assignments')
+        if args.replace_layer != bool(args.baseline):
+            raise ValueError('--replace-layer requires --baseline, and --baseline requires --replace-layer')
+        doc = copy.deepcopy(original)
+        if args.replace_layer:
+            reset_layer(doc, read_json(args.baseline), args.target, with_keys, with_colors)
+        report = plan(doc, template, profile, args.target, with_keys, with_colors, args.fill_empty)
         print_report(report)
         if args.action == 'preview':
             return
         output = args.output or args.input.with_name(f'{args.input.stem}-L{args.target}-{template["id"]}.json')
         if output.resolve() == args.input.resolve():
             raise ValueError('Input and output must differ')
-        doc = copy.deepcopy(original)
         apply(doc, report, args.override, args.allow_skipped)
         probe = copy.deepcopy(original)
         changed = []

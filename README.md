@@ -48,7 +48,25 @@ python3 scripts/apply_template.py preview examples/VirtualDefy.json templates/ma
 python3 scripts/apply_template.py apply INPUT.json TEMPLATE.json --target 4 --profile PROFILE.json
 ```
 
-Preview and apply include key assignments and mapped colors by default. Use `--keys-only` to preserve LED colors or `--colors-only` to preserve key assignments. `--override` replaces occupied key assignments; it does not affect color-only changes. `--allow-skipped` omits actions without usable host shortcuts. Color application uses the template's slot-to-purpose mapping and checks slot existence; RGB(W) values are not required. The macOS and VS Code modifier combinations cannot yet be applied because their Bazecor keycodes need current UI examples. Plain keys and the already verified Cmd+S encoding are supported. No command changes a connected keyboard.
+Preview and apply include key assignments and mapped colors by default. Use `--keys-only` to preserve LED colors or `--colors-only` to preserve key assignments. Occupied keys stop an apply by default. `--fill-empty` skips an occupied key and its color; `--override` replaces assignments only at template positions; `--replace-layer --baseline CLEAN.json` clears the target layer's selected aspects before applying: keys become transparent (`65535`), and lighting returns to the clean baseline. `--allow-skipped` on the single-template command omits actions without usable host shortcuts. Color application checks slot existence; RGB(W) values are not required.
+
+For a fresh Defy virtual JSON on this Mac, preview the four-layer initialization manifest:
+
+```sh
+python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles/macbook-pro-m5.init.local.json
+python3 scripts/apply_template_set.py apply INPUT.json profiles/macbook-pro-m5.init.local.json --output OUTPUT.json
+```
+
+The local manifest assigns app launcher to L4, VS Code to L5, macOS navigation to L6, and Herdr to L7. A tracked starting example is `profiles/macos-init.example.json`. The Omarchy example, `profiles/omarchy-init.example.json`, assigns Omarchy to L4, Herdr to L5, and tmux to L6. Preview it with `python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles/omarchy-init.example.json`; confirm its shortcuts against the installed Omarchy and terminal setup before applying. Each manifest entry may supply `"color_slots": {"5": "app"}` for that PC; if omitted, the template mapping is used. The script reports every layer's blockers and writes one output only when all requested changes are supported. The current Mac preview is blocked by unverified modifier and macro encodings, missing slot mappings, some unverified right-side LED positions, and Finder's missing shortcut. No combined configuration is created yet.
+
+To revise just L5 in an existing configuration, update L5's template in the manifest, then run:
+
+```sh
+python3 scripts/apply_template_set.py preview CURRENT.json profiles/macbook-pro-m5.init.local.json --only-layer 5 --replace-layer --baseline examples/VirtualDefy.json
+python3 scripts/apply_template_set.py apply CURRENT.json profiles/macbook-pro-m5.init.local.json --only-layer 5 --replace-layer --baseline examples/VirtualDefy.json --output UPDATED.json
+```
+
+Other layers are preserved. Layer access keys and a way back to L1 still need a chosen Layer Shift, Layer Lock, or One Shot Layer behavior and a Bazecor-verified encoding. A future clear-layer operation could remove a template without replacing it. No command changes a connected keyboard.
 
 ## Bazecor capabilities relevant to this project
 
