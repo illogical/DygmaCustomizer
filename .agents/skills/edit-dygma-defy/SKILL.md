@@ -1,6 +1,6 @@
 ---
 name: edit-dygma-defy
-description: Plan and edit Dygma Defy Bazecor configurations using L1 physical-position references, verified JSON transformations, and separate virtual and connected-keyboard workflows.
+description: Plan, visualize, and edit Dygma Defy Bazecor configurations using L1 physical-position references, verified JSON transformations, and separate virtual and connected-keyboard workflows.
 ---
 
 # Edit Dygma Defy configurations
@@ -9,11 +9,13 @@ Work in the DygmaCustomizer project. Start with the JSON file the user names; if
 
 Read `CUSTOMIZATION_GUIDE.md` for choosing a Bazecor feature from natural language. Use virtual files now and a separately verified Bazecor backup/apply workflow when a physical Defy is connected.
 
-For reusable named layers, read `templates/README.md`, the selected template, and a machine profile. `scripts/resolve_template.py` previews one template for macOS, Windows, or Linux; its output is an intent/cheat-sheet manifest, not Bazecor JSON. Resolve L1 labels against the chosen source and check application availability and host shortcuts before encoding.
+For reusable named layers, read `templates/README.md`, the selected template, and a machine profile. `scripts/resolve_template.py` previews one template for macOS, Windows, or Linux; its output is an intent/cheat-sheet manifest, not Bazecor JSON. `scripts/render_layer_preview.py` creates a labeled SVG diagram for one template or a selected PC manifest layer; use it when a user wants to see or iterate on the proposed keymap before Bazecor. Resolve L1 labels against the chosen source and check application availability and host shortcuts before encoding.
 
 Templates now use `position_id` (Defy side, one-based row and column) as physical identity, with `position_l1` as a readable hint. Derive the current numeric key index from the selected source's `device.keyboard`; warn when the current L1 assignment differs from the hint. For a binding without an ID, require an unambiguous L1 label. A shortcut array denotes ordered keypresses with release between steps, not one simultaneous Combo Key; confirm a Bazecor macro encoding before applying Herdr or tmux sequences.
 
 Templates may contain only a few keys. `scripts/apply_template.py preview` reports collisions, skips, unsupported encodings, and requested LED/slot changes without writing a file. By default, `apply` writes both assignments and mapped colors to a distinct output; `--keys-only` or `--colors-only` selects one aspect. Occupied keys block by default; `--fill-empty` skips those keys and colors, `--override` changes named positions, and `--replace-layer --baseline CLEAN.json` clears target keys and restores baseline lighting before applying. `scripts/apply_template_set.py` composes a PC manifest into one output only after all requested layers pass. The encoder accepts plain keys and modifier chords from current Bazecor key tables, calibrated with saved Cmd+S and Hyper+A examples, plus the saved One Shot Layer L4 code. It can copy Battery Level from L1 right thumb c2 (`54108`) and Bluetooth Pairing from c1 (`54109`) when the preserved source matches. Their proposed L4 destinations are c7/c8. For color application, map palette slot IDs to semantic purposes in each PC's manifest entry or its template fallback; the script checks slot existence and only maps LEDs with verified geometry. Plan a recognizable layer identity color, and reuse purpose colors across layers selectively when the action groups have a shared meaning. Keep Superkey and macro encoding gated on a saved example.
+
+For a visual preview, run `python3 scripts/render_layer_preview.py SOURCE.json MANIFEST.json --layer N --output NEW.svg` to compose all manifest entries on displayed layer N. For one template, use `SOURCE.json --template TEMPLATE.json --profile PROFILE.json --layer N --output NEW.svg`. The script also writes `NEW.md` (or `--report PATH.md`) with blockers and manual checks. The centered SVG uses stable L1 positions, two-row thumb clusters, action names, and resolved shortcuts. Its purpose colors are illustrative: the same mapped palette slot gets one preview swatch, while dashed borders mark LED positions that still need Bazecor verification. Use the Markdown report for skipped actions, unsupported encodings, missing slots, occupied keys, and conflicts. Rendering never changes the source or keyboard and does not replace the apply preview or Bazecor check. Use new SVG and report paths for each iteration.
 
 ## Interpret the request
 

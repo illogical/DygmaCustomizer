@@ -84,13 +84,15 @@ def reset_layer(doc, baseline, target, with_keys=True, with_colors=True):
 
 
 def plan(doc, template, profile, target, with_keys=True, with_colors=True,
-         fill_empty=False, source=None):
+         fill_empty=False, source=None, led_overrides=None, allow_unmapped_colors=False):
     entries, arrays, count, leds, width, _ = model(doc)
     target_index = layer(target, count)
     result = resolve(template, profile['os'], profile, doc,
                      include_without_shortcut=with_colors and not with_keys)
     keys, colors, palette = (arrays[name] for name in entries)
     mapping = led_map(doc) if with_colors else {}
+    if led_overrides:
+        mapping.update(led_overrides)
     source = source or doc
     rows = []
     used_indices = set()
@@ -154,7 +156,10 @@ def plan(doc, template, profile, target, with_keys=True, with_colors=True,
                 row['before_color_slot'] = colors[target_index*leds+led]
                 row['after_color_slot'] = color_slot(template, binding['color_category'], palette, width)
             except ValueError as error:
-                row['unsupported'] = '; '.join(filter(None, [row.get('unsupported'), str(error)]))
+                if allow_unmapped_colors and str(error) == 'key has no verified LED mapping':
+                    row['color_unmapped'] = True
+                else:
+                    row['unsupported'] = '; '.join(filter(None, [row.get('unsupported'), str(error)]))
         row['collision'] = (with_keys and keys[offset] != TRANSPARENT
                             and keys[offset] != row.get('after_keycode'))
         rows.append(row)
@@ -181,7 +186,7 @@ def apply(doc, report, override=False, allow_skipped=False):
             continue
         if report['with_keys']:
             arrays['keymap.custom'][target*KEYS+row['position_index']] = row['after_keycode']
-        if report['with_colors']:
+        if report['with_colors'] and 'led_index' in row:
             arrays['colormap.map'][target*leds+row['led_index']] = row['after_color_slot']
     changed = []
     if report['with_keys']:

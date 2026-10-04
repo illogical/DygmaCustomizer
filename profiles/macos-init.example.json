@@ -2,23 +2,21 @@
   "schema_version": 1,
   "id": "macos-init-example",
   "profile": "profiles/macos.example.json",
+  "deferred_red_slot": 11,
+  "verified_leds": {},
   "layer_targets": {
     "primary": 4,
     "secondary": 5,
     "tertiary": 6,
-    "rare": 7,
     "base": 1
   },
   "layers": [
     {"layer": 1, "template": "templates/layer-navigation.json"},
-    {"layer": 1, "template": "templates/rare-layer-access.json"},
     {"layer": 1, "template": "templates/device-controls-clear.json"},
     {"layer": 4, "template": "templates/app-launcher.json"},
     {"layer": 4, "template": "templates/device-controls.json"},
     {"layer": 5, "template": "templates/vscode.json"},
     {"layer": 5, "template": "templates/layer-return.json"},
-    {"layer": 6, "template": "templates/macos-navigation.json"},
-    {"layer": 7, "template": "templates/herdr.json"},
-    {"layer": 7, "template": "templates/layer-return.json"}
+    {"layer": 6, "template": "templates/macos-navigation.json"}
   ]
 }

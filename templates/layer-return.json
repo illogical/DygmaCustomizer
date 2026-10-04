@@ -3,7 +3,7 @@
   "id": "layer-return",
   "name": "Return to base layer",
   "platforms": ["macos", "windows", "linux"],
-  "source": "User-approved Macro 1 thumb position; layer-lock encoding requires current Bazecor verification.",
+  "source": "User-approved Macro 1 thumb position; Move to Layer L1 is supported by the preserved L8 fixture and Bazecor's matching command table.",
   "bindings": [
     {
       "id": "return_to_base",
@@ -11,7 +11,7 @@
       "position_l1": "Macro 1",
       "position_id": "defy:right:r5:c4",
       "color_category": "activation",
-      "bazecor_action": {"type": "layer-lock", "target": "base"}
+      "bazecor_action": {"type": "move-to-layer", "target": "base"}
     }
   ]
 }

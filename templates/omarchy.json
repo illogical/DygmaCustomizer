@@ -55,11 +55,11 @@
       "position_id": "defy:left:r4:c3"
     },
     {
-      "id": "herdr",
-      "name": "Herdr",
+      "id": "terminal",
+      "name": "Terminal",
       "position_l1": "H",
       "color_category": "app",
-      "requires_app": "herdr",
+      "requires_app": "terminal",
       "shortcuts": {
         "linux": "Super+Ctrl+Return"
       },

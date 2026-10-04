@@ -97,13 +97,10 @@ class ResolveTemplateTest(unittest.TestCase):
         self.assertEqual(file_search['current_l1_label'], 'Q')
         self.assertTrue(any('search_files' in warning for warning in result['warnings']))
 
-    def test_herdr_and_tmux_have_distinct_prefix_sequences(self):
+    def test_tmux_prefix_sequence(self):
         source = load('examples/VirtualDefy.json')
-        herdr = resolve(load('templates/herdr.json'), 'macos', source=source)
         tmux = resolve(load('templates/tmux.json'), 'linux', source=source)
-        self.assertEqual(next(row['shortcut'] for row in herdr['bindings'] if row['id'] == 'split_right'), ['Ctrl+B', 'V'])
         self.assertEqual(next(row['shortcut'] for row in tmux['bindings'] if row['id'] == 'split_right'), ['Ctrl+B', 'Shift+5'])
-        self.assertEqual(next(row['position_index'] for row in herdr['bindings'] if row['id'] == 'focus_left'), 42)
 
     def test_blender_view_uses_numpad_codes(self):
         result = resolve(load('templates/blender-view.json'), 'windows',

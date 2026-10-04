@@ -8,21 +8,43 @@ from pathlib import Path
 
 from apply_template import apply, plan, print_report, reset_layer
 from customize_trans_key import command_entry
-from defy import KEYS, model
+from defy import KEYS, led_map, model
 from resolve_template import read_json
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def compose(source, baseline, manifest, profile, load_template, only_layer=None,
-            with_keys=True, with_colors=True, policy='strict'):
+            with_keys=True, with_colors=True, policy='strict', defer_unsupported=False):
     if manifest.get('schema_version') != 1 or not manifest.get('id') or not isinstance(manifest.get('layers'), list) or not manifest['layers']:
         raise ValueError('Expected manifest schema version 1 with id and nonempty layers')
     if policy not in ('strict', 'fill-empty', 'override', 'replace-layer'):
         raise ValueError(f'Unknown apply policy: {policy}')
     if policy == 'fill-empty' and not with_keys:
         raise ValueError('fill-empty requires key assignments')
+    if defer_unsupported and not (with_keys and with_colors):
+        raise ValueError('Deferred preview requires keys and colors')
     model(source)
+    verified_leds = manifest.get('verified_leds', {})
+    if not isinstance(verified_leds, dict):
+        raise ValueError('manifest.verified_leds must map key indices to LED indices')
+    mapping = {}
+    for key, led in verified_leds.items():
+        if not isinstance(key, str) or not key.isdecimal() or type(led) is not int:
+            raise ValueError('Invalid verified LED mapping')
+        mapping[int(key)] = led
+    _, _, _, led_count, _, slot_count = model(source)
+    known_leds = led_map(source)
+    for key, led in mapping.items():
+        if not 0 <= key < KEYS or not 0 <= led < led_count:
+            raise ValueError('Verified LED mapping is out of range')
+        if key in known_leds and known_leds[key] != led:
+            raise ValueError('Verified LED mapping conflicts with source geometry')
+        if led in known_leds.values() and known_leds.get(key) != led:
+            raise ValueError('Verified LED mapping reuses another key LED')
+    red_slot = manifest.get('deferred_red_slot')
+    if defer_unsupported and (type(red_slot) is not int or not 0 <= red_slot < slot_count):
+        raise ValueError('Manifest needs a valid deferred_red_slot')
     if policy == 'replace-layer':
         model(baseline)
     layer_targets = manifest.get('layer_targets', {})
@@ -57,25 +79,46 @@ def compose(source, baseline, manifest, profile, load_template, only_layer=None,
                 reset_layer(output, baseline, number, with_keys, with_colors)
                 reset_layers.add(number)
             report = plan(output, template, profile, number, with_keys, with_colors,
-                          fill_empty=(policy == 'fill-empty'), source=source)
+                          fill_empty=(policy == 'fill-empty'), source=source,
+                          led_overrides=mapping if defer_unsupported else None,
+                          allow_unmapped_colors=defer_unsupported)
         except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
             blockers.append(f'L{number} {entry["template"]}: {error}')
             continue
         reports.append(report)
         prefix = f'L{number} {template["id"]}'
         blockers += [f'{prefix}: skipped {action}: {reason}' for action, reason in report['skipped']]
-        blockers += [f'{prefix}: unsupported {row["id"]}: {row["unsupported"]}'
-                     for row in report['rows'] if row.get('unsupported') and not row.get('skipped_occupied')]
+        deferred = []
+        for row in report['rows']:
+            if not row.get('unsupported') or row.get('skipped_occupied'):
+                continue
+            if defer_unsupported and with_keys and 'after_keycode' not in row:
+                if 'led_index' not in row:
+                    blockers.append(f'{prefix}: deferred {row["id"]} has no verified LED mapping')
+                else:
+                    row['deferred'] = True
+                    deferred.append(row)
+            else:
+                blockers.append(f'{prefix}: unsupported {row["id"]}: {row["unsupported"]}')
         if policy == 'strict':
             blockers += [f'{prefix}: occupied {row["id"]} at index {row["position_index"]}'
                          for row in report['rows'] if row['collision']]
         report_blocked = (
             bool(report['skipped']) or
-            any(row.get('unsupported') and not row.get('skipped_occupied') for row in report['rows']) or
+            any(row.get('unsupported') and not row.get('deferred') and not row.get('skipped_occupied') for row in report['rows']) or
+            any(row.get('unsupported') and 'led_index' not in row for row in report['rows']) or
             (policy == 'strict' and any(row['collision'] for row in report['rows']))
         )
         if not report_blocked:
-            apply(output, report, override=(policy == 'override'))
+            ready = {**report, 'rows': [row for row in report['rows'] if not row.get('deferred')]}
+            if ready['rows']:
+                apply(output, ready, override=(policy == 'override'))
+            if deferred:
+                entry = command_entry(output, 'colormap.map')
+                colors = model(output)[1]['colormap.map']
+                for row in deferred:
+                    colors[(number - 1) * led_count + row['led_index']] = red_slot
+                entry['data'] = ' '.join(map(str, colors))
     if blockers:
         return None, reports, blockers
     return output, reports, []
@@ -113,6 +156,8 @@ def main():
         policies.add_argument('--override', action='store_true')
         policies.add_argument('--replace-layer', action='store_true')
         cmd.add_argument('--baseline', type=Path, help='Clean export required with --replace-layer')
+        cmd.add_argument('--defer-unsupported', action='store_true',
+                         help='Leave unknown keycodes unchanged and mark their verified LEDs red')
         if name == 'apply':
             cmd.add_argument('--output', type=Path, help='Distinct output path')
     args = parser.parse_args()
@@ -129,7 +174,8 @@ def main():
         output_doc, reports, blockers = compose(
             source, baseline, manifest, profile,
             lambda path: read_json(ROOT / path), args.only_layer,
-            with_keys=not args.colors_only, with_colors=not args.keys_only, policy=policy)
+            with_keys=not args.colors_only, with_colors=not args.keys_only,
+            policy=policy, defer_unsupported=args.defer_unsupported)
         for report in reports:
             print_report(report)
         if blockers:
@@ -139,7 +185,13 @@ def main():
             if args.action == 'apply':
                 return 1
             return 0
-        print('Ready: all requested layers can be applied')
+        deferred = [(report['target_layer'], row) for report in reports
+                    for row in report['rows'] if row.get('deferred')]
+        for number, row in deferred:
+            print(f"  DEFERRED L{number} {row['id']} at {row['position_id']}: "
+                  f"{row['unsupported']}; LED {row['led_index']} → slot {manifest['deferred_red_slot']}")
+        print(f'Ready: {len(deferred)} deferred action(s) marked red' if deferred else
+              'Ready: all requested layers can be applied')
         if args.action == 'preview':
             return 0
         output = args.output or args.input.with_name(f'{args.input.stem}-{manifest["id"]}.json')

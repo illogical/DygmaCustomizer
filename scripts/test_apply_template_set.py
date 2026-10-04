@@ -32,12 +32,50 @@ class ApplyTemplateSetTest(unittest.TestCase):
             lambda path: read_json(ROOT / path))
         self.assertIsNone(output)
         self.assertEqual(self.source, before)
-        self.assertEqual({report['target_layer'] for report in reports}, {1, 4, 5, 6, 7})
+        self.assertEqual({report['target_layer'] for report in reports}, {1, 4, 5, 6})
         self.assertFalse(any(report['skipped'] for report in reports))
         self.assertTrue(any('Bazecor-verified' in issue for issue in blockers))
         self.assertTrue(any('verified LED mapping' in issue for issue in blockers))
         self.assertFalse(any('color category' in issue for issue in blockers))
         self.assertFalse(any('open_finder' in issue for issue in blockers))
+
+    def test_deferred_key_is_red_and_other_layers_compose(self):
+        pending = copy.deepcopy(self.template)
+        pending['id'] = 'pending'
+        pending['bindings'][0]['bazecor_action'] = {
+            'type': 'superkey', 'gestures': {'tap': {'type': 'move-to-layer', 'target': 'secondary'}}}
+        pending['bindings'][0].pop('shortcuts')
+        manifest = {'schema_version': 1, 'id': 'test', 'deferred_red_slot': 11,
+                    'layer_targets': {'secondary': 5},
+                    'verified_leds': {}, 'layers': [
+                        {'layer': 4, 'template': 'pending.json', 'color_slots': {'5': 'app'}},
+                        {'layer': 5, 'template': 'ready.json', 'color_slots': {'5': 'app'}}]}
+        source_before = copy.deepcopy(self.source)
+        output, reports, blockers = compose(
+            self.source, self.source, manifest, self.profile,
+            lambda path: pending if path == 'pending.json' else self.template,
+            policy='override', defer_unsupported=True)
+        self.assertFalse(blockers)
+        self.assertTrue(reports[0]['rows'][0]['deferred'])
+        before = model(self.source)[1]
+        after = model(output)[1]
+        self.assertEqual(after['keymap.custom'][3 * 80 + 34], 65535)
+        self.assertEqual(after['keymap.custom'][4 * 80 + 34], 4118)
+        led = 16
+        self.assertEqual(after['colormap.map'][3 * 178 + led], 11)
+        self.assertEqual(output['virtual']['palette'], self.source['virtual']['palette'])
+        self.assertEqual(self.source, source_before)
+
+    def test_deferred_key_without_verified_led_refuses_output(self):
+        manifest = read_json(ROOT / 'profiles/macbook-pro-m5-init.local.json')
+        profile = read_json(ROOT / manifest['profile'])
+        output, _, blockers = compose(
+            self.source, self.source, manifest, profile,
+            lambda path: read_json(ROOT / path), policy='override',
+            defer_unsupported=True)
+        self.assertIsNone(output)
+        self.assertTrue(any('deferred secondary_and_tertiary_layers has no verified LED mapping'
+                            in item for item in blockers))
 
     def test_compose_two_layers_preserves_unselected_layers_and_commands(self):
         manifest = {'schema_version': 1, 'id': 'test', 'layers': [

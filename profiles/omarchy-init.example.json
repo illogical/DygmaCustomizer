@@ -13,8 +13,6 @@
     {"layer": 1, "template": "templates/device-controls-clear.json"},
     {"layer": 4, "template": "templates/omarchy.json"},
     {"layer": 4, "template": "templates/device-controls.json"},
-    {"layer": 5, "template": "templates/herdr.json"},
-    {"layer": 5, "template": "templates/layer-return.json"},
     {"layer": 6, "template": "templates/tmux.json"}
   ]
 }

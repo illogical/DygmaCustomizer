@@ -17,8 +17,8 @@ The user wants a reusable template workflow for initializing a fresh Defy virtua
 
 Two tracked starting manifests now exist:
 
-- `profiles/macos-init.example.json`: L4 app launcher, L5 VS Code, L6 macOS navigation, L7 Herdr.
-- `profiles/omarchy-init.example.json`: L4 Omarchy, L5 Herdr, L6 tmux, using `profiles/omarchy.example.json`. Its preview reports 42 blockers and writes no output.
+- `profiles/macos-init.example.json`: L4 app launcher, L5 VS Code, L6 macOS navigation; L7 is unused.
+- `profiles/omarchy-init.example.json`: L4 Omarchy and L6 tmux, using `profiles/omarchy.example.json`.
 
 This Mac also has a machine-local, ignored manifest at `/Users/matt/dev/projects/DygmaCustomizer/profiles/macbook-pro-m5.init.local.json` with the Mac assignments and a machine-local profile at `/Users/matt/dev/projects/DygmaCustomizer/profiles/macbook-pro-m5.local.json`. Do not put their machine-specific contents into a tracked example without review. The Mac preview also reports 42 blockers. No combined virtual JSON was generated or applied to hardware.
 
@@ -35,7 +35,7 @@ The previous implementation turn ran `python3 -m unittest discover -s scripts -p
 
 # Current blockers
 
-Shortcut combinations and Herdr/tmux prefix sequences need minimal examples saved from the current Bazecor UI before any new raw encoding is added. PC color slot mappings are still unchosen. Several right-side key positions lack a verified key-to-LED mapping. The Mac Finder action lacks a global shortcut. The Omarchy profile is an example: confirm the installed Omarchy version, available apps, terminal behavior, and actual shortcuts on that PC. `preview` is read-only; `apply` refuses to write a partial combined configuration when these requested actions remain blocked.
+Tmux prefix sequences need minimal examples saved from the current Bazecor UI before any new raw encoding is added. Several right-side key positions lack a verified key-to-LED mapping. The Mac Finder action lacks a global shortcut. The Omarchy profile is an example: confirm the installed Omarchy version, available apps, terminal behavior, and actual shortcuts on that PC. `preview` is read-only; `apply` refuses to write a combined configuration with unmarked deferred keys.
 
 # Next discussion requested by the user
 

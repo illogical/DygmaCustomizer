@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2808" height="1191" viewBox="0 0 2808 1191" role="img" aria-label="Proposed Defy L4 layer preview">
+<style>text{font-family:Inter,Arial,sans-serif} .key{rx:15;stroke-width:2}</style>
+<rect width="2808" height="1191" fill="#101725"/>
+<text x="70" y="78" fill="#f4f7ff" font-size="40" font-weight="700" text-anchor="start">L4 · App launcher + Defy device controls</text>
+<text x="70" y="116" fill="#aab9d1" font-size="20" font-weight="400" text-anchor="start">macbook-pro-m5-init  ·  macbook-pro-m5</text>
+<text x="70" y="152" fill="#fbbf75" font-size="20" font-weight="400" text-anchor="start">Proposed template layout · source JSON and keyboard unchanged</text>
+<text x="70" y="213" fill="#9aafcc" font-size="19" font-weight="700" text-anchor="start">LEFT HALF</text>
+<text x="1454" y="213" fill="#9aafcc" font-size="19" font-weight="700" text-anchor="start">RIGHT HALF</text>
+<rect class="key" x="70" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r1:c1: Transparent</title></rect>
+<text x="81" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Esc</text>
+<text x="81" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="81" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="232" y="245" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r1:c2: Launch ChatGPT</title></rect>
+<text x="243" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 1</text>
+<text x="243" y="297" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">ChatGPT</text>
+<text x="243" y="349" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+1</text>
+<rect class="key" x="394" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r1:c3: Transparent</title></rect>
+<text x="405" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 2</text>
+<text x="405" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="405" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="556" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r1:c4: Transparent</title></rect>
+<text x="567" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 3</text>
+<text x="567" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="567" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="718" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r1:c5: Transparent</title></rect>
+<text x="729" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 4</text>
+<text x="729" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="729" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="880" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r1:c6: Transparent</title></rect>
+<text x="891" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 5</text>
+<text x="891" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="891" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1042" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r1:c7: Transparent</title></rect>
+<text x="1053" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 -</text>
+<text x="1053" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1053" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="70" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r2:c1: Transparent</title></rect>
+<text x="81" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Tab</text>
+<text x="81" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="81" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="232" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r2:c2: Transparent</title></rect>
+<text x="243" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Q</text>
+<text x="243" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="243" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="394" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r2:c3: Transparent</title></rect>
+<text x="405" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 W</text>
+<text x="405" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="405" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="556" y="375" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r2:c4: Launch Evernote</title></rect>
+<text x="567" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 E</text>
+<text x="567" y="427" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Evernote</text>
+<text x="567" y="479" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+E</text>
+<rect class="key" x="718" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r2:c5: Transparent</title></rect>
+<text x="729" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 R</text>
+<text x="729" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="729" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="880" y="375" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r2:c6: Launch Terminal</title></rect>
+<text x="891" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 T</text>
+<text x="891" y="427" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Terminal</text>
+<text x="891" y="479" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+T</text>
+<rect class="key" x="1042" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r2:c7: Transparent</title></rect>
+<text x="1053" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 [</text>
+<text x="1053" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1053" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="70" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r3:c1: Transparent</title></rect>
+<text x="81" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 57</text>
+<text x="81" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="81" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="232" y="505" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r3:c2: Launch Activity Monitor</title></rect>
+<text x="243" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 A</text>
+<text x="243" y="557" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Activity</text>
+<text x="243" y="579" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Monitor</text>
+<text x="243" y="609" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+A</text>
+<rect class="key" x="394" y="505" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r3:c3: Launch Sublime Text</title></rect>
+<text x="405" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 S</text>
+<text x="405" y="557" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Sublime Text</text>
+<text x="405" y="609" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+S</text>
+<rect class="key" x="556" y="505" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r3:c4: Launch Discord</title></rect>
+<text x="567" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 D</text>
+<text x="567" y="557" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Discord</text>
+<text x="567" y="609" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+D</text>
+<rect class="key" x="718" y="505" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r3:c5: Launch Firefox</title></rect>
+<text x="729" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 F</text>
+<text x="729" y="557" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Firefox</text>
+<text x="729" y="609" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+F</text>
+<rect class="key" x="880" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r3:c6: Transparent</title></rect>
+<text x="891" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 G</text>
+<text x="891" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="891" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1042" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r3:c7: Transparent</title></rect>
+<text x="1053" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 17152</text>
+<text x="1053" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1053" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="70" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r4:c1: Transparent</title></rect>
+<text x="81" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 225</text>
+<text x="81" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="81" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="232" y="635" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r4:c2: Launch Zen</title></rect>
+<text x="243" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Z</text>
+<text x="243" y="687" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Zen</text>
+<text x="243" y="739" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+Z</text>
+<rect class="key" x="394" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r4:c3: Transparent</title></rect>
+<text x="405" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 X</text>
+<text x="405" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="405" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="556" y="635" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r4:c4: Launch Visual Studio Code</title></rect>
+<text x="567" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 C</text>
+<text x="567" y="687" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Visual Studio</text>
+<text x="567" y="709" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Code</text>
+<text x="567" y="739" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+C</text>
+<rect class="key" x="718" y="635" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r4:c5: Launch Vivaldi</title></rect>
+<text x="729" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 V</text>
+<text x="729" y="687" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Vivaldi</text>
+<text x="729" y="739" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+V</text>
+<rect class="key" x="880" y="635" width="150" height="118" fill="#203d4a" stroke="#00fe18" stroke-dasharray="none"><title>defy:left:r4:c6: Launch Bloom</title></rect>
+<text x="891" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 B</text>
+<text x="891" y="687" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Bloom</text>
+<text x="891" y="739" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Hyper+B</text>
+<rect class="key" x="610" y="785" width="150" height="118" fill="#203d4a" stroke="#7588a2" stroke-dasharray="none"><title>defy:left:r5:c1: Pass the trigger through on the app-launcher layer</title></rect>
+<text x="621" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Super 1</text>
+<text x="621" y="837" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Pass through</text>
+<text x="621" y="889" fill="#8ce4e8" font-size="14" font-weight="400" text-anchor="start">Pass through</text>
+<rect class="key" x="772" y="785" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c2: Transparent</title></rect>
+<text x="783" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 17452</text>
+<text x="783" y="845" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="783" y="889" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="934" y="785" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c3: Transparent</title></rect>
+<text x="945" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Space</text>
+<text x="945" y="845" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="945" y="889" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1096" y="785" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c4: Transparent</title></rect>
+<text x="1107" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 49211</text>
+<text x="1107" y="845" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1107" y="889" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1096" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c5: Transparent</title></rect>
+<text x="1107" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 49721</text>
+<text x="1107" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1107" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="934" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c6: Transparent</title></rect>
+<text x="945" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 227</text>
+<text x="945" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="945" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="772" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c7: Transparent</title></rect>
+<text x="783" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 0</text>
+<text x="783" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="783" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="610" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:left:r5:c8: Transparent</title></rect>
+<text x="621" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 0</text>
+<text x="621" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="621" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1454" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c1: Transparent</title></rect>
+<text x="1465" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 =</text>
+<text x="1465" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1465" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1616" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c2: Transparent</title></rect>
+<text x="1627" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 6</text>
+<text x="1627" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1627" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1778" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c3: Transparent</title></rect>
+<text x="1789" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 7</text>
+<text x="1789" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1789" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1940" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c4: Transparent</title></rect>
+<text x="1951" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 8</text>
+<text x="1951" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1951" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2102" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c5: Transparent</title></rect>
+<text x="2113" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 9</text>
+<text x="2113" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2113" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2264" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c6: Transparent</title></rect>
+<text x="2275" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 0</text>
+<text x="2275" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2275" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2426" y="245" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r1:c7: Transparent</title></rect>
+<text x="2437" y="267" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Backspace</text>
+<text x="2437" y="305" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2437" y="349" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1454" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c1: Transparent</title></rect>
+<text x="1465" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 ]</text>
+<text x="1465" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1465" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1616" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c2: Transparent</title></rect>
+<text x="1627" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Y</text>
+<text x="1627" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1627" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1778" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c3: Transparent</title></rect>
+<text x="1789" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 U</text>
+<text x="1789" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1789" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1940" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c4: Transparent</title></rect>
+<text x="1951" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 I</text>
+<text x="1951" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1951" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2102" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c5: Transparent</title></rect>
+<text x="2113" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 O</text>
+<text x="2113" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2113" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2264" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c6: Transparent</title></rect>
+<text x="2275" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 P</text>
+<text x="2275" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2275" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2426" y="375" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r2:c7: Transparent</title></rect>
+<text x="2437" y="397" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 76</text>
+<text x="2437" y="435" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2437" y="479" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1454" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c1: Transparent</title></rect>
+<text x="1465" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 \</text>
+<text x="1465" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1465" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1616" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c2: Transparent</title></rect>
+<text x="1627" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 H</text>
+<text x="1627" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1627" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1778" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c3: Transparent</title></rect>
+<text x="1789" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 J</text>
+<text x="1789" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1789" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1940" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c4: Transparent</title></rect>
+<text x="1951" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 K</text>
+<text x="1951" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1951" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2102" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c5: Transparent</title></rect>
+<text x="2113" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 L</text>
+<text x="2113" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2113" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2264" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c6: Transparent</title></rect>
+<text x="2275" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 ;</text>
+<text x="2275" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2275" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2426" y="505" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r3:c7: Transparent</title></rect>
+<text x="2437" y="527" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 &#x27;</text>
+<text x="2437" y="565" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2437" y="609" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1454" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r4:c1: Transparent</title></rect>
+<text x="1465" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 0</text>
+<text x="1465" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1465" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1616" y="635" width="150" height="118" fill="#263747" stroke="#e9a35b" stroke-dasharray="7 5"><title>defy:right:r4:c2: Launch Notion; key has no verified LED mapping</title></rect>
+<text x="1627" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 N</text>
+<text x="1627" y="687" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Notion</text>
+<text x="1627" y="739" fill="#ffca8d" font-size="14" font-weight="400" text-anchor="start">Hyper+N</text>
+<rect class="key" x="1778" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r4:c3: Transparent</title></rect>
+<text x="1789" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 M</text>
+<text x="1789" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1789" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1940" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r4:c4: Transparent</title></rect>
+<text x="1951" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 ,</text>
+<text x="1951" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1951" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2102" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r4:c5: Transparent</title></rect>
+<text x="2113" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 .</text>
+<text x="2113" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2113" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2264" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r4:c6: Transparent</title></rect>
+<text x="2275" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 /</text>
+<text x="2275" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2275" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="2426" y="635" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r4:c7: Transparent</title></rect>
+<text x="2437" y="657" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 229</text>
+<text x="2437" y="695" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="2437" y="739" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1890" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r5:c1: Transparent</title></rect>
+<text x="1901" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 54109</text>
+<text x="1901" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1901" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1728" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r5:c2: Transparent</title></rect>
+<text x="1739" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 54108</text>
+<text x="1739" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1739" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1566" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r5:c3: Transparent</title></rect>
+<text x="1577" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 101</text>
+<text x="1577" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1577" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1404" y="923" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r5:c4: Transparent</title></rect>
+<text x="1415" y="945" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 49209</text>
+<text x="1415" y="983" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1415" y="1027" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1404" y="785" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r5:c5: Transparent</title></rect>
+<text x="1415" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 code 49162</text>
+<text x="1415" y="845" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1415" y="889" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1566" y="785" width="150" height="118" fill="#1b2434" stroke="#42536b" stroke-dasharray="none"><title>defy:right:r5:c6: Transparent</title></rect>
+<text x="1577" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Space</text>
+<text x="1577" y="845" fill="#afbdd0" font-size="19" font-weight="400" text-anchor="start">—</text>
+<text x="1577" y="889" fill="#7588a2" font-size="13" font-weight="400" text-anchor="start">Current L4</text>
+<rect class="key" x="1728" y="785" width="150" height="118" fill="#263747" stroke="#e9a35b" stroke-dasharray="7 5"><title>defy:right:r5:c7: Show battery level; key has no verified LED mapping</title></rect>
+<text x="1739" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 Right Alt</text>
+<text x="1739" y="837" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Show battery</text>
+<text x="1739" y="859" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">level</text>
+<text x="1739" y="889" fill="#ffca8d" font-size="14" font-weight="400" text-anchor="start">Device command</text>
+<rect class="key" x="1890" y="785" width="150" height="118" fill="#263747" stroke="#e9a35b" stroke-dasharray="7 5"><title>defy:right:r5:c8: Bluetooth pairing; key has no verified LED mapping</title></rect>
+<text x="1901" y="807" fill="#b9c8d9" font-size="15" font-weight="600" text-anchor="start">L1 keycode:53852</text>
+<text x="1901" y="837" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">Bluetooth</text>
+<text x="1901" y="859" fill="#f4f8fb" font-size="18" font-weight="650" text-anchor="start">pairing</text>
+<text x="1901" y="889" fill="#ffca8d" font-size="14" font-weight="400" text-anchor="start">Device command</text>
+<text x="70" y="1086" fill="#9fe6c5" font-size="18" font-weight="600" text-anchor="start">Border: proposed palette slot</text>
+<text x="440" y="1086" fill="#ffca8d" font-size="18" font-weight="600" text-anchor="start">Dashed: LED position unverified</text>
+<text x="920" y="1086" fill="#b2bfd2" font-size="18" font-weight="600" text-anchor="start">Gray: current source layer</text>
+<text x="70" y="1122" fill="#aab9d1" font-size="17" font-weight="400" text-anchor="start">Hyper = Ctrl + Alt + Cmd + Shift  ·  App shortcuts come from the machine profile</text>
+<text x="70" y="1156" fill="#aab9d1" font-size="17" font-weight="400" text-anchor="start">15 proposed positions · 3 with unverified LED mapping · 3 position notes</text>
+</svg>
