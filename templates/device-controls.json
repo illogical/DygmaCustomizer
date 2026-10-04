@@ -3,12 +3,12 @@
   "id": "device-controls",
   "name": "Defy device controls",
   "platforms": ["macos", "windows", "linux"],
-  "source": "Preserve the current L1 battery and Bluetooth actions on their physical thumb positions; each command needs a current Bazecor-verified encoding before apply.",
+  "source": "Copy the verified L1 battery and Bluetooth codes from right thumb c2 and c1 to the selected L4 destination positions c7 and c8.",
   "bindings": [
     {
       "id": "battery_level",
       "name": "Show battery level",
-      "position_l1": "Battery level",
+      "position_l1": "Right Alt",
       "position_id": "defy:right:r5:c7",
       "color_category": "system",
       "bazecor_action": {"type": "device-command", "command": "battery-level"}
@@ -16,7 +16,7 @@
     {
       "id": "bluetooth_pairing",
       "name": "Bluetooth pairing",
-      "position_l1": "Bluetooth pairing",
+      "position_l1": "keycode:53852",
       "position_id": "defy:right:r5:c8",
       "color_category": "system",
       "bazecor_action": {"type": "device-command", "command": "bluetooth-pairing"}

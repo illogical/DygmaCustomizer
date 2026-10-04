@@ -78,7 +78,7 @@ def resolve_bazecor_action(action, profile, layer_count=None):
     action_type = action['type']
     if action_type == 'transparent':
         return resolved
-    if action_type in ('one-shot-layer', 'layer-lock', 'layer-shift'):
+    if action_type in ('one-shot-layer', 'layer-lock', 'layer-shift', 'move-to-layer'):
         target = action.get('target')
         targets = profile.get('layer_targets', {})
         if not isinstance(targets, dict) or target not in targets:
@@ -97,8 +97,8 @@ def resolve_bazecor_action(action, profile, layer_count=None):
         for gesture, subaction in gestures.items():
             if gesture not in ('tap', 'hold', 'tap_hold', 'double_tap', 'double_tap_hold'):
                 raise ValueError(f'unsupported Superkey gesture: {gesture}')
-            if not isinstance(subaction, dict) or subaction.get('type') not in ('layer-lock', 'layer-shift'):
-                raise ValueError(f'Superkey gesture {gesture} must specify a layer-lock or layer-shift action')
+            if not isinstance(subaction, dict) or subaction.get('type') not in ('layer-lock', 'layer-shift', 'move-to-layer'):
+                raise ValueError(f'Superkey gesture {gesture} must specify a layer-lock, move-to-layer, or layer-shift action')
             resolved_gestures[gesture] = resolve_bazecor_action(subaction, profile, layer_count)
         resolved['gestures'] = resolved_gestures
     elif action_type == 'device-command':

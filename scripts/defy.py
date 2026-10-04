@@ -9,6 +9,9 @@ from pathlib import Path
 from customize_trans_key import command_entry, numbers
 
 KEYS = 80
+FIXTURE_RIGHT_ROWS = [list(range(9, 16)), list(range(25, 32)),
+                      list(range(41, 48))]
+FIXTURE_RIGHT_LEDS = list(range(35, 56))
 
 
 def model(doc):
@@ -45,9 +48,14 @@ def led_map(doc):
         rows = keyboard[side]
         keys = [key for row in rows for key in row]
         leds = keyboard['leds' + side.capitalize()]
-        # The source has one more right key than right LED. Only its first row is proven.
+        # The L8 fixture paints the first two right rows and anchors the third
+        # row's final key at LED 55. Those rows each have seven keys and LEDs.
+        # The right thumb row still has one more key than remaining LEDs.
         if side == 'right':
-            keys, leds = rows[0], leds[:len(rows[0])]
+            proven_rows = (rows[:3] if rows[:3] == FIXTURE_RIGHT_ROWS
+                           and leds[:21] == FIXTURE_RIGHT_LEDS else rows[:1])
+            keys = [key for row in proven_rows for key in row]
+            leds = leds[:len(keys)]
         if len(keys) != len(leds):
             raise ValueError(f'{side} key/LED mapping is ambiguous')
         mapping.update(zip(keys, leds))

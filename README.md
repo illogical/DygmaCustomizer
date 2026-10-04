@@ -30,7 +30,7 @@ python3 scripts/defy.py set-color INPUT.json OUTPUT.json --target 4 --led 36 --s
 python3 scripts/defy.py set-palette INPUT.json OUTPUT.json --slot 14 --channels 20 80 255 0
 ```
 
-The examples show syntax; choose actual paths, positions, and colors after inspecting the source. `copy-keys` copies assignments and optionally matching LED slots. A whole-layer copy copies all 80 key positions and that layer's full LED map; move then clears the source keys to transparent and source LEDs to the requested slot. Existing destination assignments require `--replace`. Changing a used palette slot also requires `--replace` because every LED referring to that slot will change. This command does not rewrite layer-switch keys, macros, default-layer settings, or names; review those when moving a layer. For per-key color edits, the verified key-to-LED map covers the left half and right top row. Use `--led` only after checking another right-side LED in Bazecor.
+The examples show syntax; choose actual paths, positions, and colors after inspecting the source. `copy-keys` copies assignments and optionally matching LED slots. A whole-layer copy copies all 80 key positions and that layer's full LED map; move then clears the source keys to transparent and source LEDs to the requested slot. Existing destination assignments require `--replace`. Changing a used palette slot also requires `--replace` because every LED referring to that slot will change. This command does not rewrite layer-switch keys, macros, default-layer settings, or names; review those when moving a layer. For per-key color edits, the fixture supports the left half and the first three right rows; the third right row follows the contiguous seven-key/seven-LED geometry anchored by its final colored key. Check that row visually in Bazecor. Use `--led` only after checking lower right-side LEDs in Bazecor.
 
 ## Named layer templates and machine profiles
 
@@ -69,7 +69,7 @@ python3 scripts/apply_template_set.py preview examples/VirtualDefy.json profiles
 python3 scripts/apply_template_set.py apply INPUT.json PC-MANIFEST.json --keys-only --override --output OUTPUT.json
 ```
 
-The Mac example manifest maps `primary` to L4 app launcher, `secondary` to L5 VS Code, `tertiary` to L6 macOS navigation, `rare` to L7 Herdr, and `base` to L1. The Omarchy example maps its own L4–L6 layers to those roles. Multiple manifest entries can target one layer and compose in order. `--only-layer N` selects all templates for that layer. Replace `PC-MANIFEST.json` with the chosen manifest path; run `apply` only after its preview has no blockers. The applier can copy the Battery Level and Bluetooth Pairing assignments already present on L1 of the selected `VirtualDefy.json` when their codes and physical positions match. Layer triggers, Superkeys, shortcuts, macros, and right-side lighting still block the complete Mac output.
+The Mac example manifest maps `primary` to L4 app launcher, `secondary` to L5 VS Code, `tertiary` to L6 macOS navigation, `rare` to L7 Herdr, and `base` to L1. The Omarchy example maps its own L4–L6 layers to those roles. Multiple manifest entries can target one layer and compose in order. `--only-layer N` selects all templates for that displayed layer. Replace `PC-MANIFEST.json` with the chosen manifest path; run `apply` only after its preview has no blockers. The applier can copy Battery Level (`54108`) from L1 right thumb c2 and Bluetooth Pairing (`54109`) from c1 when their source positions and codes match, placing them at proposed L4 c7/c8 destinations. The L8 fixture and Bazecor code tables support the One Shot Layer L4, Hyper, VS Code, and macOS navigation chord encodings. The script produced `profiles/macbook-pro-m5-L4-keys.local.json` and `profiles/macbook-pro-m5-L6-navigation.local.json` as separate partial demonstrations. Superkey gestures, the exact layer-stay/toggle choice, Herdr macros, and lower right-side lighting still block the complete Mac output; see [the fixture checklist](BAZECOR_FIXTURES.md).
 
 To revise just L5 in an existing configuration, update L5's template in the manifest, then run:
 
@@ -78,7 +78,7 @@ python3 scripts/apply_template_set.py preview CURRENT.json PC-MANIFEST.json --on
 python3 scripts/apply_template_set.py apply CURRENT.json PC-MANIFEST.json --only-layer 5 --replace-layer --baseline CLEAN.json --output UPDATED.json
 ```
 
-Other layers are preserved. Navigation and return templates describe the selected One Shot Layer, Layer Shift, and Layer Lock behavior. The applier blocks those actions until their Bazecor encodings are verified. No command changes a connected keyboard.
+Other layers are preserved. Navigation and return templates describe the selected One Shot Layer, Layer Shift, and Layer Lock behavior. The applier supports the verified One Shot Layer L4 code and blocks other unverified layer actions. No command changes a connected keyboard.
 
 ## Bazecor capabilities relevant to this project
 

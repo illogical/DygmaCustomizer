@@ -12,27 +12,41 @@ from resolve_template import read_json, resolve
 
 TRANSPARENT = 65535
 
-# Plain USB HID keys already used by Defy keymaps. Modifier combos need a
-# Bazecor-made fixture; the only confirmed combo in this project is Cmd+S.
+# HID bases and additive modifier offsets match Bazecor's key tables.
+# The saved L8 fixture confirms Hyper+A (6912+4); the source confirms Cmd+S.
 PLAIN = {chr(65 + i): 4 + i for i in range(26)}
 PLAIN.update({str(i): 29 + i for i in range(1, 10)})
 PLAIN['0'] = 39
 PLAIN.update({'Tab': 43, 'Space': 44, 'Minus': 45, 'Grave': 53,
-              'F5': 62, 'Left': 80, 'Right': 79, 'Up': 82, 'Down': 81})
-ENCODED = {'Cmd+S': 4118}
-# Existing L1 assignments in examples/VirtualDefy.json. Copy only when the
-# selected source still has these exact codes at these physical positions.
-VERIFIED_DEVICE_SOURCE = {'battery-level': (78, 230),
-                          'bluetooth-pairing': (79, 53852)}
+              'Comma': 54, 'F5': 62, 'F12': 69,
+              'Left': 80, 'Right': 79, 'Up': 82, 'Down': 81})
+MODIFIER_OFFSETS = {
+    frozenset({'Ctrl'}): 256,
+    frozenset({'Cmd'}): 4096,
+    frozenset({'Shift'}): 2048,
+    frozenset({'Ctrl', 'Shift'}): 2304,
+    frozenset({'Ctrl', 'Cmd'}): 4352,
+    frozenset({'Shift', 'Cmd'}): 6144,
+    frozenset({'Ctrl', 'Alt', 'Cmd', 'Shift'}): 6912,
+}
+# Existing L1 assignments in examples/VirtualDefy.json. Source positions are
+# independent of the template's destination positions; check both geometry and
+# source codes before copying.
+VERIFIED_DEVICE_SOURCE = {'battery-level': (73, 54108),
+                          'bluetooth-pairing': (72, 54109)}
 
 
 def encode(chord):
     if isinstance(chord, list):
         raise ValueError('ordered sequence needs a Bazecor-verified macro')
-    if chord in ENCODED:
-        return ENCODED[chord]
     if chord in PLAIN:
         return PLAIN[chord]
+    if isinstance(chord, str):
+        *modifiers, key = chord.split('+')
+        offset = MODIFIER_OFFSETS.get(frozenset(modifiers))
+        if (offset is not None and len(modifiers) == len(set(modifiers))
+                and key in PLAIN):
+            return offset + PLAIN[key]
     raise ValueError(f'{chord} needs a Bazecor-verified keycode')
 
 
@@ -104,13 +118,17 @@ def plan(doc, template, profile, target, with_keys=True, with_colors=True,
                 action_type = binding['bazecor_action']['type']
                 if action_type == 'transparent':
                     row['after_keycode'] = TRANSPARENT
+                elif action_type == 'one-shot-layer' and binding['bazecor_action']['target_layer'] == 4:
+                    row['after_keycode'] = 49164
+                elif action_type == 'move-to-layer':
+                    row['after_keycode'] = 17491 + binding['bazecor_action']['target_layer']
                 elif action_type == 'device-command':
                     command = binding['bazecor_action']['command']
                     verified = VERIFIED_DEVICE_SOURCE.get(command)
                     source_keys = model(source)[1]['keymap.custom']
-                    if (verified is None or index != verified[0]
+                    if (verified is None
                             or source['device']['keyboard'] != doc['device']['keyboard']
-                            or source_keys[index] != verified[1]):
+                            or source_keys[verified[0]] != verified[1]):
                         row['unsupported'] = (
                             f'{command} needs a matching verified L1 assignment in the source'
                         )

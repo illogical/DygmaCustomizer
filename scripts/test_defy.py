@@ -7,13 +7,29 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 
-from defy import edit, model
+from defy import edit, led_map, model
+from resolve_template import read_json
 from test_copy_l1_numbers_to_l4 import sample_layout
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class DefyCommandTest(unittest.TestCase):
+    def test_saved_l8_colors_confirm_right_first_three_rows(self):
+        source = read_json(ROOT / 'examples/VirtualDefy.json')
+        fixture = read_json(ROOT / 'examples/VirtualDefy-L8-fixtures.json')
+        mapping = led_map(source)
+        colors = model(fixture)[1]['colormap.map'][7 * 178:8 * 178]
+        self.assertEqual([(mapping[key], colors[mapping[key]]) for key in (27, 28, 30)],
+                         [(44, 11), (45, 10), (47, 8)])
+        self.assertEqual((mapping[47], colors[mapping[47]]), (55, 14))
+        self.assertEqual([mapping[key] for key in (42, 43, 44, 45)], [50, 51, 52, 53])
+        self.assertNotIn(58, mapping)  # Lower right rows need confirmation.
+
+        altered = copy.deepcopy(source)
+        altered['device']['keyboard']['right'][1][2] = 99
+        self.assertNotIn(27, led_map(altered))
+
     def layout(self):
         doc = sample_layout()
         doc['device']['RGBWMode'] = True

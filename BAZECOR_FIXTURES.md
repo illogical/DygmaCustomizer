@@ -1,72 +1,40 @@
 # Bazecor fixtures for the Mac Defy manifest
 
-Use the existing assignments in `examples/VirtualDefy.json` before creating new fixtures for `profiles/macbook-pro-m5-init.local.json`. Keep that source intact. For each genuinely new example below, start from a separate copy, make only the stated change, use Bazecor's Save action, and save the result under a distinct filename. Send the saved examples for command-by-command comparison. Loading a virtual file does not update a connected keyboard.
+Use `examples/VirtualDefy.json` as the preserved comparison source for `profiles/macbook-pro-m5-init.local.json`. Bazecor saved the user's virtual configuration at `/Users/matt/Dygma/Backups/VirtualDefy.json`; its current L8 example is preserved as `examples/VirtualDefy-L8-fixtures.json` for repeatable checks. Bazecor's Save action updates its selected virtual JSON; Preferences → Backups → Export Backup can report no backup for a virtual keyboard. A physical Defy is not needed to compare virtual JSON, but is needed later to confirm behavior on hardware. Keep each source intact and save the next example under a distinct name.
 
-Record the Bazecor version, Defy model/layout, firmware shown by Bazecor, and whether RGBW mode is enabled. These encodings may depend on Bazecor or firmware; the Mac's Raycast, VS Code, screenshot, and Herdr shortcuts must also be checked on that Mac. Do not infer a new keycode merely from an older API example or from a different machine.
+The saved file identifies a Defy with ten layers, 80 key positions per layer, 178 LED entries per layer, and 16 RGBW palette slots. Against the preserved source, only five L8 `keymap.custom` values and 30 L8 `colormap.map` values changed semantically. `palette`, `superkeys.map`, `macros.map`, device geometry, and other layers are unchanged; Bazecor only normalized whitespace in `palette` and `keymap.onlyCustom`.
 
-## Next fixture to make
+## What the current L8 save establishes
 
-One saved copy can cover the immediate questions. First inspect the existing L1 thumb assignments listed below in Bazecor. In the copy, set One Shot Layer L4 on L1 `Super 1` and Layer Lock L7 on L1 `No Key` **only if those exact behaviors are absent**. Put a Layer Lock L1 return on L5 `Macro 1` if its code cannot be established from the inspected assignments. Save screenshots or notes identifying each edited position and its Bazecor action. Avoid changing macros or Superkeys in this fixture.
+| L8 position (L1 reference) | Key index | Saved code | Bazecor code-table meaning |
+| --- | ---: | ---: | --- |
+| Left r3:c3 (`S`) | 34 | `49164` | One Shot Layer L4 |
+| Left r3:c4 (`D`) | 35 | `17498` | Move to Layer L7 |
+| Left r3:c5 (`F`) | 36 | `17496` | Move to Layer L5 |
+| Left r3:c6 (`G`) | 37 | `53980` | Reference to existing Superkey 1 |
+| Left r3:c7 (`keycode:17152`) | 38 | `6916` | Hyper+A (`6912` modifier offset + HID `A` code `4`) |
 
-For lighting, use otherwise empty L8 and assign 11 *different existing palette slots* to the 11 right-side physical positions listed at the end of this guide. Keep a position-to-color list or screenshot. One saved result lets us compare the keymap and colormap separately against the untouched source. The source already stores every palette slot's RGBW values; this fixture establishes the missing **key-to-LED positions**, not the RGBW values. If Bazecor cannot distinguish all 11 chosen slots in one save, use successive saved copies for the ambiguous positions.
+The saved L7/L5 samples are Bazecor **Move to layer** codes. That table renders a lock icon; Bazecor also has a separate **Lock layer to** table. The remaining decision is whether the Mac layout should stay on a layer until an explicit L1 return, as these samples demonstrate, or toggle back when the trigger is tapped again. Assigning `53980` did not change `superkeys.map`, so this save does not define the requested Superkey gestures. [One Shot](https://github.com/Dygmalab/Bazecor/blob/development/src/api/keymap/db/oneshot.tsx), [layer actions](https://github.com/Dygmalab/Bazecor/blob/development/src/api/keymap/db/layerswitch.tsx), [Superkey references](https://github.com/Dygmalab/Bazecor/blob/development/src/api/keymap/db/superkeys.ts), [modifiers](https://github.com/Dygmalab/Bazecor/blob/development/src/api/keymap/db/modifiers.ts).
 
-The source is a wireless RGBW Defy virtual file with ten layers and 80 key positions per layer. L4–L10 are entirely Transparent in `keymap.custom`; L1–L3 contain assignments. `keymap.custom` and `keymap.default` currently have identical data. `macros.map` and `superkeys.map` are nonempty, so preserve their contents and references when adding actions. The colormap has 178 entries per layer, while `device.keyboard` lists only 35 left and 35 right physical-key LEDs; additional LED positions must not be guessed from the key layout.
+L8 LED offsets `0–14` now use slots `0–14` in order on the left. On the right, LED offsets `35–41` use slots `6,5,4,3,2,1,0`; `42–48` use `13,12,11,10,9,8,7`; and `55` uses `14`. These assignments confirm the first two right rows and anchor the final key of the third row. `scripts/defy.py` now maps the first three seven-key right rows to their seven-LED segments. Its third-row mapping follows the contiguous row geometry from that anchor and should be checked visually in Bazecor. The eight-key right thumb row has only seven LEDs, so do not zip the full right-side arrays. The Mac manifest still lacks verified LEDs for right r4:c2 and right thumb r5:c1, c2, c4, c7, and c8. A distinct one-position color save or a position-to-slot list from Bazecor can establish each missing mapping. No RGBW values need to be created: the source already contains the palette.
 
-## Already present in the source
+## Corrected device controls
 
-The L1 keymap already contains these assignments at the named physical positions:
+The preserved L1 source has **Battery Level** at `defy:right:r5:c2`, key index `73`, code `54108`, and **Bluetooth Pairing** at `defy:right:r5:c1`, index `72`, code `54109`. Bazecor defines those codes in its [battery](https://github.com/Dygmalab/Bazecor/blob/development/src/hw/battery.ts) and [Bluetooth](https://github.com/Dygmalab/Bazecor/blob/development/src/hw/bluetooth.ts) tables. The older guide's `230` at c7 is Right Alt, and `53852` at c8 is not the Bluetooth Pairing code; neither may be copied as a device control. The Mac template intentionally places Battery Level at L4 c7 and Bluetooth Pairing at L4 c8, while clearing their actual L1 source positions c2 and c1.
 
-| L1 position | Key index | Stored code | What it establishes |
-| --- | --- | --- | --- |
-| Battery Level (`defy:right:r5:c7`) | 78 | `230` | The L4 assignment can copy this exact L1 code from the preserved source. |
-| Bluetooth Pairing (`defy:right:r5:c8`) | 79 | `53852` | The L4 assignment can copy this exact L1 code from the preserved source. |
-| `Super 1` (`defy:left:r5:c1`) | 64 | `53980` | Inspect the existing action's type, target, and behavior. |
-| Left thumb `defy:left:r5:c2` | 65 | `17452` | Inspect whether it is a usable layer example. |
-| Left thumb `defy:left:r5:c4` | 67 | `49211` | Inspect whether it is a usable layer or Superkey example. |
-| `No Key` (`defy:left:r5:c5`) | 68 | `49721` | The stored assignment is not the transparent code `65535`; inspect its actual behavior. |
-| `Macro 1` (`defy:right:r5:c4`) | 75 | `49209` | Inspect its reference and gestures; `superkeys.map` and `macros.map` are separate commands. |
-| Right thumb `defy:right:r5:c1` | 72 | `54109` | Inspect whether it is a usable layer example. |
-| Right thumb `defy:right:r5:c2` | 73 | `54108` | Inspect whether it is a usable layer example. |
-| Right thumb `defy:right:r5:c5` | 76 | `49162` | Inspect whether it is a usable layer or Superkey example. |
-| L3 top-row F5 position | 5 | `62` | The VS Code debug action can use this existing plain F5 code. |
+Other source examples remain useful but do not define the requested new behaviors: L1 left thumb c1 has Superkey 1 (`53980`), left thumb c2 has Layer Shift L3 (`17452`), and right thumb c5 has One Shot Layer L2 (`49162`). Preserve their existing `superkeys.map`, `macros.map`, and timing commands when comparing fixtures.
 
-The Battery Level and Bluetooth Pairing codes are sufficient to copy **these existing assignments** to L4 after confirming their labels in Bazecor. They are not proposed as portable constants for another source or firmware. The final layout makes their L1 positions Transparent.
+## What can be applied now
 
-## Layer actions still to inspect or demonstrate
+The L8 Hyper+A example and Bazecor's [additive modifier tables](https://github.com/Dygmalab/Bazecor/blob/development/src/api/keymap/db/utils.ts) establish the Raycast Hyper letter/digit codes. The same Bazecor tables define the VS Code and macOS navigation chord families used in this manifest. Their numeric encodings no longer need separate samples; confirm that the Mac apps perform the intended shortcuts. Raycast's [Hyper manual](https://manual.raycast.com/hyper-key) describes Ctrl+Alt+Cmd by default and optional Shift; this Mac profile currently includes Shift.
 
-First open the existing L1 thumb assignments above in the current Bazecor UI. A screenshot or written list of each assignment panel is enough for this inspection; no edited JSON is needed. Record each action's type, target layer, and, for a Superkey, all gestures and timing values. If an existing assignment exactly matches a requested behavior, reuse it rather than making another example. For any behavior absent from the source, save one minimal example per row so differences in `keymap.custom`, `superkeys.map`, `macros.map`, and timing commands can be attributed to that action.
+The applier has produced `profiles/macbook-pro-m5-L4-keys.local.json` with the 14 changed L4 key assignments and `profiles/macbook-pro-m5-L6-navigation.local.json` with seven L6 keys and seven colors. Both are distinct from the preserved source. The full Mac manifest still reports blockers and creates no combined output.
 
-| Requested behavior | Make a new example only if the source does not show it |
-| --- | --- |
-| One Shot Layer L4 | L1 `Super 1` (`defy:left:r5:c1`): tap for next key, hold for Layer Shift, double tap for lock; same position Transparent on L4. |
-| Layer Lock L7 | L1 `No Key` (`defy:left:r5:c5`). |
-| Tap/hold Superkey | L1 `Macro 1` (`defy:right:r5:c4`): Tap = Layer Lock L5, Hold = Layer Shift L6, other gestures unused. |
-| Layer Lock L1 return | L5 `Macro 1`; use on L7 as well if the same encoding is valid there. |
+## Remaining examples and decisions
 
-Keep a route back to L1 from each locked layer. A code found on another thumb key is useful evidence, but its numeric value alone does not prove One Shot versus Lock versus Shift or a Superkey's gesture references.
+1. **Layer behavior:** The L8 file already provides Move to Layer L5 and L7, and Bazecor's same table identifies Move to Layer L1 for an explicit return. If the intended behavior is to stay until that return, no more basic layer-move fixture is needed. If the trigger must toggle back on a second tap, capture that distinct Layer Lock behavior and revise the template accordingly.
+2. **Superkey gestures:** The L8 file only assigns an existing Superkey; `superkeys.map` is unchanged. For the requested combined Tap = L5 and Hold = Layer Shift L6 control, create or edit one Superkey with those gestures, save, and compare `superkeys.map`, references, and timing fields. Confirm Bazecor accepts both gestures in this version. A separate key design would avoid this dependency if preferred.
+3. **Remaining LEDs:** Confirm right r4:c2 and right thumb r5:c1, c2, c4, c7, and c8. `--keys-only` can test assignments independently while these colors remain unresolved.
+4. **Herdr:** The L7 template contains `Ctrl+B`, release, then command-key sequences. The current fixture has no matching macro definitions. These remain deferred, but their inclusion in the full initialization manifest blocks a combined output. Do not encode them as simultaneous shortcuts.
 
-## Later: Combo Key examples
-
-First inspect existing key assignments in Bazecor for any of the listed chord shapes; the raw large keycodes in this JSON do not identify their modifiers by themselves. Create saved examples only for missing modifier/key families at an otherwise unused position on a spare layer. A few representative examples may establish a current-Bazecor encoding rule; compare additional members of each family before using that rule for all actions. If the rule is unclear, save each needed chord separately. Confirm the host actually performs each intended action.
-
-| Family | Example chords | Remaining chords required by the manifest |
-| --- | --- | --- |
-| Raycast Hyper | `Hyper+A`, `Hyper+1` | Hyper with B, C, D, E, F, N, S, T, V, Z, after confirming Include Shift on this Mac |
-| VS Code | `Cmd+P`, `Cmd+Comma`, `Ctrl+Minus`, `Ctrl+Shift+Minus`, `Shift+F12`, `Shift+Cmd+B` | None; plain F5 is already present on L3 of the source. |
-| macOS navigation | `Ctrl+Cmd+Left`, `Shift+Cmd+Tab`, `Cmd+Grave`, `Shift+Ctrl+C` | `Ctrl+Cmd+Right`, `Cmd+Tab`, `Shift+Cmd+Grave` |
-
-Raycast's [Hyper Key manual](https://manual.raycast.com/hyper-key) says macOS Hyper sends Ctrl+Alt+Cmd by default, with an optional Include Shift setting. The local profile currently includes Shift based on the earlier Mac setting; confirm that toggle before encoding Raycast chords. The L6 Finder action has been removed.
-
-## Deferred: Herdr macros
-
-The Herdr template already states `Ctrl+B`, release, then its standard command key. No macro examples are requested in this round. The full L7 Herdr layer remains blocked until its Bazecor macro encoding is verified later; preserve the source's nonempty `macros.map` and references.
-
-## Right-side lighting map
-
-On L8, assign distinct **existing palette colors** to the following L1 physical positions, then save. L8 currently uses slot 15 throughout, so choose other slots. Comparing each chosen slot in `colormap.map` with the untouched source should reveal its LED index. Do not derive the right-side LED map by zipping key and LED arrays; this source has 36 right key positions and 35 right LEDs.
-
-`defy:right:r2:c3`, `r2:c4`, `r2:c6`, `r3:c2`, `r3:c3`, `r3:c4`, `r3:c5`, `r4:c2`, `r5:c4`, `r5:c7`, `r5:c8`.
-
-The Mac manifest maps color purposes to existing palette slots only; it does not edit RGBW values. After the LED mapping is verified, preview the whole manifest and inspect its layer colors in Bazecor.
-
-The proposed identities are green app keys on L4 (slot 1), cyan search keys on L5 (slot 4), blue navigation keys on L6 (slot 5), and a blue/teal navigation and creation grouping on L7 (slots 5 and 7). Amber activation keys (slot 0) mark layer access and return; transparent pass-through positions use the existing off slot 12. The other purpose mappings are recorded per template entry in the Mac manifest. Review visibility in Bazecor before treating these color choices as final.
+Record Bazecor version, displayed firmware, RGBW mode, and the chosen action/physical position with each saved copy. Preview the full manifest against the preserved source before applying. Do not write a combined output while an action or requested LED mapping is unsupported; later check the result visually in Bazecor and on a connected Defy.
