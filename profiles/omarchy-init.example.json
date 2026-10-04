@@ -2,9 +2,19 @@
   "schema_version": 1,
   "id": "omarchy-init-example",
   "profile": "profiles/omarchy.example.json",
+  "layer_targets": {
+    "primary": 4,
+    "secondary": 5,
+    "tertiary": 6,
+    "base": 1
+  },
   "layers": [
+    {"layer": 1, "template": "templates/layer-navigation.json"},
+    {"layer": 1, "template": "templates/device-controls-clear.json"},
     {"layer": 4, "template": "templates/omarchy.json"},
+    {"layer": 4, "template": "templates/device-controls.json"},
     {"layer": 5, "template": "templates/herdr.json"},
+    {"layer": 5, "template": "templates/layer-return.json"},
     {"layer": 6, "template": "templates/tmux.json"}
   ]
 }

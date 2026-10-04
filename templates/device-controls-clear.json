@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "device-controls-clear",
+  "name": "Free device-control thumb positions",
+  "platforms": ["macos", "windows", "linux"],
+  "source": "Free the two right thumb positions currently assigned to battery level and Bluetooth pairing on L1 after those commands are placed on the primary layer.",
+  "bindings": [
+    {
+      "id": "clear_battery_position",
+      "name": "Free the battery-level position",
+      "position_l1": "Battery level",
+      "position_id": "defy:right:r5:c7",
+      "color_category": "activation",
+      "bazecor_action": {"type": "transparent"}
+    },
+    {
+      "id": "clear_bluetooth_position",
+      "name": "Free the Bluetooth-pairing position",
+      "position_l1": "Bluetooth pairing",
+      "position_id": "defy:right:r5:c8",
+      "color_category": "activation",
+      "bazecor_action": {"type": "transparent"}
+    }
+  ]
+}

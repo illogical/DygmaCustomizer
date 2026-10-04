@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "rare-layer-access",
+  "name": "Occasional layer access",
+  "platforms": ["macos", "windows", "linux"],
+  "source": "The lower outer left thumb position is shown as No Key in the supplied screenshot; verify it against the selected source before replacing it.",
+  "bindings": [
+    {
+      "id": "rare_layer",
+      "name": "Open the occasional layer",
+      "position_l1": "No Key",
+      "position_id": "defy:left:r5:c5",
+      "color_category": "activation",
+      "bazecor_action": {"type": "layer-lock", "target": "rare"}
+    }
+  ]
+}

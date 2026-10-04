@@ -9,9 +9,17 @@
   ],
   "activation": {
     "mode": "one-shot",
-    "trigger_l1": null
+    "trigger_l1": "Super 1"
   },
   "bindings": [
+    {
+      "id": "one_shot_return",
+      "name": "Pass the trigger through on the app-launcher layer",
+      "position_l1": "Super 1",
+      "position_id": "defy:left:r5:c1",
+      "color_category": "activation",
+      "bazecor_action": {"type": "transparent"}
+    },
     {
       "id": "activity_monitor",
       "name": "Launch Activity Monitor",
@@ -19,14 +27,6 @@
       "color_category": "app",
       "requires_app": "activity-monitor",
       "position_id": "defy:left:r3:c2"
-    },
-    {
-      "id": "antigravity",
-      "name": "Launch Antigravity",
-      "position_l1": "G",
-      "color_category": "app",
-      "requires_app": "antigravity",
-      "position_id": "defy:left:r3:c6"
     },
     {
       "id": "bloom",

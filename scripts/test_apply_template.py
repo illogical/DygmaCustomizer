@@ -51,6 +51,49 @@ class ApplyTemplateTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unsupported actions'):
             apply(self.source, report, allow_skipped=True)
 
+    def test_unverified_layer_and_device_actions_are_reported_and_refused(self):
+        template = {
+            'schema_version': 1, 'id': 'actions', 'name': 'Bazecor actions',
+            'platforms': ['macos'], 'bindings': [{
+                'id': 'launcher', 'name': 'Open app launcher',
+                'position_l1': 'Super 1', 'position_id': 'defy:left:r5:c1',
+                'color_category': 'activation',
+                'bazecor_action': {'type': 'one-shot-layer', 'target': 'primary',
+                                   'target_layer': 4},
+            }, {
+                'id': 'battery', 'name': 'Battery level',
+                'position_l1': 'Battery level', 'position_id': 'defy:right:r5:c7',
+                'color_category': 'system',
+                'bazecor_action': {'type': 'device-command', 'command': 'battery-level'},
+            }],
+        }
+        profile = self.profile | {'layer_targets': {'primary': 4}}
+        report = plan(self.source, template, profile, 1,
+                      with_keys=True, with_colors=False)
+        self.assertTrue(all('current Bazecor-verified encoding fixture' in row['unsupported']
+                            for row in report['rows']))
+        with self.assertRaisesRegex(ValueError, 'Unsupported actions'):
+            apply(self.source, report)
+
+    def test_transparent_thumb_action_uses_known_transparent_keycode(self):
+        template = {
+            'schema_version': 1, 'id': 'transparent', 'name': 'Transparent trigger',
+            'platforms': ['macos'], 'bindings': [{
+                'id': 'one_shot_return', 'name': 'Transparent trigger position',
+                'position_l1': 'Super 1', 'position_id': 'defy:left:r5:c1',
+                'color_category': 'activation',
+                'bazecor_action': {'type': 'transparent'},
+            }],
+        }
+        arrays = model(self.source)[1]
+        arrays['keymap.custom'][3 * 80 + 64] = 10
+        self.source['virtual']['keymap.custom']['data'] = ' '.join(map(str, arrays['keymap.custom']))
+        report = plan(self.source, template, self.profile, 4,
+                      with_keys=True, with_colors=False)
+        self.assertEqual(report['rows'][0]['after_keycode'], 65535)
+        apply(self.source, report, override=True)
+        self.assertEqual(model(self.source)[1]['keymap.custom'][3 * 80 + 64], 65535)
+
     def test_template_color_slot_maps_purpose_without_rgb_value(self):
         self.template['color_slots'] = {'5': 'navigation'}
         report = plan(self.source, self.template, self.profile, 4, with_colors=True)

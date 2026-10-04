@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "layer-navigation",
+  "name": "Layer navigation",
+  "platforms": ["macos", "windows", "linux"],
+  "source": "User-approved physical positions from the supplied default-layer screenshot; action encodings require current Bazecor verification.",
+  "bindings": [
+    {
+      "id": "primary_layer",
+      "name": "Open the primary layer for one action",
+      "position_l1": "Super 1",
+      "position_id": "defy:left:r5:c1",
+      "color_category": "activation",
+      "bazecor_action": {"type": "one-shot-layer", "target": "primary"}
+    },
+    {
+      "id": "secondary_and_tertiary_layers",
+      "name": "Choose a secondary or tertiary layer",
+      "position_l1": "Macro 1",
+      "position_id": "defy:right:r5:c4",
+      "color_category": "activation",
+      "bazecor_action": {
+        "type": "superkey",
+        "gestures": {
+          "tap": {"type": "layer-lock", "target": "secondary"},
+          "hold": {"type": "layer-shift", "target": "tertiary"}
+        }
+      }
+    }
+  ]
+}

@@ -38,6 +38,86 @@ class ApplyTemplateSetTest(unittest.TestCase):
         self.assertEqual(changes, [3*80+34, 4*80+34])
         self.assertEqual(output['virtual']['palette'], before['virtual']['palette'])
 
+    def test_compose_multiple_partial_templates_on_one_layer(self):
+        second = copy.deepcopy(self.template)
+        second['id'] = 'navigation'
+        second['bindings'][0].update({
+            'id': 'focus', 'name': 'Focus next control', 'position_l1': 'F',
+            'position_id': 'defy:left:r3:c5', 'shortcuts': {'macos': 'F'},
+        })
+        manifest = {'schema_version': 1, 'id': 'test', 'layers': [
+            {'layer': 4, 'template': 'a.json', 'color_slots': {'5': 'app'}},
+            {'layer': 4, 'template': 'b.json', 'color_slots': {'5': 'app'}},
+        ]}
+        templates = {'a.json': self.template, 'b.json': second}
+        before = copy.deepcopy(self.source)
+        output, reports, blockers = compose(
+            self.source, self.source, manifest, self.profile,
+            lambda path: templates[path], with_colors=False)
+        self.assertFalse(blockers)
+        self.assertEqual(len(reports), 2)
+        original = model(before)[1]['keymap.custom']
+        updated = model(output)[1]['keymap.custom']
+        self.assertEqual(
+            [i for i, (a, b) in enumerate(zip(original, updated)) if a != b],
+            [3 * 80 + 34, 3 * 80 + 36],
+        )
+
+    def test_same_layer_overlap_blocks_strict_and_writes_nothing(self):
+        second = copy.deepcopy(self.template)
+        second['bindings'][0]['shortcuts']['macos'] = 'G'
+        manifest = {'schema_version': 1, 'id': 'test', 'layers': [
+            {'layer': 4, 'template': 'a.json'},
+            {'layer': 4, 'template': 'b.json'},
+        ]}
+        output, _, blockers = compose(
+            self.source, self.source, manifest, self.profile,
+            lambda path: self.template if path == 'a.json' else second,
+            with_colors=False)
+        self.assertIsNone(output)
+        self.assertTrue(any('occupied' in blocker for blocker in blockers))
+
+    def test_same_layer_override_uses_manifest_order(self):
+        first = copy.deepcopy(self.template)
+        first['bindings'][0]['shortcuts']['macos'] = 'F'
+        second = copy.deepcopy(self.template)
+        second['bindings'][0]['shortcuts']['macos'] = 'G'
+        manifest = {'schema_version': 1, 'id': 'test', 'layers': [
+            {'layer': 4, 'template': 'first.json'},
+            {'layer': 4, 'template': 'second.json'},
+        ]}
+        templates = {'first.json': first, 'second.json': second}
+        output, _, blockers = compose(
+            self.source, self.source, manifest, self.profile,
+            lambda path: templates[path], with_colors=False, policy='override')
+        self.assertFalse(blockers)
+        self.assertEqual(model(output)[1]['keymap.custom'][3 * 80 + 34], 10)
+
+    def test_replace_layer_resets_once_then_applies_every_partial_template(self):
+        second = copy.deepcopy(self.template)
+        second['id'] = 'navigation'
+        second['bindings'][0].update({
+            'id': 'focus', 'name': 'Focus next control', 'position_l1': 'F',
+            'position_id': 'defy:left:r3:c5', 'shortcuts': {'macos': 'F'},
+        })
+        source = copy.deepcopy(self.source)
+        arrays = model(source)[1]
+        arrays['keymap.custom'][3 * 80 + 20] = 4
+        source['virtual']['keymap.custom']['data'] = ' '.join(map(str, arrays['keymap.custom']))
+        manifest = {'schema_version': 1, 'id': 'test', 'layers': [
+            {'layer': 4, 'template': 'a.json'},
+            {'layer': 4, 'template': 'b.json'},
+        ]}
+        templates = {'a.json': self.template, 'b.json': second}
+        output, _, blockers = compose(
+            source, self.source, manifest, self.profile,
+            lambda path: templates[path], with_colors=False, policy='replace-layer')
+        self.assertFalse(blockers)
+        keys = model(output)[1]['keymap.custom']
+        self.assertEqual(keys[3 * 80 + 20], 65535)
+        self.assertEqual(keys[3 * 80 + 34], 4118)
+        self.assertEqual(keys[3 * 80 + 36], 9)
+
     def test_blocked_template_does_not_mutate_input(self):
         manifest = {'schema_version': 1, 'id': 'test', 'layers': [{'layer': 4, 'template': 'a.json'}]}
         before = copy.deepcopy(self.source)

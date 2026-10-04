@@ -25,15 +25,19 @@ def compose(source, baseline, manifest, profile, load_template, only_layer=None,
     model(source)
     if policy == 'replace-layer':
         model(baseline)
+    layer_targets = manifest.get('layer_targets', {})
+    if not isinstance(layer_targets, dict):
+        raise ValueError('manifest.layer_targets must map logical destinations to displayed layers')
+    profile = copy.deepcopy(profile)
+    profile_targets = profile.get('layer_targets', {})
+    if not isinstance(profile_targets, dict):
+        raise ValueError('profile.layer_targets must map logical destinations to displayed layers')
+    profile['layer_targets'] = {**profile_targets, **layer_targets}
     selected = []
-    seen_layers = set()
     for entry in manifest['layers']:
         if not isinstance(entry, dict) or type(entry.get('layer')) is not int or not isinstance(entry.get('template'), str) or not entry['template']:
             raise ValueError('Each manifest layer needs an integer layer and template path')
         number = entry['layer']
-        if number in seen_layers:
-            raise ValueError(f'Duplicate target layer L{number}')
-        seen_layers.add(number)
         if only_layer is None or only_layer == number:
             selected.append(entry)
     if not selected:
@@ -41,16 +45,18 @@ def compose(source, baseline, manifest, profile, load_template, only_layer=None,
 
     reports = []
     blockers = []
+    output = copy.deepcopy(source)
+    reset_layers = set()
     for entry in selected:
         number = entry['layer']
         try:
             template = copy.deepcopy(load_template(entry['template']))
             if 'color_slots' in entry:
                 template['color_slots'] = entry['color_slots']
-            proposed = copy.deepcopy(source)
-            if policy == 'replace-layer':
-                reset_layer(proposed, baseline, number, with_keys, with_colors)
-            report = plan(proposed, template, profile, number, with_keys, with_colors,
+            if policy == 'replace-layer' and number not in reset_layers:
+                reset_layer(output, baseline, number, with_keys, with_colors)
+                reset_layers.add(number)
+            report = plan(output, template, profile, number, with_keys, with_colors,
                           fill_empty=(policy == 'fill-empty'))
         except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
             blockers.append(f'L{number} {entry["template"]}: {error}')
@@ -63,14 +69,15 @@ def compose(source, baseline, manifest, profile, load_template, only_layer=None,
         if policy == 'strict':
             blockers += [f'{prefix}: occupied {row["id"]} at index {row["position_index"]}'
                          for row in report['rows'] if row['collision']]
+        report_blocked = (
+            bool(report['skipped']) or
+            any(row.get('unsupported') and not row.get('skipped_occupied') for row in report['rows']) or
+            (policy == 'strict' and any(row['collision'] for row in report['rows']))
+        )
+        if not report_blocked:
+            apply(output, report, override=(policy == 'override'))
     if blockers:
         return None, reports, blockers
-
-    output = copy.deepcopy(source)
-    for report in reports:
-        if policy == 'replace-layer':
-            reset_layer(output, baseline, report['target_layer'], with_keys, with_colors)
-        apply(output, report, override=(policy == 'override'))
     return output, reports, []
 
 

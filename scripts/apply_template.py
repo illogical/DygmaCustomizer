@@ -94,10 +94,19 @@ def plan(doc, template, profile, target, with_keys=True, with_colors=True, fill_
         if with_keys:
             row['shortcut'] = binding['shortcut']
             row['before_keycode'] = keys[offset]
-            try:
-                row['after_keycode'] = encode(binding['shortcut'])
-            except ValueError as error:
-                row['unsupported'] = str(error)
+            if binding.get('bazecor_action'):
+                action_type = binding['bazecor_action']['type']
+                if action_type == 'transparent':
+                    row['after_keycode'] = TRANSPARENT
+                else:
+                    row['unsupported'] = (
+                        f'{action_type} action needs a current Bazecor-verified encoding fixture'
+                    )
+            else:
+                try:
+                    row['after_keycode'] = encode(binding['shortcut'])
+                except ValueError as error:
+                    row['unsupported'] = str(error)
         if with_colors:
             try:
                 if index not in mapping:
