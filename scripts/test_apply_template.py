@@ -49,6 +49,16 @@ class ApplyTemplateTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unsupported actions'):
             apply(self.source, report)
 
+    def test_f5_uses_existing_plain_code_from_source(self):
+        template = read_json(ROOT / 'templates/vscode.json')
+        profile = self.profile | {'available_apps': ['vscode']}
+        report = plan(self.source, template, profile, 5,
+                      with_keys=True, with_colors=False)
+        debug = next(row for row in report['rows'] if row['id'] == 'debug')
+        self.assertEqual(model(self.source)[1]['keymap.custom'][2 * 80 + 5], 62)
+        self.assertEqual(debug['after_keycode'], 62)
+        self.assertNotIn('unsupported', debug)
+
     def test_unverified_layer_action_is_refused_while_existing_device_code_resolves(self):
         template = {
             'schema_version': 1, 'id': 'actions', 'name': 'Bazecor actions',

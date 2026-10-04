@@ -18,7 +18,7 @@ PLAIN = {chr(65 + i): 4 + i for i in range(26)}
 PLAIN.update({str(i): 29 + i for i in range(1, 10)})
 PLAIN['0'] = 39
 PLAIN.update({'Tab': 43, 'Space': 44, 'Minus': 45, 'Grave': 53,
-              'Left': 80, 'Right': 79, 'Up': 82, 'Down': 81})
+              'F5': 62, 'Left': 80, 'Right': 79, 'Up': 82, 'Down': 81})
 ENCODED = {'Cmd+S': 4118}
 # Existing L1 assignments in examples/VirtualDefy.json. Copy only when the
 # selected source still has these exact codes at these physical positions.
