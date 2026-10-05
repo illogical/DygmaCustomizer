@@ -30,7 +30,7 @@ PURPOSE_COLORS = {
     'create': '#8fd5a5', 'view': '#8cc9df', 'session': '#d5ac89',
     'mode': '#b6b8ee', 'movement': '#7fd7ce', 'action': '#e2b38d',
     'quick-slot': '#dcc479', 'modifier': '#b1a4ef', 'menu': '#86bce5',
-    'transform': '#d5a5e8', 'mesh': '#a3cf92',
+    'transform': '#d5a5e8', 'mesh': '#a3cf92', 'media': '#74c5df',
 }
 FALLBACK_COLORS = ('#78bfd5', '#d1b77b', '#b2d18e', '#c4a9df', '#e4a8aa')
 
@@ -201,6 +201,7 @@ def collect(source, manifest, profile, layer_number, template_loader, policy='st
             item = {'id': binding['id'], 'template': template['id'], 'name': binding['name'],
                     'l1_label': binding['position_l1'], 'position_index': index,
                     'color_category': category, 'slot': slot,
+                    'after_keycode': raw.get('after_keycode'),
                     'shortcut': resolved_row.get('shortcut'),
                     'bazecor_action': resolved_row.get('bazecor_action', binding.get('bazecor_action')),
                     'led_unverified': led_unverified, 'problems': problems}
@@ -238,6 +239,30 @@ def collect(source, manifest, profile, layer_number, template_loader, policy='st
             'slot_colors': slot_colors}
 
 
+def collect_current(source, manifest, profile, layer_number, template_loader):
+    """Label only actions whose encoded assignment is present in this JSON."""
+    data = collect(source, manifest, profile, layer_number, template_loader)
+    actual = {}
+    missing = []
+    for item in data['all_items']:
+        expected = item['after_keycode']
+        if expected is not None and expected != 65535 and data['target'][item['position_index']] == expected:
+            actual[item['position_index']] = {**item, 'problems': []}
+        else:
+            missing.append(item)
+    data['items'] = actual
+    data['missing'] = missing
+    data['slot_purposes'] = {}
+    for item in actual.values():
+        if item['slot'] is not None:
+            data['slot_purposes'].setdefault(item['slot'], [])
+            if item['color_category'] not in data['slot_purposes'][item['slot']]:
+                data['slot_purposes'][item['slot']].append(item['color_category'])
+    data['slot_colors'] = {slot: category_color(purposes[0])
+                           for slot, purposes in data['slot_purposes'].items()}
+    return data
+
+
 def report_lines(data):
     return [(item, problem) for item in data['all_items'] for problem in item['problems']]
 
@@ -270,10 +295,33 @@ def render_report(data, source_path, selection_path, profile_path, layer_number)
     return '\n'.join(lines) + '\n'
 
 
-def render(source, manifest, profile, layer_number, template_loader, policy='strict', prepared=None):
+def render_current_report(data, source_path, selection_path, profile_path, layer_number):
+    lines = [f'# Current L{layer_number} Defy layout', '',
+             'This diagram reads assignments in the named virtual JSON. No configuration was changed.', '',
+             f'- Source: `{source_path}`', f'- Manifest: `{selection_path}`',
+             f'- Profile: `{profile_path}`',
+             f'- Recognized assigned actions: {len(data["items"])}',
+             f'- Manifest actions absent or different: {len(data["missing"])}', '',
+             '## Manifest actions absent or different', '']
+    if data['missing']:
+        lines += ['| L1 position | Action | Current assignment |', '| --- | --- | --- |']
+        for item in data['missing']:
+            current = label_for_code(data['target'][item['position_index']])
+            lines.append(f'| {md_cell(item["l1_label"])} (`{item["position_index"]}`) | '
+                         f'{md_cell(item["template"] + "." + item["id"])} | {md_cell(current)} |')
+    else:
+        lines.append('None.')
+    lines += ['', 'Names are shown only when the stored keycode matches the manifest action. '
+              'Colors are illustrative; inspect actual lighting and behavior in Bazecor.']
+    return '\n'.join(lines) + '\n'
+
+
+def render(source, manifest, profile, layer_number, template_loader, policy='strict', prepared=None,
+           current=False):
     data = prepared or collect(source, manifest, profile, layer_number, template_loader, policy)
     items, target, local_profile = data['items'], data['target'], data['profile']
-    categories_without_slots = sorted({item['color_category'] for item in data['all_items'] if item['slot'] is None})
+    shown_items = data['items'].values() if current else data['all_items']
+    categories_without_slots = sorted({item['color_category'] for item in shown_items if item['slot'] is None})
     legend = [(f'Slot {slot}: ' + ', '.join(purposes), data['slot_colors'][slot])
               for slot, purposes in sorted(data['slot_purposes'].items())]
     legend += [(f'{category}: slot unset', category_color(category)) for category in categories_without_slots]
@@ -287,7 +335,8 @@ def render(source, manifest, profile, layer_number, template_loader, policy='str
              f'<rect width="{WIDTH}" height="{height}" fill="#101725"/>',
              svg_text(70, 78, f'L{layer_number} · ' + ' + '.join(data['names']), 40, '#f4f7ff', 700),
              svg_text(70, 116, f'{manifest["id"]} · {profile["id"]}', 20, '#aab9d1'),
-             svg_text(70, 152, 'Proposed diagram · preview colors · source JSON and keyboard unchanged', 20, '#fbbf75'),
+             svg_text(70, 152, ('Current JSON assignments' if current else 'Proposed diagram') +
+                      ' · illustrative colors · keyboard unchanged', 20, '#fbbf75'),
              svg_text(LEFT_X, 213, 'LEFT HALF', 19, '#9aafcc', 700),
              svg_text(RIGHT_X, 213, 'RIGHT HALF', 19, '#9aafcc', 700)]
     for side, base_x in (('left', LEFT_X), ('right', RIGHT_X)):
@@ -330,7 +379,9 @@ def render(source, manifest, profile, layer_number, template_loader, policy='str
               svg_text(70, FOOT_Y + 36, 'Hyper = ' + ' + '.join(profile.get('hyper_modifiers', [])) +
                        ' · Shortcuts come from the machine profile', 17, '#aab9d1'),
               svg_text(70, FOOT_Y + 70,
-                       f'{len(data["all_items"])} template actions · {len(report_lines(data)) + len(data["notes"])} report items · no Bazecor JSON created',
+                       (f'{len(data["items"])} recognized assigned actions · {len(data["missing"])} absent or different'
+                        if current else
+                        f'{len(data["all_items"])} template actions · {len(report_lines(data)) + len(data["notes"])} report items · no Bazecor JSON created'),
                        17, '#aab9d1'),
               svg_text(70, legend_y - 18, 'Preview colors by purpose and palette slot', 18, '#f4f7ff', 700)]
     for number, (label, color) in enumerate(legend):
@@ -347,6 +398,8 @@ def main():
     parser.add_argument('source', type=Path)
     parser.add_argument('manifest', type=Path, nargs='?', help='PC manifest (legacy positional form)')
     parser.add_argument('--template', type=Path, help='Render one template instead of a manifest')
+    parser.add_argument('--current', action='store_true',
+                        help='Render assignments actually stored in source; requires a manifest')
     parser.add_argument('--profile', type=Path, help='Required with --template; optional manifest override')
     parser.add_argument('--layer', type=int, required=True, help='Displayed layer number')
     parser.add_argument('--policy', choices=('strict', 'override', 'fill-empty'), default='strict')
@@ -356,6 +409,8 @@ def main():
     try:
         if (args.manifest is None) == (args.template is None):
             raise ValueError('Provide exactly one PC manifest or --template')
+        if args.current and args.template:
+            raise ValueError('--current requires a PC manifest, not --template')
         if args.template and not args.profile:
             raise ValueError('--template requires --profile')
         report_path = args.report or args.output.with_suffix('.md')
@@ -375,9 +430,13 @@ def main():
             loader = lambda path: read_json(ROOT / path)
             profile_path = args.profile or ROOT / manifest['profile']
         profile = read_json(profile_path)
-        data = collect(source, manifest, profile, args.layer, loader, args.policy)
-        svg = render(source, manifest, profile, args.layer, loader, args.policy, prepared=data)
-        report = render_report(data, args.source, args.template or args.manifest, profile_path, args.layer)
+        data = (collect_current(source, manifest, profile, args.layer, loader) if args.current else
+                collect(source, manifest, profile, args.layer, loader, args.policy))
+        svg = render(source, manifest, profile, args.layer, loader, args.policy,
+                     prepared=data, current=args.current)
+        report = (render_current_report(data, args.source, args.manifest, profile_path, args.layer)
+                  if args.current else
+                  render_report(data, args.source, args.template or args.manifest, profile_path, args.layer))
         created = []
         try:
             for path, content in ((args.output, svg), (report_path, report)):

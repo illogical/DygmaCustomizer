@@ -54,9 +54,20 @@ python3 scripts/render_layer_preview.py examples/VirtualDefy.json profiles/macbo
 
 Open the SVG in a browser. It draws each Defy physical position in a centered, roomy two-half schematic, including two rows of thumb keys, with its L1 reference, proposed action, and resolved shortcut; unassigned positions show the current source layer. Borders use a standard **illustrative purpose palette**, not measured LED RGB(W). Actions mapped to the same palette slot share one preview color, and the legend shows slot-to-purpose meanings. A dashed border means the LED position is unverified; an amber dot points to an issue in the companion Markdown report. The command writes `OUTPUT.md` beside `OUTPUT.svg` by default; use `--report PATH.md` to choose another location. The report lists skipped actions, unsupported encodings, occupied keys, missing slots, template conflicts, and manual checks. Both outputs are proposals; neither changes Bazecor JSON or a keyboard. The script refuses to replace either existing output path. `--policy override` or `--policy fill-empty` changes how overlapping proposed positions are depicted; strict is the default. The [centered L4 diagram](docs/app-launcher-macbook-pro-m5-L4-centered.svg) and [issue report](docs/app-launcher-macbook-pro-m5-L4-centered.md) combine App Launcher and device controls from the Mac manifest.
 
+For a change to a virtual configuration, render the stored layer before and after applying it:
+
+```sh
+python3 scripts/render_layer_preview.py INPUT.json PC-MANIFEST.json --current --layer 6 --output docs/L6-before.svg
+python3 scripts/render_layer_preview.py OUTPUT.json PC-MANIFEST.json --current --layer 6 --output docs/L6-after.svg
+```
+
+Current-layer mode labels a manifest action only when its expected keycode is actually present in that JSON. Each companion report lists manifest actions absent from or different in the file. It does not read back host behavior; check media controls and lighting in Bazecor.
+
 Additional samples: [`templates/tmux.json`](templates/tmux.json) proposes pane navigation with prefix sequences; [`templates/blender-modeling.json`](templates/blender-modeling.json) and [`templates/blender-view.json`](templates/blender-view.json) separate modeling from Numpad-based viewport control. Their layouts and colors are proposals. Tmux sequences need verified macro handling in Bazecor, and Blender depends on the selected keymap and viewport context. See `templates/README.md` for the rationale and source links.
 
 [`templates/macos-navigation.json`](templates/macos-navigation.json) proposes a small macOS navigation group for desktops, apps, windows, and screenshots. The local Mac profile overrides desktop and screenshot actions with the user's reported shortcuts. Apple's documented defaults are linked in `templates/README.md`.
+
+[`templates/multimedia-controls.json`](templates/multimedia-controls.json) adds previous/play-pause/next on the L1 `E/R/T` positions and volume down/mute/up on `D/F/G`. It copies the six matching L3 media assignments from the preserved virtual source after checking each position and code. The Mac L6 manifest composes it with macOS navigation and maps `media` to palette slot 7; the global palette is not changed. Verify the controls on the Mac in Bazecor. Future layout ideas go in [`docs/FUTURE_TASKS.md`](docs/FUTURE_TASKS.md).
 
 [`templates/gaming-fps.json`](templates/gaming-fps.json) and [`templates/gaming-rpg.json`](templates/gaming-rpg.json) propose separate Windows gaming layers with left-hand WASD, number slots, modifiers, and Space, plus occasional right-hand arrow and Enter controls. RPG moves inventory and map outputs to the L1 `T` and `G` positions. Their amber/violet identity colors are proposals only; palette slots, activation, and return behavior are undecided. Resolve with `profiles/windows.example.json` and the chosen source before previewing. Several special-key outputs need Bazecor fixtures before the applier can write the full templates; see `templates/README.md`.
 
@@ -102,6 +113,8 @@ Primary references: [Dygma Defy configuration](https://dygma.com/pages/defy-conf
 ## Working with an agent
 
 Start a Codex project or chat rooted in this directory so it discovers `AGENTS.md` and the project-scoped `edit-dygma-defy` skill. Ask the agent to select or create a template, name the source JSON and machine profile, preview the target layer or PC manifest, and report any unsupported encoding before applying. For example: “On L4, put the L1 `1` through `0` keys and their colors at the same positions; preview against `examples/VirtualDefy.json` first.” State how the layer is entered and exited. The agent should create a new output JSON only when ready, verify its precise changes, and tell you which file to load in Bazecor. If an L1 label is ambiguous, provide another location cue or confirm the intended key in the UI.
+
+To locate a key or ask whether this computer already has an action, give the agent the computer's current virtual JSON and its PC manifest. For example, run `python3 scripts/query_layout.py profiles/macbook-pro-m5-L4-composed.local.json --manifest profiles/macbook-pro-m5-init.local.json --query 'Firefox'`. Add `--format json` for structured results, or replace `--query` with `--inventory` to list every physical position for placement analysis. The JSON is the authority for assigned keycodes; manifest purposes are reported as current only when their encodings match it. The command does not write files. A virtual JSON cannot establish what is on a connected keyboard.
 
 `AGENTS.md` holds short rules that apply to all work in this project. `.agents/skills/edit-dygma-defy/SKILL.md` holds the focused Bazecor editing workflow. `scripts/defy.py` handles supported key, layer, and color operations; the older scripts remain checked examples. Configuration snapshots live in `examples/`. Add or adapt scripts when a repeated transformation warrants it.
 

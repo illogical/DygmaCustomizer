@@ -6,7 +6,8 @@ import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from render_layer_preview import CELL_W, LEFT_X, RIGHT_X, WIDTH, collect, key_origin, render, title_lines
+from render_layer_preview import (CELL_W, LEFT_X, RIGHT_X, WIDTH, collect,
+                                  collect_current, key_origin, render, title_lines)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -145,6 +146,34 @@ class RenderLayerPreviewTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertFalse(svg.exists())
             self.assertEqual(report.read_text(), 'keep this report')
+
+    def test_current_mode_shows_only_assignments_present_in_json(self):
+        source = json.loads((ROOT / 'profiles/macbook-pro-m5-L6-navigation.local.json').read_text())
+        manifest = json.loads((ROOT / 'profiles/macbook-pro-m5-init.local.json').read_text())
+        profile = json.loads((ROOT / 'profiles/macbook-pro-m5.local.json').read_text())
+        load = lambda path: json.loads((ROOT / path).read_text())
+        data = collect_current(source, manifest, profile, 6, load)
+        self.assertEqual(len(data['items']), 7)
+        self.assertEqual(len(data['missing']), 6)
+        svg = render(source, manifest, profile, 6, load, prepared=data, current=True)
+        ET.fromstring(svg)
+        self.assertIn('Next desktop', svg)
+        self.assertNotIn('defy:left:r2:c5: Play / pause', svg)
+        self.assertIn('7 recognized assigned actions', svg)
+
+    def test_current_cli_renders_actual_file_and_report(self):
+        with tempfile.TemporaryDirectory() as directory:
+            svg = Path(directory) / 'before.svg'
+            command = [sys.executable, str(ROOT / 'scripts/render_layer_preview.py'),
+                       str(ROOT / 'profiles/macbook-pro-m5-L6-navigation.local.json'),
+                       str(ROOT / 'profiles/macbook-pro-m5-init.local.json'), '--current',
+                       '--layer', '6', '--output', str(svg)]
+            result = subprocess.run(command, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            ET.parse(svg)
+            report = svg.with_suffix('.md').read_text()
+            self.assertIn('Recognized assigned actions: 7', report)
+            self.assertIn('Manifest actions absent or different: 6', report)
 
 
 if __name__ == '__main__':

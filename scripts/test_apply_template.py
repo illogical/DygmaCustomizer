@@ -178,6 +178,37 @@ class ApplyTemplateTest(unittest.TestCase):
         self.assertTrue(all('matching verified L1 assignment' in row['unsupported']
                             for row in report['rows']))
 
+    def test_media_template_copies_six_l3_codes_and_colors_only_on_l6(self):
+        template = read_json(ROOT / 'templates/multimedia-controls.json')
+        before = copy.deepcopy(self.source)
+        report = plan(self.source, template, self.profile, 6)
+        self.assertFalse(report['skipped'])
+        self.assertTrue(all(not row.get('unsupported') and not row['collision'] for row in report['rows']))
+        self.assertEqual([(row['position_index'], row['after_keycode']) for row in report['rows']],
+                         [(19, 22710), (20, 22733), (21, 22709),
+                          (35, 23786), (36, 19682), (37, 23785)])
+        apply(self.source, report)
+        old, new = model(before)[1], model(self.source)[1]
+        key_changes = [i for i, (a, b) in enumerate(zip(old['keymap.custom'], new['keymap.custom'])) if a != b]
+        led_changes = [i for i, (a, b) in enumerate(zip(old['colormap.map'], new['colormap.map'])) if a != b]
+        self.assertEqual(key_changes, [400 + i for i in (19, 20, 21, 35, 36, 37)])
+        self.assertEqual(led_changes, [5 * 178 + i for i in (10, 11, 12, 17, 18, 19)])
+        self.assertEqual({new['colormap.map'][i] for i in led_changes}, {7})
+        self.assertEqual(self.source['virtual']['palette'], before['virtual']['palette'])
+
+    def test_media_copy_blocks_changed_l3_source(self):
+        template = read_json(ROOT / 'templates/multimedia-controls.json')
+        source = copy.deepcopy(self.source)
+        keys = model(source)[1]['keymap.custom']
+        keys[2 * 80 + 36] = 65535
+        source['virtual']['keymap.custom']['data'] = ' '.join(map(str, keys))
+        original = copy.deepcopy(self.source)
+        report = plan(self.source, template, self.profile, 6, source=source)
+        self.assertIn('matching verified L3 assignment', report['rows'][1]['unsupported'])
+        with self.assertRaisesRegex(ValueError, 'Unsupported actions'):
+            apply(self.source, report)
+        self.assertEqual(self.source, original)
+
     def test_clear_device_controls_targets_actual_source_positions(self):
         template = read_json(ROOT / 'templates/device-controls-clear.json')
         original = copy.deepcopy(self.source)

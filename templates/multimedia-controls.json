@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "multimedia-controls",
+  "name": "Multimedia controls",
+  "platforms": ["macos"],
+  "source": "Copied from verified L3 assignments in examples/VirtualDefy.json; HID Consumer usage names: https://www.usb.org/sites/default/files/hut1_3_0.pdf",
+  "activation": {"mode": "unspecified", "trigger_l1": null},
+  "color_slots": {"7": "media"},
+  "bindings": [
+    {"id": "previous_track", "name": "Previous track", "position_l1": "E", "position_id": "defy:left:r2:c4", "color_category": "media", "bazecor_action": {"type": "device-command", "command": "media-previous-track"}},
+    {"id": "play_pause", "name": "Play / pause", "position_l1": "R", "position_id": "defy:left:r2:c5", "color_category": "media", "bazecor_action": {"type": "device-command", "command": "media-play-pause"}},
+    {"id": "next_track", "name": "Next track", "position_l1": "T", "position_id": "defy:left:r2:c6", "color_category": "media", "bazecor_action": {"type": "device-command", "command": "media-next-track"}},
+    {"id": "volume_down", "name": "Volume down", "position_l1": "D", "position_id": "defy:left:r3:c4", "color_category": "media", "bazecor_action": {"type": "device-command", "command": "media-volume-down"}},
+    {"id": "mute", "name": "Mute", "position_l1": "F", "position_id": "defy:left:r3:c5", "color_category": "media", "bazecor_action": {"type": "device-command", "command": "media-mute"}},
+    {"id": "volume_up", "name": "Volume up", "position_l1": "G", "position_id": "defy:left:r3:c6", "color_category": "media", "bazecor_action": {"type": "device-command", "command": "media-volume-up"}}
+  ]
+}

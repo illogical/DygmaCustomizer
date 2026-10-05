@@ -17,6 +17,7 @@
     {"layer": 4, "template": "templates/device-controls.json"},
     {"layer": 5, "template": "templates/vscode.json"},
     {"layer": 5, "template": "templates/layer-return.json"},
-    {"layer": 6, "template": "templates/macos-navigation.json"}
+    {"layer": 6, "template": "templates/macos-navigation.json"},
+    {"layer": 6, "template": "templates/multimedia-controls.json", "color_slots": {"7": "media"}}
   ]
 }

@@ -29,11 +29,18 @@ MODIFIER_OFFSETS = {
     frozenset({'Shift', 'Cmd'}): 6144,
     frozenset({'Ctrl', 'Alt', 'Cmd', 'Shift'}): 6912,
 }
-# Existing L1 assignments in examples/VirtualDefy.json. Source positions are
-# independent of the template's destination positions; check both geometry and
-# source codes before copying.
-VERIFIED_DEVICE_SOURCE = {'battery-level': (73, 54108),
-                          'bluetooth-pairing': (72, 54109)}
+# Preserved assignments in examples/VirtualDefy.json: (displayed layer,
+# physical key index, serialized code). Check the source before each copy.
+VERIFIED_DEVICE_SOURCE = {
+    'battery-level': (1, 73, 54108),
+    'bluetooth-pairing': (1, 72, 54109),
+    'media-previous-track': (3, 19, 22710),
+    'media-play-pause': (3, 36, 22733),
+    'media-next-track': (3, 20, 22709),
+    'media-volume-down': (3, 37, 23786),
+    'media-mute': (3, 53, 19682),
+    'media-volume-up': (3, 21, 23785),
+}
 
 
 def encode(chord):
@@ -130,12 +137,13 @@ def plan(doc, template, profile, target, with_keys=True, with_colors=True,
                     source_keys = model(source)[1]['keymap.custom']
                     if (verified is None
                             or source['device']['keyboard'] != doc['device']['keyboard']
-                            or source_keys[verified[0]] != verified[1]):
+                            or source_keys[(verified[0] - 1) * KEYS + verified[1]] != verified[2]):
+                        source_layer = verified[0] if verified else 'verified'
                         row['unsupported'] = (
-                            f'{command} needs a matching verified L1 assignment in the source'
+                            f'{command} needs a matching verified L{source_layer} assignment in the source'
                         )
                     else:
-                        row['after_keycode'] = verified[1]
+                        row['after_keycode'] = verified[2]
                 else:
                     row['unsupported'] = (
                         f'{action_type} action needs a current Bazecor-verified encoding fixture'
