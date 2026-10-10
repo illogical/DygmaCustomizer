@@ -1,0 +1,296 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2944" height="1232" viewBox="0 0 2944 1232" role="img" aria-label="Saved Defy L3 Multimedia">
+<style>text{font-family:Inter,Arial,sans-serif}</style>
+<rect width="2944" height="1232" fill="#101725"/>
+<text x="70" y="78" fill="#f4f7ff" font-size="40" font-weight="700">L3 · Multimedia</text>
+<text x="70" y="116" fill="#aab9d1" font-size="19">20261010135117-Silver Defy.json · SHA-256 756798932b4f</text>
+<text x="70" y="153" fill="#fbbf75" font-size="18">Stored keycodes · palette colors approximated on screen · dashed border means LED mapping unverified</text>
+<text x="70" y="213" fill="#9aafcc" font-size="19" font-weight="700">LEFT HALF</text>
+<text x="1572" y="213" fill="#9aafcc" font-size="19" font-weight="700">RIGHT HALF</text>
+<rect x="70" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#00feea" stroke-width="4"><title>defy:left:r1:c1 | L1 Esc | L3 Grave (53) | LED 0, palette slot 4</title></rect>
+<text x="80" y="268" fill="#b9c8d9" font-size="14">L1 Esc</text>
+<text x="80" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Grave</text>
+<text x="80" y="349" fill="#90a5bb" font-size="13">code 53 · slot 4</text>
+<rect x="258" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:left:r1:c2 | L1 1 | L3 Code 58 (58) | LED 1, palette slot 8</title></rect>
+<text x="268" y="268" fill="#b9c8d9" font-size="14">L1 1</text>
+<text x="268" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 58</text>
+<text x="268" y="349" fill="#90a5bb" font-size="13">code 58 · slot 8</text>
+<rect x="446" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:left:r1:c3 | L1 2 | L3 Code 59 (59) | LED 2, palette slot 8</title></rect>
+<text x="456" y="268" fill="#b9c8d9" font-size="14">L1 2</text>
+<text x="456" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 59</text>
+<text x="456" y="349" fill="#90a5bb" font-size="13">code 59 · slot 8</text>
+<rect x="634" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:left:r1:c4 | L1 3 | L3 Code 60 (60) | LED 3, palette slot 8</title></rect>
+<text x="644" y="268" fill="#b9c8d9" font-size="14">L1 3</text>
+<text x="644" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 60</text>
+<text x="644" y="349" fill="#90a5bb" font-size="13">code 60 · slot 8</text>
+<rect x="822" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:left:r1:c5 | L1 4 | L3 Code 61 (61) | LED 4, palette slot 8</title></rect>
+<text x="832" y="268" fill="#b9c8d9" font-size="14">L1 4</text>
+<text x="832" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 61</text>
+<text x="832" y="349" fill="#90a5bb" font-size="13">code 61 · slot 8</text>
+<rect x="1010" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:left:r1:c6 | L1 5 | L3 F5 (62) | LED 5, palette slot 8</title></rect>
+<text x="1020" y="268" fill="#b9c8d9" font-size="14">L1 5</text>
+<text x="1020" y="311" fill="#f4f8fb" font-size="19" font-weight="650">F5</text>
+<text x="1020" y="349" fill="#90a5bb" font-size="13">code 62 · slot 8</text>
+<rect x="1198" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:left:r1:c7 | L1 Code 2095 | L3 Code 68 (68) | LED 6, palette slot 8</title></rect>
+<text x="1208" y="268" fill="#b9c8d9" font-size="14">L1 Code 2095</text>
+<text x="1208" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 68</text>
+<text x="1208" y="349" fill="#90a5bb" font-size="13">code 68 · slot 8</text>
+<rect x="70" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r2:c1 | L1 Tab | L3 No Key (0) | LED 7, palette slot 15</title></rect>
+<text x="80" y="400" fill="#b9c8d9" font-size="14">L1 Tab</text>
+<text x="80" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="80" y="481" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="258" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r2:c2 | L1 Q | L3 No Key (0) | LED 8, palette slot 15</title></rect>
+<text x="268" y="400" fill="#b9c8d9" font-size="14">L1 Q</text>
+<text x="268" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="268" y="481" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="446" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r2:c3 | L1 W | L3 No Key (0) | LED 9, palette slot 15</title></rect>
+<text x="456" y="400" fill="#b9c8d9" font-size="14">L1 W</text>
+<text x="456" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="456" y="481" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="634" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#57a4ff" stroke-width="4"><title>defy:left:r2:c4 | L1 E | L3 Media Previous Track (22710) | LED 10, palette slot 7</title></rect>
+<text x="644" y="400" fill="#b9c8d9" font-size="14">L1 E</text>
+<text x="644" y="443" fill="#f4f8fb" font-size="19" font-weight="650">Media Previous Tra…</text>
+<text x="644" y="481" fill="#90a5bb" font-size="13">code 22710 · slot 7</text>
+<rect x="822" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#57a4ff" stroke-width="4"><title>defy:left:r2:c5 | L1 R | L3 Media Next Track (22709) | LED 11, palette slot 7</title></rect>
+<text x="832" y="400" fill="#b9c8d9" font-size="14">L1 R</text>
+<text x="832" y="443" fill="#f4f8fb" font-size="19" font-weight="650">Media Next Track</text>
+<text x="832" y="481" fill="#90a5bb" font-size="13">code 22709 · slot 7</text>
+<rect x="1010" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#00fe18" stroke-width="4"><title>defy:left:r2:c6 | L1 T | L3 Media Volume Up (23785) | LED 12, palette slot 1</title></rect>
+<text x="1020" y="400" fill="#b9c8d9" font-size="14">L1 T</text>
+<text x="1020" y="443" fill="#f4f8fb" font-size="19" font-weight="650">Media Volume Up</text>
+<text x="1020" y="481" fill="#90a5bb" font-size="13">code 23785 · slot 1</text>
+<rect x="1198" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r2:c7 | L1 Left Bracket | L3 No Key (0) | LED 13, palette slot 15</title></rect>
+<text x="1208" y="400" fill="#b9c8d9" font-size="14">L1 Left Bracket</text>
+<text x="1208" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1208" y="481" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="70" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r3:c1 | L1 Code 49163 | L3 No Key (0) | LED 14, palette slot 15</title></rect>
+<text x="80" y="532" fill="#b9c8d9" font-size="14">L1 Code 49163</text>
+<text x="80" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="80" y="613" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="258" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r3:c2 | L1 Superkey A | L3 No Key (0) | LED 15, palette slot 15</title></rect>
+<text x="268" y="532" fill="#b9c8d9" font-size="14">L1 Superkey A</text>
+<text x="268" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="268" y="613" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="446" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#e7ff00" stroke-width="4"><title>defy:left:r3:c3 | L1 Superkey S | L3 Code 22713 (22713) | LED 16, palette slot 3</title></rect>
+<text x="456" y="532" fill="#b9c8d9" font-size="14">L1 Superkey S</text>
+<text x="456" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Code 22713</text>
+<text x="456" y="613" fill="#90a5bb" font-size="13">code 22713 · slot 3</text>
+<rect x="634" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#ffc400" stroke-width="4"><title>defy:left:r3:c4 | L1 Superkey D | L3 Code 22711 (22711) | LED 17, palette slot 0</title></rect>
+<text x="644" y="532" fill="#b9c8d9" font-size="14">L1 Superkey D</text>
+<text x="644" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Code 22711</text>
+<text x="644" y="613" fill="#90a5bb" font-size="13">code 22711 · slot 0</text>
+<rect x="822" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#ff00e8" stroke-width="4"><title>defy:left:r3:c5 | L1 Superkey F | L3 Media Play Pause (22733) | LED 18, palette slot 6</title></rect>
+<text x="832" y="532" fill="#b9c8d9" font-size="14">L1 Superkey F</text>
+<text x="832" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Media Play Pause</text>
+<text x="832" y="613" fill="#90a5bb" font-size="13">code 22733 · slot 6</text>
+<rect x="1010" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#efdbff" stroke-width="4"><title>defy:left:r3:c6 | L1 G | L3 Media Volume Down (23786) | LED 19, palette slot 9</title></rect>
+<text x="1020" y="532" fill="#b9c8d9" font-size="14">L1 G</text>
+<text x="1020" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Media Volume Down</text>
+<text x="1020" y="613" fill="#90a5bb" font-size="13">code 23786 · slot 9</text>
+<rect x="1198" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r3:c7 | L1 Ctrl+Shift+C | L3 No Key (0) | LED 20, palette slot 15</title></rect>
+<text x="1208" y="532" fill="#b9c8d9" font-size="14">L1 Ctrl+Shift+C</text>
+<text x="1208" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1208" y="613" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="70" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#57a4ff" stroke-width="4"><title>defy:left:r4:c1 | L1 Code 17493 | L3 Code 17492 (17492) | LED 21, palette slot 7</title></rect>
+<text x="80" y="664" fill="#b9c8d9" font-size="14">L1 Code 17493</text>
+<text x="80" y="707" fill="#f4f8fb" font-size="19" font-weight="650">Code 17492</text>
+<text x="80" y="745" fill="#90a5bb" font-size="13">code 17492 · slot 7</text>
+<rect x="258" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r4:c2 | L1 Z | L3 No Key (0) | LED 22, palette slot 15</title></rect>
+<text x="268" y="664" fill="#b9c8d9" font-size="14">L1 Z</text>
+<text x="268" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="268" y="745" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="446" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r4:c3 | L1 X | L3 No Key (0) | LED 23, palette slot 15</title></rect>
+<text x="456" y="664" fill="#b9c8d9" font-size="14">L1 X</text>
+<text x="456" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="456" y="745" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="634" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r4:c4 | L1 C | L3 No Key (0) | LED 24, palette slot 15</title></rect>
+<text x="644" y="664" fill="#b9c8d9" font-size="14">L1 C</text>
+<text x="644" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="644" y="745" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="822" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r4:c5 | L1 V | L3 No Key (0) | LED 25, palette slot 15</title></rect>
+<text x="832" y="664" fill="#b9c8d9" font-size="14">L1 V</text>
+<text x="832" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="832" y="745" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="1010" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#ff0900" stroke-width="4"><title>defy:left:r4:c6 | L1 B | L3 Media Mute (19682) | LED 26, palette slot 11</title></rect>
+<text x="1020" y="664" fill="#b9c8d9" font-size="14">L1 B</text>
+<text x="1020" y="707" fill="#f4f8fb" font-size="19" font-weight="650">Media Mute</text>
+<text x="1020" y="745" fill="#90a5bb" font-size="13">code 19682 · slot 11</text>
+<rect x="634" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r5:c1 | L1 No Key | L3 No Key (0) | LED 27, palette slot 15</title></rect>
+<text x="644" y="816" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="644" y="859" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="644" y="897" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="822" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#ffffff" stroke-width="4"><title>defy:left:r5:c2 | L1 Tab | L3 Transparent (65535) | LED 28, palette slot 2</title></rect>
+<text x="832" y="816" fill="#b9c8d9" font-size="14">L1 Tab</text>
+<text x="832" y="859" fill="#f4f8fb" font-size="19" font-weight="650">Transparent</text>
+<text x="832" y="897" fill="#90a5bb" font-size="13">code 65535 · slot 2</text>
+<rect x="1010" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#00fe18" stroke-width="4"><title>defy:left:r5:c3 | L1 Space | L3 Transparent (65535) | LED 29, palette slot 1</title></rect>
+<text x="1020" y="816" fill="#b9c8d9" font-size="14">L1 Space</text>
+<text x="1020" y="859" fill="#f4f8fb" font-size="19" font-weight="650">Transparent</text>
+<text x="1020" y="897" fill="#90a5bb" font-size="13">code 65535 · slot 1</text>
+<rect x="1198" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#ff6500" stroke-width="4"><title>defy:left:r5:c4 | L1 Code 17453 | L3 No Key (0) | LED 30, palette slot 12</title></rect>
+<text x="1208" y="816" fill="#b9c8d9" font-size="14">L1 Code 17453</text>
+<text x="1208" y="859" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1208" y="897" fill="#90a5bb" font-size="13">code 0 · slot 12</text>
+<rect x="1198" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r5:c5 | L1 Enter | L3 No Key (0) | LED 31, palette slot 15</title></rect>
+<text x="1208" y="956" fill="#b9c8d9" font-size="14">L1 Enter</text>
+<text x="1208" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1208" y="1037" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="1010" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r5:c6 | L1 Esc | L3 No Key (0) | LED 32, palette slot 15</title></rect>
+<text x="1020" y="956" fill="#b9c8d9" font-size="14">L1 Esc</text>
+<text x="1020" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1020" y="1037" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="822" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r5:c7 | L1 No Key | L3 No Key (0) | LED 33, palette slot 15</title></rect>
+<text x="832" y="956" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="832" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="832" y="1037" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="634" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:left:r5:c8 | L1 Cmd+R | L3 No Key (0) | LED 34, palette slot 15</title></rect>
+<text x="644" y="956" fill="#b9c8d9" font-size="14">L1 Cmd+R</text>
+<text x="644" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="644" y="1037" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="1572" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#ff00e8" stroke-width="4"><title>defy:right:r1:c1 | L1 Code 2096 | L3 F12 (69) | LED 35, palette slot 6</title></rect>
+<text x="1582" y="268" fill="#b9c8d9" font-size="14">L1 Code 2096</text>
+<text x="1582" y="311" fill="#f4f8fb" font-size="19" font-weight="650">F12</text>
+<text x="1582" y="349" fill="#90a5bb" font-size="13">code 69 · slot 6</text>
+<rect x="1760" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:right:r1:c2 | L1 6 | L3 Code 63 (63) | LED 36, palette slot 8</title></rect>
+<text x="1770" y="268" fill="#b9c8d9" font-size="14">L1 6</text>
+<text x="1770" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 63</text>
+<text x="1770" y="349" fill="#90a5bb" font-size="13">code 63 · slot 8</text>
+<rect x="1948" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:right:r1:c3 | L1 7 | L3 Code 64 (64) | LED 37, palette slot 8</title></rect>
+<text x="1958" y="268" fill="#b9c8d9" font-size="14">L1 7</text>
+<text x="1958" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 64</text>
+<text x="1958" y="349" fill="#90a5bb" font-size="13">code 64 · slot 8</text>
+<rect x="2136" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:right:r1:c4 | L1 8 | L3 Code 65 (65) | LED 38, palette slot 8</title></rect>
+<text x="2146" y="268" fill="#b9c8d9" font-size="14">L1 8</text>
+<text x="2146" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 65</text>
+<text x="2146" y="349" fill="#90a5bb" font-size="13">code 65 · slot 8</text>
+<rect x="2324" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:right:r1:c5 | L1 9 | L3 Code 66 (66) | LED 39, palette slot 8</title></rect>
+<text x="2334" y="268" fill="#b9c8d9" font-size="14">L1 9</text>
+<text x="2334" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 66</text>
+<text x="2334" y="349" fill="#90a5bb" font-size="13">code 66 · slot 8</text>
+<rect x="2512" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:right:r1:c6 | L1 0 | L3 Code 67 (67) | LED 40, palette slot 8</title></rect>
+<text x="2522" y="268" fill="#b9c8d9" font-size="14">L1 0</text>
+<text x="2522" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Code 67</text>
+<text x="2522" y="349" fill="#90a5bb" font-size="13">code 67 · slot 8</text>
+<rect x="2700" y="245" width="174" height="118" rx="15" fill="#263244" stroke="#9013fe" stroke-width="4"><title>defy:right:r1:c7 | L1 Code 76 | L3 Battery Level (54108) | LED 41, palette slot 8</title></rect>
+<text x="2710" y="268" fill="#b9c8d9" font-size="14">L1 Code 76</text>
+<text x="2710" y="311" fill="#f4f8fb" font-size="19" font-weight="650">Battery Level</text>
+<text x="2710" y="349" fill="#90a5bb" font-size="13">code 54108 · slot 8</text>
+<rect x="1572" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#0034ff" stroke-width="4"><title>defy:right:r2:c1 | L1 Right Bracket | L3 No Key (0) | LED 42, palette slot 5</title></rect>
+<text x="1582" y="400" fill="#b9c8d9" font-size="14">L1 Right Bracket</text>
+<text x="1582" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1582" y="481" fill="#90a5bb" font-size="13">code 0 · slot 5</text>
+<rect x="1760" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:right:r2:c2 | L1 Y | L3 No Key (0) | LED 43, palette slot 15</title></rect>
+<text x="1770" y="400" fill="#b9c8d9" font-size="14">L1 Y</text>
+<text x="1770" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1770" y="481" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="1948" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:right:r2:c3 | L1 U | L3 Code 23663 (23663) | LED 44, palette slot 15</title></rect>
+<text x="1958" y="400" fill="#b9c8d9" font-size="14">L1 U</text>
+<text x="1958" y="443" fill="#f4f8fb" font-size="19" font-weight="650">Code 23663</text>
+<text x="1958" y="481" fill="#90a5bb" font-size="13">code 23663 · slot 15</text>
+<rect x="2136" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#ff6500" stroke-width="4"><title>defy:right:r2:c4 | L1 I | L3 No Key (0) | LED 45, palette slot 12</title></rect>
+<text x="2146" y="400" fill="#b9c8d9" font-size="14">L1 I</text>
+<text x="2146" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2146" y="481" fill="#90a5bb" font-size="13">code 0 · slot 12</text>
+<rect x="2324" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#e7ff00" stroke-width="4"><title>defy:right:r2:c5 | L1 O | L3 No Key (0) | LED 46, palette slot 3</title></rect>
+<text x="2334" y="400" fill="#b9c8d9" font-size="14">L1 O</text>
+<text x="2334" y="443" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2334" y="481" fill="#90a5bb" font-size="13">code 0 · slot 3</text>
+<rect x="2512" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:right:r2:c6 | L1 P | L3 Transparent (65535) | LED 47, palette slot 15</title></rect>
+<text x="2522" y="400" fill="#b9c8d9" font-size="14">L1 P</text>
+<text x="2522" y="443" fill="#f4f8fb" font-size="19" font-weight="650">Transparent</text>
+<text x="2522" y="481" fill="#90a5bb" font-size="13">code 65535 · slot 15</text>
+<rect x="2700" y="377" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:right:r2:c7 | L1 Minus | L3 Bluetooth Pairing (54109) | LED 48, palette slot 15</title></rect>
+<text x="2710" y="400" fill="#b9c8d9" font-size="14">L1 Minus</text>
+<text x="2710" y="443" fill="#f4f8fb" font-size="19" font-weight="650">Bluetooth Pairing</text>
+<text x="2710" y="481" fill="#90a5bb" font-size="13">code 54109 · slot 15</text>
+<rect x="1572" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:right:r3:c1 | L1 Backslash | L3 No Key (0) | LED 49, palette slot 15</title></rect>
+<text x="1582" y="532" fill="#b9c8d9" font-size="14">L1 Backslash</text>
+<text x="1582" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1582" y="613" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="1760" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#ff6500" stroke-width="4"><title>defy:right:r3:c2 | L1 H | L3 No Key (0) | LED 50, palette slot 12</title></rect>
+<text x="1770" y="532" fill="#b9c8d9" font-size="14">L1 H</text>
+<text x="1770" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1770" y="613" fill="#90a5bb" font-size="13">code 0 · slot 12</text>
+<rect x="1948" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#ff0900" stroke-width="4"><title>defy:right:r3:c3 | L1 Superkey J | L3 Code 23664 (23664) | LED 51, palette slot 11</title></rect>
+<text x="1958" y="532" fill="#b9c8d9" font-size="14">L1 Superkey J</text>
+<text x="1958" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Code 23664</text>
+<text x="1958" y="613" fill="#90a5bb" font-size="13">code 23664 · slot 11</text>
+<rect x="2136" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#ffc400" stroke-width="4"><title>defy:right:r3:c4 | L1 Superkey K | L3 Code 20866 (20866) | LED 52, palette slot 0</title></rect>
+<text x="2146" y="532" fill="#b9c8d9" font-size="14">L1 Superkey K</text>
+<text x="2146" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Code 20866</text>
+<text x="2146" y="613" fill="#90a5bb" font-size="13">code 20866 · slot 0</text>
+<rect x="2324" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#e7ff00" stroke-width="4"><title>defy:right:r3:c5 | L1 Superkey L | L3 Code 20865 (20865) | LED 53, palette slot 3</title></rect>
+<text x="2334" y="532" fill="#b9c8d9" font-size="14">L1 Superkey L</text>
+<text x="2334" y="575" fill="#f4f8fb" font-size="19" font-weight="650">Code 20865</text>
+<text x="2334" y="613" fill="#90a5bb" font-size="13">code 20865 · slot 3</text>
+<rect x="2512" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#ff6500" stroke-width="4"><title>defy:right:r3:c6 | L1 Superkey ; | L3 No Key (0) | LED 54, palette slot 12</title></rect>
+<text x="2522" y="532" fill="#b9c8d9" font-size="14">L1 Superkey ;</text>
+<text x="2522" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2522" y="613" fill="#90a5bb" font-size="13">code 0 · slot 12</text>
+<rect x="2700" y="509" width="174" height="118" rx="15" fill="#263244" stroke="#000000" stroke-width="4"><title>defy:right:r3:c7 | L1 Quote | L3 No Key (0) | LED 55, palette slot 15</title></rect>
+<text x="2710" y="532" fill="#b9c8d9" font-size="14">L1 Quote</text>
+<text x="2710" y="575" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2710" y="613" fill="#90a5bb" font-size="13">code 0 · slot 15</text>
+<rect x="1572" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c1 | L1 No Key | L3 Transparent (65535) | LED mapping unverified</title></rect>
+<text x="1582" y="664" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="1582" y="707" fill="#f4f8fb" font-size="19" font-weight="650">Transparent</text>
+<text x="1582" y="745" fill="#90a5bb" font-size="13">code 65535</text>
+<rect x="1760" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c2 | L1 N | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1770" y="664" fill="#b9c8d9" font-size="14">L1 N</text>
+<text x="1770" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1770" y="745" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1948" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c3 | L1 M | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1958" y="664" fill="#b9c8d9" font-size="14">L1 M</text>
+<text x="1958" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1958" y="745" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="2136" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c4 | L1 Comma | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="2146" y="664" fill="#b9c8d9" font-size="14">L1 Comma</text>
+<text x="2146" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2146" y="745" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="2324" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c5 | L1 Period | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="2334" y="664" fill="#b9c8d9" font-size="14">L1 Period</text>
+<text x="2334" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2334" y="745" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="2512" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c6 | L1 Slash | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="2522" y="664" fill="#b9c8d9" font-size="14">L1 Slash</text>
+<text x="2522" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2522" y="745" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="2700" y="641" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r4:c7 | L1 Equals | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="2710" y="664" fill="#b9c8d9" font-size="14">L1 Equals</text>
+<text x="2710" y="707" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2710" y="745" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="2086" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c1 | L1 No Key | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="2096" y="956" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="2096" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2096" y="1037" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1898" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c2 | L1 No Key | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1908" y="956" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="1908" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1908" y="1037" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1710" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c3 | L1 Code 17493 | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1720" y="956" fill="#b9c8d9" font-size="14">L1 Code 17493</text>
+<text x="1720" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1720" y="1037" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1522" y="933" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c4 | L1 Enter | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1532" y="956" fill="#b9c8d9" font-size="14">L1 Enter</text>
+<text x="1532" y="999" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1532" y="1037" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1522" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c5 | L1 Code 50747 | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1532" y="816" fill="#b9c8d9" font-size="14">L1 Code 50747</text>
+<text x="1532" y="859" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1532" y="897" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1710" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c6 | L1 Space | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1720" y="816" fill="#b9c8d9" font-size="14">L1 Space</text>
+<text x="1720" y="859" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1720" y="897" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="1898" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c7 | L1 No Key | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="1908" y="816" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="1908" y="859" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="1908" y="897" fill="#90a5bb" font-size="13">code 0</text>
+<rect x="2086" y="793" width="174" height="118" rx="15" fill="#263244" stroke="#738396" stroke-width="4" stroke-dasharray="7 5"><title>defy:right:r5:c8 | L1 No Key | L3 No Key (0) | LED mapping unverified</title></rect>
+<text x="2096" y="816" fill="#b9c8d9" font-size="14">L1 No Key</text>
+<text x="2096" y="859" fill="#f4f8fb" font-size="19" font-weight="650">No Key</text>
+<text x="2096" y="897" fill="#90a5bb" font-size="13">code 0</text>
+<text x="70" y="1096" fill="#b9c8d9" font-size="18">Palette slots shown: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15 · exact RGBW values remain in the backup</text>
+<text x="70" y="1131" fill="#b9c8d9" font-size="18">Transparent means pass through; No Key is a stored keycode. Unknown commands retain their numeric code.</text>
+<text x="70" y="1166" fill="#b9c8d9" font-size="18">This is a saved backup snapshot; it does not prove the device is currently connected or unchanged.</text>
+</svg>

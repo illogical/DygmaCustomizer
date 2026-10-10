@@ -6,6 +6,8 @@ Tools and guidance for customizing Dygma keyboards through Bazecor, starting wit
 
 This repository is a reusable starting point for Defy customization on macOS, Windows, or Linux. The current file workflow uses virtual Defy JSON. When a keyboard is connected, a backup and Bazecor compatibility check will precede applying changes to it. `AGENTS.md` and the [project skill](.agents/skills/edit-dygma-defy/SKILL.md) guide agent work; [CUSTOMIZATION_GUIDE.md](CUSTOMIZATION_GUIDE.md) translates requests into Bazecor features. Reusable actions belong in `templates/`, machine settings in `profiles/`, and layer assignments in a PC initialization manifest. `PERSONALIZATION.md`, when present, is optional private notes rather than a required parallel specification. Confirm actual host shortcuts before encoding them.
 
+The [Silver Defy saved configuration snapshot](docs/silver-defy-20261010-current.md) documents the latest identified physical-device backup from 2026-10-10 and links diagrams for all ten saved layers. Its named source is authoritative for that saved snapshot; virtual examples and manifests remain separate.
+
 Dygma calls the temporary held behavior **Layer Shift**, the toggle behavior **Layer Lock**, and the next-keypress behavior **One Shot Layer**. Dygma describes a One Shot Layer key as shifting on hold and moving to the layer on double tap as well. Templates and manifests describe proposed behavior; a preview or virtual file alone does not change a connected keyboard.
 
 ## Start with templates
